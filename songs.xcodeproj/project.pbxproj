@@ -22,6 +22,9 @@
 		CF20EF50194DEA02008E47A4 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF20EF34194DEA02008E47A4 /* CoreData.framework */; };
 		CF20EF58194DEA02008E47A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CF20EF56194DEA02008E47A4 /* InfoPlist.strings */; };
 		CF20EF5A194DEA02008E47A4 /* songsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CF20EF59194DEA02008E47A4 /* songsTests.m */; };
+		CF3F7930194DEDFC00D9615A /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF3F792F194DEDFC00D9615A /* SWRevealViewController.m */; };
+		CF3F7932194DF1AF00D9615A /* Storyboard_iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF3F7931194DF1AF00D9615A /* Storyboard_iphone.storyboard */; };
+		CF3F7934194DF1DC00D9615A /* Storyboard_ipad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF3F7933194DF1DC00D9615A /* Storyboard_ipad.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +56,10 @@
 		CF20EF55194DEA02008E47A4 /* songsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "songsTests-Info.plist"; sourceTree = "<group>"; };
 		CF20EF57194DEA02008E47A4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CF20EF59194DEA02008E47A4 /* songsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = songsTests.m; sourceTree = "<group>"; };
+		CF3F792E194DEDFC00D9615A /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		CF3F792F194DEDFC00D9615A /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		CF3F7931194DF1AF00D9615A /* Storyboard_iphone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard_iphone.storyboard; sourceTree = "<group>"; };
+		CF3F7933194DF1DC00D9615A /* Storyboard_ipad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard_ipad.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,10 +122,10 @@
 		CF20EF36194DEA02008E47A4 /* songs */ = {
 			isa = PBXGroup;
 			children = (
-				CF20EF3F194DEA02008E47A4 /* ZDAppDelegate.h */,
-				CF20EF40194DEA02008E47A4 /* ZDAppDelegate.m */,
-				CF20EF45194DEA02008E47A4 /* Images.xcassets */,
-				CF20EF42194DEA02008E47A4 /* songs.xcdatamodeld */,
+				CF3F7928194DED7300D9615A /* model */,
+				CF3F792A194DED7E00D9615A /* controller */,
+				CF3F7929194DED7900D9615A /* view */,
+				CF3F792B194DED8500D9615A /* others */,
 				CF20EF37194DEA02008E47A4 /* Supporting Files */,
 			);
 			path = songs;
@@ -127,10 +134,14 @@
 		CF20EF37194DEA02008E47A4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				CF20EF38194DEA02008E47A4 /* songs-Info.plist */,
-				CF20EF39194DEA02008E47A4 /* InfoPlist.strings */,
+				CF20EF3F194DEA02008E47A4 /* ZDAppDelegate.h */,
+				CF20EF40194DEA02008E47A4 /* ZDAppDelegate.m */,
 				CF20EF3C194DEA02008E47A4 /* main.m */,
 				CF20EF3E194DEA02008E47A4 /* songs-Prefix.pch */,
+				CF20EF45194DEA02008E47A4 /* Images.xcassets */,
+				CF20EF42194DEA02008E47A4 /* songs.xcdatamodeld */,
+				CF20EF38194DEA02008E47A4 /* songs-Info.plist */,
+				CF20EF39194DEA02008E47A4 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -153,6 +164,56 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		CF3F7928194DED7300D9615A /* model */ = {
+			isa = PBXGroup;
+			children = (
+				CF3F792C194DEDD600D9615A /* protocol */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		CF3F7929194DED7900D9615A /* view */ = {
+			isa = PBXGroup;
+			children = (
+				CF3F7931194DF1AF00D9615A /* Storyboard_iphone.storyboard */,
+				CF3F7933194DF1DC00D9615A /* Storyboard_ipad.storyboard */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		CF3F792A194DED7E00D9615A /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				CF3F792D194DEDE900D9615A /* frameworks */,
+			);
+			name = controller;
+			path = controllers;
+			sourceTree = "<group>";
+		};
+		CF3F792B194DED8500D9615A /* others */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = others;
+			sourceTree = "<group>";
+		};
+		CF3F792C194DEDD600D9615A /* protocol */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = protocol;
+			path = protocols;
+			sourceTree = "<group>";
+		};
+		CF3F792D194DEDE900D9615A /* frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CF3F792E194DEDFC00D9615A /* SWRevealViewController.h */,
+				CF3F792F194DEDFC00D9615A /* SWRevealViewController.m */,
+			);
+			path = frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -163,6 +224,7 @@
 				CF20EF27194DEA02008E47A4 /* Sources */,
 				CF20EF28194DEA02008E47A4 /* Frameworks */,
 				CF20EF29194DEA02008E47A4 /* Resources */,
+				CF3F7935194DF1F500D9615A /* Run Script - Update Current Project Version */,
 			);
 			buildRules = (
 			);
@@ -201,6 +263,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Jorge Moura";
 				TargetAttributes = {
+					CF20EF2A194DEA02008E47A4 = {
+						DevelopmentTeam = 6CHZFW8V57;
+					};
 					CF20EF4A194DEA02008E47A4 = {
 						TestTargetID = CF20EF2A194DEA02008E47A4;
 					};
@@ -231,6 +296,8 @@
 			files = (
 				CF20EF3B194DEA02008E47A4 /* InfoPlist.strings in Resources */,
 				CF20EF46194DEA02008E47A4 /* Images.xcassets in Resources */,
+				CF3F7932194DF1AF00D9615A /* Storyboard_iphone.storyboard in Resources */,
+				CF3F7934194DF1DC00D9615A /* Storyboard_ipad.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,6 +311,23 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		CF3F7935194DF1F500D9615A /* Run Script - Update Current Project Version */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script - Update Current Project Version";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${DEVELOPER_BIN_DIR}/agvtool\" next-version -all";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		CF20EF27194DEA02008E47A4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -252,6 +336,7 @@
 				CF20EF41194DEA02008E47A4 /* ZDAppDelegate.m in Sources */,
 				CF20EF44194DEA02008E47A4 /* songs.xcdatamodeld in Sources */,
 				CF20EF3D194DEA02008E47A4 /* main.m in Sources */,
+				CF3F7930194DEDFC00D9615A /* SWRevealViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,9 +455,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "songs/songs-Prefix.pch";
 				INFOPLIST_FILE = "songs/songs-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -383,9 +470,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "songs/songs-Prefix.pch";
 				INFOPLIST_FILE = "songs/songs-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -450,6 +539,7 @@
 				CF20EF5F194DEA02008E47A4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CF20EF60194DEA02008E47A4 /* Build configuration list for PBXNativeTarget "songsTests" */ = {
 			isa = XCConfigurationList;
@@ -458,6 +548,7 @@
 				CF20EF62194DEA02008E47A4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
