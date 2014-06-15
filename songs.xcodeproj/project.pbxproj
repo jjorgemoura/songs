@@ -1,0 +1,478 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CF20EF2F194DEA02008E47A4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF20EF2E194DEA02008E47A4 /* Foundation.framework */; };
+		CF20EF31194DEA02008E47A4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF20EF30194DEA02008E47A4 /* CoreGraphics.framework */; };
+		CF20EF33194DEA02008E47A4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF20EF32194DEA02008E47A4 /* UIKit.framework */; };
+		CF20EF35194DEA02008E47A4 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF20EF34194DEA02008E47A4 /* CoreData.framework */; };
+		CF20EF3B194DEA02008E47A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CF20EF39194DEA02008E47A4 /* InfoPlist.strings */; };
+		CF20EF3D194DEA02008E47A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CF20EF3C194DEA02008E47A4 /* main.m */; };
+		CF20EF41194DEA02008E47A4 /* ZDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CF20EF40194DEA02008E47A4 /* ZDAppDelegate.m */; };
+		CF20EF44194DEA02008E47A4 /* songs.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CF20EF42194DEA02008E47A4 /* songs.xcdatamodeld */; };
+		CF20EF46194DEA02008E47A4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF20EF45194DEA02008E47A4 /* Images.xcassets */; };
+		CF20EF4D194DEA02008E47A4 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF20EF4C194DEA02008E47A4 /* XCTest.framework */; };
+		CF20EF4E194DEA02008E47A4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF20EF2E194DEA02008E47A4 /* Foundation.framework */; };
+		CF20EF4F194DEA02008E47A4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF20EF32194DEA02008E47A4 /* UIKit.framework */; };
+		CF20EF50194DEA02008E47A4 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF20EF34194DEA02008E47A4 /* CoreData.framework */; };
+		CF20EF58194DEA02008E47A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CF20EF56194DEA02008E47A4 /* InfoPlist.strings */; };
+		CF20EF5A194DEA02008E47A4 /* songsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CF20EF59194DEA02008E47A4 /* songsTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CF20EF51194DEA02008E47A4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CF20EF23194DEA02008E47A4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CF20EF2A194DEA02008E47A4;
+			remoteInfo = songs;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		CF20EF2B194DEA02008E47A4 /* songs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = songs.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF20EF2E194DEA02008E47A4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		CF20EF30194DEA02008E47A4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		CF20EF32194DEA02008E47A4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		CF20EF34194DEA02008E47A4 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		CF20EF38194DEA02008E47A4 /* songs-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "songs-Info.plist"; sourceTree = "<group>"; };
+		CF20EF3A194DEA02008E47A4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CF20EF3C194DEA02008E47A4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		CF20EF3E194DEA02008E47A4 /* songs-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "songs-Prefix.pch"; sourceTree = "<group>"; };
+		CF20EF3F194DEA02008E47A4 /* ZDAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZDAppDelegate.h; sourceTree = "<group>"; };
+		CF20EF40194DEA02008E47A4 /* ZDAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZDAppDelegate.m; sourceTree = "<group>"; };
+		CF20EF43194DEA02008E47A4 /* songs.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = songs.xcdatamodel; sourceTree = "<group>"; };
+		CF20EF45194DEA02008E47A4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		CF20EF4B194DEA02008E47A4 /* songsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = songsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF20EF4C194DEA02008E47A4 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		CF20EF55194DEA02008E47A4 /* songsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "songsTests-Info.plist"; sourceTree = "<group>"; };
+		CF20EF57194DEA02008E47A4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CF20EF59194DEA02008E47A4 /* songsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = songsTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CF20EF28194DEA02008E47A4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CF20EF31194DEA02008E47A4 /* CoreGraphics.framework in Frameworks */,
+				CF20EF35194DEA02008E47A4 /* CoreData.framework in Frameworks */,
+				CF20EF33194DEA02008E47A4 /* UIKit.framework in Frameworks */,
+				CF20EF2F194DEA02008E47A4 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF20EF48194DEA02008E47A4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CF20EF4D194DEA02008E47A4 /* XCTest.framework in Frameworks */,
+				CF20EF50194DEA02008E47A4 /* CoreData.framework in Frameworks */,
+				CF20EF4F194DEA02008E47A4 /* UIKit.framework in Frameworks */,
+				CF20EF4E194DEA02008E47A4 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CF20EF22194DEA02008E47A4 = {
+			isa = PBXGroup;
+			children = (
+				CF20EF36194DEA02008E47A4 /* songs */,
+				CF20EF53194DEA02008E47A4 /* songsTests */,
+				CF20EF2D194DEA02008E47A4 /* Frameworks */,
+				CF20EF2C194DEA02008E47A4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CF20EF2C194DEA02008E47A4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CF20EF2B194DEA02008E47A4 /* songs.app */,
+				CF20EF4B194DEA02008E47A4 /* songsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CF20EF2D194DEA02008E47A4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CF20EF2E194DEA02008E47A4 /* Foundation.framework */,
+				CF20EF30194DEA02008E47A4 /* CoreGraphics.framework */,
+				CF20EF32194DEA02008E47A4 /* UIKit.framework */,
+				CF20EF34194DEA02008E47A4 /* CoreData.framework */,
+				CF20EF4C194DEA02008E47A4 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CF20EF36194DEA02008E47A4 /* songs */ = {
+			isa = PBXGroup;
+			children = (
+				CF20EF3F194DEA02008E47A4 /* ZDAppDelegate.h */,
+				CF20EF40194DEA02008E47A4 /* ZDAppDelegate.m */,
+				CF20EF45194DEA02008E47A4 /* Images.xcassets */,
+				CF20EF42194DEA02008E47A4 /* songs.xcdatamodeld */,
+				CF20EF37194DEA02008E47A4 /* Supporting Files */,
+			);
+			path = songs;
+			sourceTree = "<group>";
+		};
+		CF20EF37194DEA02008E47A4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CF20EF38194DEA02008E47A4 /* songs-Info.plist */,
+				CF20EF39194DEA02008E47A4 /* InfoPlist.strings */,
+				CF20EF3C194DEA02008E47A4 /* main.m */,
+				CF20EF3E194DEA02008E47A4 /* songs-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CF20EF53194DEA02008E47A4 /* songsTests */ = {
+			isa = PBXGroup;
+			children = (
+				CF20EF59194DEA02008E47A4 /* songsTests.m */,
+				CF20EF54194DEA02008E47A4 /* Supporting Files */,
+			);
+			path = songsTests;
+			sourceTree = "<group>";
+		};
+		CF20EF54194DEA02008E47A4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CF20EF55194DEA02008E47A4 /* songsTests-Info.plist */,
+				CF20EF56194DEA02008E47A4 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CF20EF2A194DEA02008E47A4 /* songs */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CF20EF5D194DEA02008E47A4 /* Build configuration list for PBXNativeTarget "songs" */;
+			buildPhases = (
+				CF20EF27194DEA02008E47A4 /* Sources */,
+				CF20EF28194DEA02008E47A4 /* Frameworks */,
+				CF20EF29194DEA02008E47A4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = songs;
+			productName = songs;
+			productReference = CF20EF2B194DEA02008E47A4 /* songs.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CF20EF4A194DEA02008E47A4 /* songsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CF20EF60194DEA02008E47A4 /* Build configuration list for PBXNativeTarget "songsTests" */;
+			buildPhases = (
+				CF20EF47194DEA02008E47A4 /* Sources */,
+				CF20EF48194DEA02008E47A4 /* Frameworks */,
+				CF20EF49194DEA02008E47A4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CF20EF52194DEA02008E47A4 /* PBXTargetDependency */,
+			);
+			name = songsTests;
+			productName = songsTests;
+			productReference = CF20EF4B194DEA02008E47A4 /* songsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CF20EF23194DEA02008E47A4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = ZD;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Jorge Moura";
+				TargetAttributes = {
+					CF20EF4A194DEA02008E47A4 = {
+						TestTargetID = CF20EF2A194DEA02008E47A4;
+					};
+				};
+			};
+			buildConfigurationList = CF20EF26194DEA02008E47A4 /* Build configuration list for PBXProject "songs" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = CF20EF22194DEA02008E47A4;
+			productRefGroup = CF20EF2C194DEA02008E47A4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CF20EF2A194DEA02008E47A4 /* songs */,
+				CF20EF4A194DEA02008E47A4 /* songsTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CF20EF29194DEA02008E47A4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CF20EF3B194DEA02008E47A4 /* InfoPlist.strings in Resources */,
+				CF20EF46194DEA02008E47A4 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF20EF49194DEA02008E47A4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CF20EF58194DEA02008E47A4 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CF20EF27194DEA02008E47A4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CF20EF41194DEA02008E47A4 /* ZDAppDelegate.m in Sources */,
+				CF20EF44194DEA02008E47A4 /* songs.xcdatamodeld in Sources */,
+				CF20EF3D194DEA02008E47A4 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF20EF47194DEA02008E47A4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CF20EF5A194DEA02008E47A4 /* songsTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CF20EF52194DEA02008E47A4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CF20EF2A194DEA02008E47A4 /* songs */;
+			targetProxy = CF20EF51194DEA02008E47A4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		CF20EF39194DEA02008E47A4 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CF20EF3A194DEA02008E47A4 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		CF20EF56194DEA02008E47A4 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CF20EF57194DEA02008E47A4 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CF20EF5B194DEA02008E47A4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CF20EF5C194DEA02008E47A4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CF20EF5E194DEA02008E47A4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "songs/songs-Prefix.pch";
+				INFOPLIST_FILE = "songs/songs-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		CF20EF5F194DEA02008E47A4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "songs/songs-Prefix.pch";
+				INFOPLIST_FILE = "songs/songs-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		CF20EF61194DEA02008E47A4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/songs.app/songs";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "songs/songs-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "songsTests/songsTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		CF20EF62194DEA02008E47A4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/songs.app/songs";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "songs/songs-Prefix.pch";
+				INFOPLIST_FILE = "songsTests/songsTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CF20EF26194DEA02008E47A4 /* Build configuration list for PBXProject "songs" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CF20EF5B194DEA02008E47A4 /* Debug */,
+				CF20EF5C194DEA02008E47A4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CF20EF5D194DEA02008E47A4 /* Build configuration list for PBXNativeTarget "songs" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CF20EF5E194DEA02008E47A4 /* Debug */,
+				CF20EF5F194DEA02008E47A4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		CF20EF60194DEA02008E47A4 /* Build configuration list for PBXNativeTarget "songsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CF20EF61194DEA02008E47A4 /* Debug */,
+				CF20EF62194DEA02008E47A4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		CF20EF42194DEA02008E47A4 /* songs.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				CF20EF43194DEA02008E47A4 /* songs.xcdatamodel */,
+			);
+			currentVersion = CF20EF43194DEA02008E47A4 /* songs.xcdatamodel */;
+			path = songs.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = CF20EF23194DEA02008E47A4 /* Project object */;
+}
