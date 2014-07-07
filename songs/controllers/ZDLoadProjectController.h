@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ZDCoreDataTableVC.h"
 
-@interface ZDLoadProjectController : UIViewController
+@interface ZDLoadProjectController : ZDCoreDataTableVC <UITableViewDataSource, UITableViewDelegate>
 
 @end

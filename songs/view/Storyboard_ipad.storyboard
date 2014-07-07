@@ -59,7 +59,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Co-8l-Qev" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="614" y="658"/>
+            <point key="canvasLocation" x="614" y="754"/>
         </scene>
         <!--Main Controller-->
         <scene sceneID="jL2-ge-90X">
@@ -158,6 +158,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="zGf-Mg-5b4" kind="custom" identifier="menu_create" customClass="SWRevealViewControllerSegue" id="Ur9-vh-FeC"/>
+                                </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MY_MENULOAD_CELL" textLabel="f2k-ez-ZgV" style="IBUITableViewCellStyleDefault" id="NXu-JI-3Lk">
                                 <rect key="frame" x="0.0" y="207" width="768" height="44"/>
@@ -175,6 +178,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="niE-oF-nRg" kind="custom" identifier="menu_load" customClass="SWRevealViewControllerSegue" id="msj-UV-KNU"/>
+                                </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MY_MENUSETTINGS_CELL" textLabel="Lgn-YK-wgV" style="IBUITableViewCellStyleDefault" id="iN8-eQ-AcX">
                                 <rect key="frame" x="0.0" y="251" width="768" height="44"/>
@@ -207,6 +213,115 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MmG-8N-Fl2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="556" y="-1858"/>
+        </scene>
+        <!--New Project Controller - New Project-->
+        <scene sceneID="w36-ME-46a">
+            <objects>
+                <viewController id="zGf-Mg-5b4" customClass="ZDNewProjectController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DjG-Xi-n2P"/>
+                        <viewControllerLayoutGuide type="bottom" id="CCB-pH-Lue"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="E5F-WY-04N">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6vS-Xd-AoH">
+                                <rect key="frame" x="325" y="327" width="118" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Save">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="save:" destination="zGf-Mg-5b4" eventType="touchUpInside" id="rYH-r8-e99"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Project Name*" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jUr-Xr-1Ys">
+                                <rect key="frame" x="220" y="156" width="329" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Band" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pXw-Ju-Nzk">
+                                <rect key="frame" x="220" y="194" width="329" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Composer" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WrF-jL-f4H">
+                                <rect key="frame" x="220" y="232" width="329" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Year" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dwZ-Vt-s8Q">
+                                <rect key="frame" x="220" y="270" width="103" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Bpm" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ake-5M-QwX">
+                                <rect key="frame" x="333" y="270" width="103" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Key" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6k1-rC-M7m">
+                                <rect key="frame" x="446" y="270" width="103" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="New Project" id="X2y-Zy-LuZ">
+                        <connections>
+                            <outlet property="leftBarButtonItem" destination="cXP-si-r6c" id="nke-wL-RH8"/>
+                        </connections>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="bandTextName" destination="pXw-Ju-Nzk" id="BzJ-ii-gVW"/>
+                        <outlet property="bpmIntName" destination="ake-5M-QwX" id="TY6-P7-SLa"/>
+                        <outlet property="composerTextName" destination="WrF-jL-f4H" id="HA3-PS-rNm"/>
+                        <outlet property="keyTextName" destination="6k1-rC-M7m" id="l2U-ht-jtR"/>
+                        <outlet property="projectTextName" destination="jUr-Xr-1Ys" id="TeC-Du-i2i"/>
+                        <outlet property="revealButtonItem" destination="cXP-si-r6c" id="DTp-R4-FHL"/>
+                        <outlet property="saveButton" destination="6vS-Xd-AoH" id="Ezs-SD-b77"/>
+                        <outlet property="yearIntName" destination="dwZ-Vt-s8Q" id="v37-ed-cCX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LL3-Ir-gSg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <barButtonItem image="reveal-icon" id="cXP-si-r6c"/>
+            </objects>
+            <point key="canvasLocation" x="2210" y="-2904"/>
+        </scene>
+        <!--Load Project Controller - Title-->
+        <scene sceneID="ZqO-0a-psk">
+            <objects>
+                <viewController id="niE-oF-nRg" customClass="ZDLoadProjectController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="m16-X8-P0y"/>
+                        <viewControllerLayoutGuide type="bottom" id="8no-eO-rd6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fIX-pv-jvb">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Title" id="T1p-fK-Yxe">
+                        <connections>
+                            <outlet property="leftBarButtonItem" destination="LS4-7I-suP" id="3O9-l8-ORF"/>
+                        </connections>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="revealButtonItem" destination="LS4-7I-suP" id="hPk-5q-oiq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0TT-Ht-02l" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <barButtonItem image="reveal-icon" id="LS4-7I-suP"/>
+            </objects>
+            <point key="canvasLocation" x="2210" y="-1735"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="qfX-hX-65c">

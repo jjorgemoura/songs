@@ -35,6 +35,7 @@
 		CFF01A511969660E00A6E2F6 /* ZDNewProjectController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF01A501969660E00A6E2F6 /* ZDNewProjectController.m */; };
 		CFF01A541969661B00A6E2F6 /* ZDLoadProjectController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF01A531969661B00A6E2F6 /* ZDLoadProjectController.m */; };
 		CFF01A5A1969669500A6E2F6 /* ZDSongCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF01A591969669500A6E2F6 /* ZDSongCollectionViewCell.m */; };
+		CFF4B546196AFB8000FF78F4 /* ZDCoreDataTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF4B545196AFB8000FF78F4 /* ZDCoreDataTableVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +91,8 @@
 		CFF01A531969661B00A6E2F6 /* ZDLoadProjectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDLoadProjectController.m; sourceTree = "<group>"; };
 		CFF01A581969669500A6E2F6 /* ZDSongCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDSongCollectionViewCell.h; sourceTree = "<group>"; };
 		CFF01A591969669500A6E2F6 /* ZDSongCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDSongCollectionViewCell.m; sourceTree = "<group>"; };
+		CFF4B544196AFB8000FF78F4 /* ZDCoreDataTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDCoreDataTableVC.h; sourceTree = "<group>"; };
+		CFF4B545196AFB8000FF78F4 /* ZDCoreDataTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDCoreDataTableVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -260,6 +263,8 @@
 			children = (
 				CF3F792E194DEDFC00D9615A /* SWRevealViewController.h */,
 				CF3F792F194DEDFC00D9615A /* SWRevealViewController.m */,
+				CFF4B544196AFB8000FF78F4 /* ZDCoreDataTableVC.h */,
+				CFF4B545196AFB8000FF78F4 /* ZDCoreDataTableVC.m */,
 			);
 			path = frameworks;
 			sourceTree = "<group>";
@@ -391,6 +396,7 @@
 				CFF01A5A1969669500A6E2F6 /* ZDSongCollectionViewCell.m in Sources */,
 				CF20EF3D194DEA02008E47A4 /* main.m in Sources */,
 				CF19EDC519640C2A00A03A85 /* ZDSongBlock.m in Sources */,
+				CFF4B546196AFB8000FF78F4 /* ZDCoreDataTableVC.m in Sources */,
 				CFF01A4E196965F900A6E2F6 /* ZDSettingsController.m in Sources */,
 				CFF01A45196965BA00A6E2F6 /* ZDMainController.m in Sources */,
 				CF19EDC819640C2A00A03A85 /* ZDProject.m in Sources */,
@@ -456,7 +462,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 27;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -496,7 +502,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 27;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

@@ -60,7 +60,19 @@
         NSLog(@"SEGUE: menu_main");
     }
     
+    if([[segue identifier] isEqualToString:@"menu_main"]) {
+        NSLog(@"SEGUE: menu_create");
+    }
+    
+    if([[segue identifier] isEqualToString:@"menu_main"]) {
+        NSLog(@"SEGUE: menu_load");
+    }
  
+    if([[segue identifier] isEqualToString:@"menu_main"]) {
+        NSLog(@"SEGUE: menu_settings");
+    }
+    
+    
     // configure the segue.
     if ( [segue isKindOfClass: [SWRevealViewControllerSegue class]] ) {
 
