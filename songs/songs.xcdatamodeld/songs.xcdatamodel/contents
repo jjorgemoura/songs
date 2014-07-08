@@ -2,8 +2,8 @@
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13E28" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="ZDBar" representedClassName="ZDBar" syncable="YES">
         <attribute name="chordType" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="order" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="songBlock" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="order" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="songBlock" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="timeSignatureBeatCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="timeSignatureNoteValue" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="theProject" maxCount="1" deletionRule="Nullify" destinationEntity="ZDProject" inverseName="bars" inverseEntity="ZDProject" syncable="YES"/>
@@ -13,22 +13,22 @@
         <attribute name="band" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="bpm" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="composer" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="createDate" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="createOn" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="createDate" attributeType="Date" syncable="YES"/>
+        <attribute name="createOn" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="key" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lyricsBy" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="year" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="bars" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="ZDBar" inverseName="theProject" inverseEntity="ZDBar" syncable="YES"/>
     </entity>
     <entity name="ZDSongBlock" representedClassName="ZDSongBlock" syncable="YES">
-        <attribute name="color" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="info" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="color" attributeType="String" syncable="YES"/>
+        <attribute name="info" attributeType="String" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="ZDProject" positionX="-63" positionY="-18" width="128" height="193"/>
         <element name="ZDBar" positionX="151" positionY="108" width="128" height="148"/>
+        <element name="ZDProject" positionX="-63" positionY="-18" width="128" height="193"/>
         <element name="ZDSongBlock" positionX="358" positionY="9" width="128" height="88"/>
     </elements>
 </model>

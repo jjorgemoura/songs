@@ -2,7 +2,7 @@
 //  ZDBar.m
 //  songs
 //
-//  Created by Jorge Moura on 02/07/14.
+//  Created by Jorge Moura on 07/07/14.
 //  Copyright (c) 2014 Jorge Moura. All rights reserved.
 //
 
@@ -14,10 +14,10 @@
 @implementation ZDBar
 
 @dynamic chordType;
+@dynamic order;
 @dynamic songBlock;
 @dynamic timeSignatureBeatCount;
 @dynamic timeSignatureNoteValue;
-@dynamic order;
 @dynamic theProject;
 @dynamic theSongBlock;
 

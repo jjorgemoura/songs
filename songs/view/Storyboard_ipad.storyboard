@@ -198,6 +198,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="jnf-py-HC3" kind="custom" identifier="menu_settings" customClass="SWRevealViewControllerSegue" id="jht-xa-2Y8"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -213,6 +216,49 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MmG-8N-Fl2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="556" y="-1858"/>
+        </scene>
+        <!--Settings Controller - Settings-->
+        <scene sceneID="cVR-o6-EiK">
+            <objects>
+                <viewController id="jnf-py-HC3" customClass="ZDSettingsController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="yJb-Di-ITO"/>
+                        <viewControllerLayoutGuide type="bottom" id="bvg-O1-YtC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="YKs-rd-qI6">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lca-C7-jvS">
+                                <rect key="frame" x="294" y="33" width="180" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" text="No settings defined for this version." translatesAutoresizingMaskIntoConstraints="NO" id="l96-Or-pa7">
+                                <rect key="frame" x="0.0" y="82" width="768" height="474"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Settings" id="BLr-Ke-9pW">
+                        <connections>
+                            <outlet property="leftBarButtonItem" destination="Ko5-mD-j15" id="XXW-Uh-tNb"/>
+                        </connections>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="revealButtonItem" destination="Ko5-mD-j15" id="eXf-uO-Kni"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iub-zK-ABZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <barButtonItem image="reveal-icon" id="Ko5-mD-j15"/>
+            </objects>
+            <point key="canvasLocation" x="1676" y="-3124"/>
         </scene>
         <!--New Project Controller - New Project-->
         <scene sceneID="w36-ME-46a">
@@ -294,7 +340,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LL3-Ir-gSg" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <barButtonItem image="reveal-icon" id="cXP-si-r6c"/>
             </objects>
-            <point key="canvasLocation" x="2210" y="-2904"/>
+            <point key="canvasLocation" x="2898" y="-2408"/>
         </scene>
         <!--Load Project Controller - Title-->
         <scene sceneID="ZqO-0a-psk">
@@ -321,7 +367,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0TT-Ht-02l" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <barButtonItem image="reveal-icon" id="LS4-7I-suP"/>
             </objects>
-            <point key="canvasLocation" x="2210" y="-1735"/>
+            <point key="canvasLocation" x="2898" y="-1183"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="qfX-hX-65c">
