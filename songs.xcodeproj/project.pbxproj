@@ -25,6 +25,10 @@
 		CF3F7930194DEDFC00D9615A /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF3F792F194DEDFC00D9615A /* SWRevealViewController.m */; };
 		CF3F7932194DF1AF00D9615A /* Storyboard_iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF3F7931194DF1AF00D9615A /* Storyboard_iphone.storyboard */; };
 		CF3F7934194DF1DC00D9615A /* Storyboard_ipad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF3F7933194DF1DC00D9615A /* Storyboard_ipad.storyboard */; };
+		CFB4438B196DB51500EDB6E2 /* ZDPersistentStack.m in Sources */ = {isa = PBXBuildFile; fileRef = CFB4438A196DB51500EDB6E2 /* ZDPersistentStack.m */; };
+		CFB4438E196DD8C600EDB6E2 /* ZDProject+Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = CFB4438D196DD8C600EDB6E2 /* ZDProject+Factory.m */; };
+		CFB44391196DD8EC00EDB6E2 /* ZDSongBlock+Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = CFB44390196DD8EC00EDB6E2 /* ZDSongBlock+Factory.m */; };
+		CFB44394196DD8FB00EDB6E2 /* ZDBar+Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = CFB44393196DD8FB00EDB6E2 /* ZDBar+Factory.m */; };
 		CFD88A11196C0A7100FC1F1B /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CFD88A10196C0A7100FC1F1B /* Settings.bundle */; };
 		CFF01A45196965BA00A6E2F6 /* ZDMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF01A44196965BA00A6E2F6 /* ZDMainController.m */; };
 		CFF01A48196965C800A6E2F6 /* ZDMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF01A47196965C800A6E2F6 /* ZDMenuController.m */; };
@@ -72,6 +76,14 @@
 		CF3F792F194DEDFC00D9615A /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		CF3F7931194DF1AF00D9615A /* Storyboard_iphone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard_iphone.storyboard; sourceTree = "<group>"; };
 		CF3F7933194DF1DC00D9615A /* Storyboard_ipad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard_ipad.storyboard; sourceTree = "<group>"; };
+		CFB44389196DB51500EDB6E2 /* ZDPersistentStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDPersistentStack.h; sourceTree = "<group>"; };
+		CFB4438A196DB51500EDB6E2 /* ZDPersistentStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDPersistentStack.m; sourceTree = "<group>"; };
+		CFB4438C196DD8C600EDB6E2 /* ZDProject+Factory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ZDProject+Factory.h"; sourceTree = "<group>"; };
+		CFB4438D196DD8C600EDB6E2 /* ZDProject+Factory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ZDProject+Factory.m"; sourceTree = "<group>"; };
+		CFB4438F196DD8EC00EDB6E2 /* ZDSongBlock+Factory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ZDSongBlock+Factory.h"; sourceTree = "<group>"; };
+		CFB44390196DD8EC00EDB6E2 /* ZDSongBlock+Factory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ZDSongBlock+Factory.m"; sourceTree = "<group>"; };
+		CFB44392196DD8FB00EDB6E2 /* ZDBar+Factory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ZDBar+Factory.h"; sourceTree = "<group>"; };
+		CFB44393196DD8FB00EDB6E2 /* ZDBar+Factory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ZDBar+Factory.m"; sourceTree = "<group>"; };
 		CFD88A10196C0A7100FC1F1B /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		CFF01A43196965BA00A6E2F6 /* ZDMainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDMainController.h; sourceTree = "<group>"; };
 		CFF01A44196965BA00A6E2F6 /* ZDMainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDMainController.m; sourceTree = "<group>"; };
@@ -210,6 +222,12 @@
 				CFF4B548196B48E600FF78F4 /* ZDBar.m */,
 				CFF4B54D196B48E700FF78F4 /* ZDSongBlock.h */,
 				CFF4B54E196B48E700FF78F4 /* ZDSongBlock.m */,
+				CFB4438C196DD8C600EDB6E2 /* ZDProject+Factory.h */,
+				CFB4438D196DD8C600EDB6E2 /* ZDProject+Factory.m */,
+				CFB44392196DD8FB00EDB6E2 /* ZDBar+Factory.h */,
+				CFB44393196DD8FB00EDB6E2 /* ZDBar+Factory.m */,
+				CFB4438F196DD8EC00EDB6E2 /* ZDSongBlock+Factory.h */,
+				CFB44390196DD8EC00EDB6E2 /* ZDSongBlock+Factory.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -268,6 +286,8 @@
 				CF3F792F194DEDFC00D9615A /* SWRevealViewController.m */,
 				CFF4B544196AFB8000FF78F4 /* ZDCoreDataTableVC.h */,
 				CFF4B545196AFB8000FF78F4 /* ZDCoreDataTableVC.m */,
+				CFB44389196DB51500EDB6E2 /* ZDPersistentStack.h */,
+				CFB4438A196DB51500EDB6E2 /* ZDPersistentStack.m */,
 			);
 			path = frameworks;
 			sourceTree = "<group>";
@@ -394,15 +414,19 @@
 			files = (
 				CFF4B549196B48E600FF78F4 /* ZDBar.m in Sources */,
 				CF20EF41194DEA02008E47A4 /* ZDAppDelegate.m in Sources */,
+				CFB44394196DD8FB00EDB6E2 /* ZDBar+Factory.m in Sources */,
 				CFF01A4B196965E900A6E2F6 /* ZDAuxViewController.m in Sources */,
 				CFF01A511969660E00A6E2F6 /* ZDNewProjectController.m in Sources */,
 				CFF01A48196965C800A6E2F6 /* ZDMenuController.m in Sources */,
+				CFB4438B196DB51500EDB6E2 /* ZDPersistentStack.m in Sources */,
 				CF20EF44194DEA02008E47A4 /* songs.xcdatamodeld in Sources */,
 				CFF01A5A1969669500A6E2F6 /* ZDSongCollectionViewCell.m in Sources */,
 				CF20EF3D194DEA02008E47A4 /* main.m in Sources */,
 				CFF4B54F196B48E700FF78F4 /* ZDSongBlock.m in Sources */,
 				CFF4B54C196B48E700FF78F4 /* ZDProject.m in Sources */,
+				CFB44391196DD8EC00EDB6E2 /* ZDSongBlock+Factory.m in Sources */,
 				CFF4B546196AFB8000FF78F4 /* ZDCoreDataTableVC.m in Sources */,
+				CFB4438E196DD8C600EDB6E2 /* ZDProject+Factory.m in Sources */,
 				CFF01A4E196965F900A6E2F6 /* ZDSettingsController.m in Sources */,
 				CFF01A45196965BA00A6E2F6 /* ZDMainController.m in Sources */,
 				CFF01A541969661B00A6E2F6 /* ZDLoadProjectController.m in Sources */,
