@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ZDMenuController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
+#import "ZDNewProjectController.h"
+
+@interface ZDMenuController : UITableViewController <UITableViewDelegate, UITableViewDataSource, ZDNewProjectControllerDelegate>
 
 @end

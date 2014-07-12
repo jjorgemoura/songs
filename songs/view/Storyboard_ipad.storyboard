@@ -258,7 +258,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iub-zK-ABZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <barButtonItem image="reveal-icon" id="Ko5-mD-j15"/>
             </objects>
-            <point key="canvasLocation" x="1676" y="-3124"/>
+            <point key="canvasLocation" x="1796" y="-3056"/>
         </scene>
         <!--New Project Controller - New Project-->
         <scene sceneID="w36-ME-46a">
@@ -273,7 +273,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6vS-Xd-AoH">
-                                <rect key="frame" x="325" y="327" width="118" height="30"/>
+                                <rect key="frame" x="325" y="365" width="118" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Save">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -301,19 +301,25 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Year" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dwZ-Vt-s8Q">
-                                <rect key="frame" x="220" y="270" width="103" height="30"/>
+                                <rect key="frame" x="220" y="308" width="103" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Bpm" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ake-5M-QwX">
-                                <rect key="frame" x="333" y="270" width="103" height="30"/>
+                                <rect key="frame" x="333" y="308" width="103" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Key" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6k1-rC-M7m">
-                                <rect key="frame" x="446" y="270" width="103" height="30"/>
+                                <rect key="frame" x="446" y="308" width="103" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Lyrics By" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="63v-la-KzW">
+                                <rect key="frame" x="220" y="270" width="329" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -331,6 +337,7 @@
                         <outlet property="bpmIntName" destination="ake-5M-QwX" id="TY6-P7-SLa"/>
                         <outlet property="composerTextName" destination="WrF-jL-f4H" id="HA3-PS-rNm"/>
                         <outlet property="keyTextName" destination="6k1-rC-M7m" id="l2U-ht-jtR"/>
+                        <outlet property="lyricsTextName" destination="63v-la-KzW" id="WFZ-aN-J0Z"/>
                         <outlet property="projectTextName" destination="jUr-Xr-1Ys" id="TeC-Du-i2i"/>
                         <outlet property="revealButtonItem" destination="cXP-si-r6c" id="DTp-R4-FHL"/>
                         <outlet property="saveButton" destination="6vS-Xd-AoH" id="Ezs-SD-b77"/>

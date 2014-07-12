@@ -7,6 +7,9 @@
 //
 
 #import "ZDNewProjectController.h"
+#import "ZDCoreDataStack.h"
+#import "ZDProject+Factory.h"
+#import "NSManagedObjectID+ZDString.h"
 
 @interface ZDNewProjectController ()
 
@@ -15,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *projectTextName;
 @property (weak, nonatomic) IBOutlet UITextField *bandTextName;
 @property (weak, nonatomic) IBOutlet UITextField *composerTextName;
+@property (weak, nonatomic) IBOutlet UITextField *lyricsTextName;
 @property (weak, nonatomic) IBOutlet UITextField *yearIntName;
 @property (weak, nonatomic) IBOutlet UITextField *bpmIntName;
 @property (weak, nonatomic) IBOutlet UITextField *keyTextName;
@@ -79,10 +83,10 @@
 //---------------------------------------------------------------------------------------
 - (IBAction)save:(id)sender {
     
-    NSLog(@"SAVE Button");
+    //NSLog(@"SAVE Button");
     BOOL toSave = YES;
     
-    if(![self projectTextName]) {
+    if(![[self projectTextName] text]) {
     
         //projectTextName cannot be null
         toSave = NO;
@@ -93,16 +97,75 @@
     //SAVE
     if (toSave) {
         
+        NSString *pName = [[self projectTextName] text];
+        NSString *pBand = nil;
+        NSString *pComposer = nil;
+        NSString *pLyrics = nil;
+        NSNumber *pYear = nil;
+        NSString *pKey = nil;
+        NSNumber *pBPM = nil;
+        NSNumber *pCreateOn = [NSNumber numberWithInt:1];
+
+        
         //Validate
+        pBand = ([[self bandTextName] text]) ? [[self bandTextName] text] : nil ;
+        pComposer = ([[self composerTextName] text]) ? [[self composerTextName] text] : nil ;
+        pLyrics = ([[self lyricsTextName] text]) ? [[self lyricsTextName] text] : nil ;
+        pKey = ([[self keyTextName] text]) ? [[self keyTextName] text] : nil ;
+        pYear = ([[self yearIntName] text]) ? [NSNumber numberWithInt:[[[self yearIntName] text] intValue]] : nil ;
+        pBPM = ([[self bpmIntName] text]) ? [NSNumber numberWithInt:[[[self bpmIntName] text] intValue]] : nil ;
+        
+        
+        
+        
+        //Call Delegate
+        [[self delegate] viewController:self willSaveZDProject:pName];
+        
+        
         
         
         
         //Save
+        __block NSString *objID = nil;
+        __block NSString *theMessage = nil;
+        
+        NSManagedObjectContext *moc = [ZDCoreDataStack mainQueueContext];
         
         
+        [moc performBlockAndWait:^{
+            
+            ZDProject *newProject = [NSEntityDescription insertNewObjectForEntityForName:[ZDProject entityName] inManagedObjectContext:moc];
+            [newProject setName:pName];
+            [newProject setBand:pBand];
+            [newProject setComposer:pComposer];
+            [newProject setLyricsBy:pLyrics];
+            [newProject setYear:pYear];
+            [newProject setBpm:pBPM];
+            [newProject setKey:pKey];
+            [newProject setCreateOn:pCreateOn];
+            [newProject setCreateDate:[NSDate date]];
+            
+            
+            NSError *error = nil;
+            [moc save:&error];
+            
+            if(error) {
+                NSLog(@"CORE DATA ERROR: Saving New Project: %@", [error debugDescription]);
+                theMessage = @"ERROR Saving New Project.";
+            }
+            else {
+            
+                theMessage = @"OK";
+                objID = [[newProject objectID] stringRepresentation];
+            }
+            
+        }];
         
+        
+        //Call Delegate
+        [[self delegate] viewController:self didSaveZDProjectWithID:objID andMessage:theMessage];
+
     }
-    
     
 }
 

@@ -7,6 +7,8 @@
 //
 
 #import "ZDAppDelegate.h"
+#import "ZDCoreDataStack.h"
+#import "ZDSongBlock+Factory.h"
 
 //Private Declaration
 @interface ZDAppDelegate()
@@ -175,6 +177,11 @@
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
+- (NSURL *)applicationLibraryDirectory
+{
+    return [[[NSFileManager defaultManager] URLsForDirectory:NSLibraryDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
 
 //---------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------
@@ -182,10 +189,57 @@
 //---------------------------------------------------------------------------------------
 - (void)prepareCoreDataDefaults {
 
+    NSLog(@"DOCUMENT DIR: %@", [[self applicationDocumentsDirectory] description]);
+    NSLog(@"LIBRARY DIR: %@", [[self applicationLibraryDirectory] description]);
+    
 
+    //The context
+    NSManagedObjectContext *privateContext = [ZDCoreDataStack privateQueueContext];
     
     
     
+    //Check if already exists data
+    NSError *error = nil;
+    NSNumber *registerCount = [ZDSongBlock qtEntities:privateContext withError:&error];
+    NSNumber *registerCount2 = [ZDSongBlock countEntities:privateContext withError:&error];
+    
+    
+    //decision
+    if([registerCount intValue] == 0) {
+        
+        //Prepare data to save
+        void (^xxx)(void) = [ZDSongBlock prefillDatabaseBlock:privateContext];
+        
+        //save
+        [privateContext performBlock:xxx];
+    }
+    
+    
+    __block int fff = 8;
+    
+    [privateContext performBlockAndWait:^{
+    
+        int ddd = 5;
+        fff = 10;
+        
+        int zzz = ddd + fff;
+        NSLog(@"logs: %d", zzz);
+    }];
+    
+    
+    NSLog(@"logs: %d", fff);
+    
+    
+    
+    
+    //NSArray *cx = [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
+    //NSArray *cx2 = [[NSFileManager defaultManager] URLsForDirectory:NSLibraryDirectory inDomains:NSUserDomainMask];
+    
+    //    typedef void(^JMB)(NSManagedObjectContext *);
+    //    JMB yyy = [ZDSongBlock prefillDatabaseBlock];
+    //    yyy(privateContext);
+    
+    //[privateContext performBlock:void ^[ZDSongBlock prefillDatabaseBlock](privateContext)];
 }
 @end
 

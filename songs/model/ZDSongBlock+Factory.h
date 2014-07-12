@@ -11,8 +11,15 @@
 @interface ZDSongBlock (Factory)
 
 + (NSString *)entityName;
+
 + (void)preFillDatabase:(NSManagedObjectContext *)context;
+//+ (void (^)(NSManagedObjectContext *))prefillDatabaseBlock;
++ (void (^)(void))prefillDatabaseBlock:(NSManagedObjectContext *)moc;
+
 + (BOOL)deleteAllFromDatabase:(NSManagedObjectContext *)context;
+
 + (NSFetchRequest *)allEntities;
++ (NSNumber *)qtEntities:(NSManagedObjectContext *)moc withError:(NSError **)error;
++ (NSNumber *)countEntities:(NSManagedObjectContext *)moc withError:(NSError **)error;
 
 @end

@@ -60,15 +60,15 @@
         NSLog(@"SEGUE: menu_main");
     }
     
-    if([[segue identifier] isEqualToString:@"menu_main"]) {
+    if([[segue identifier] isEqualToString:@"menu_create"]) {
         NSLog(@"SEGUE: menu_create");
     }
     
-    if([[segue identifier] isEqualToString:@"menu_main"]) {
+    if([[segue identifier] isEqualToString:@"menu_load"]) {
         NSLog(@"SEGUE: menu_load");
     }
  
-    if([[segue identifier] isEqualToString:@"menu_main"]) {
+    if([[segue identifier] isEqualToString:@"menu_settings"]) {
         NSLog(@"SEGUE: menu_settings");
     }
     
@@ -79,13 +79,21 @@
         SWRevealViewControllerSegue* rvcs = (SWRevealViewControllerSegue*) segue;
         SWRevealViewController* rvc = [self revealViewController];
  
+        
+        if([[segue identifier] isEqualToString:@"menu_create"]) {
+
+            ZDNewProjectController *nextVC = [segue destinationViewController];
+            [nextVC setDelegate:self];
+            //[[segue destinationViewController] setDelegate:self];
+        }
+        
  
         rvcs.performBlock = ^(SWRevealViewControllerSegue* rvc_segue, UIViewController* svc, UIViewController* dvc) {
+     
                 UINavigationController* nc = [[UINavigationController alloc] initWithRootViewController:dvc ];
                 [rvc pushFrontViewController:nc animated:YES];
             };
     }
-    
 }
 
 
@@ -136,6 +144,41 @@
     
     
     return cell;
+}
+
+
+
+//---------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------
+#pragma mark - ZDNewProjectController Delegate
+//---------------------------------------------------------------------------------------
+-(void) viewController:(ZDNewProjectController *)viewController willSaveZDProject:(NSString *)projectName {
+    
+    NSLog(@"New Project will Save");
+}
+
+-(void) viewController:(ZDNewProjectController *)viewController didSaveZDProjectWithID:(NSString *)projectID andMessage:(NSString *)message {
+    
+    NSLog(@"New Project did Save");
+    
+    
+    
+    //close viewcontroller
+    //NSLog(@"The presented VC: %@", [[self presentedViewController] description]);
+    //    UIViewController *xxx = [self presentedViewController];
+    //    UIViewController *yyy = viewController;
+    //    UINavigationController *zzz = [self navigationController];
+    //    UIViewController *ttt = [viewController presentingViewController];
+    //    UIViewController *ttt2 = [viewController presentedViewController];
+    
+    //[[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
+    //[self dismissViewControllerAnimated:YES completion: nil];
+    //[[self navigationController] dismissViewControllerAnimated:YES completion:nil];
+    //[[self navigationController] popViewControllerAnimated:YES];
+    
+    
+    [self performSegueWithIdentifier:@"menu_main" sender:self];
+    
 }
 
 @end

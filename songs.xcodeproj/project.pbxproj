@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CF119D231970294D00E512F8 /* ZDCoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = CF119D221970294D00E512F8 /* ZDCoreDataStack.m */; };
+		CF119D2A19704F9D00E512F8 /* NSManagedObjectID+ZDString.m in Sources */ = {isa = PBXBuildFile; fileRef = CF119D2919704F9D00E512F8 /* NSManagedObjectID+ZDString.m */; };
+		CF119D2D19704FCF00E512F8 /* NSManagedObjectContext+ZDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = CF119D2C19704FCF00E512F8 /* NSManagedObjectContext+ZDAdditions.m */; };
 		CF20EF2F194DEA02008E47A4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF20EF2E194DEA02008E47A4 /* Foundation.framework */; };
 		CF20EF31194DEA02008E47A4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF20EF30194DEA02008E47A4 /* CoreGraphics.framework */; };
 		CF20EF33194DEA02008E47A4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF20EF32194DEA02008E47A4 /* UIKit.framework */; };
@@ -54,6 +57,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CF119D211970294D00E512F8 /* ZDCoreDataStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDCoreDataStack.h; sourceTree = "<group>"; };
+		CF119D221970294D00E512F8 /* ZDCoreDataStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDCoreDataStack.m; sourceTree = "<group>"; };
+		CF119D2819704F9D00E512F8 /* NSManagedObjectID+ZDString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObjectID+ZDString.h"; sourceTree = "<group>"; };
+		CF119D2919704F9D00E512F8 /* NSManagedObjectID+ZDString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectID+ZDString.m"; sourceTree = "<group>"; };
+		CF119D2B19704FCF00E512F8 /* NSManagedObjectContext+ZDAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObjectContext+ZDAdditions.h"; sourceTree = "<group>"; };
+		CF119D2C19704FCF00E512F8 /* NSManagedObjectContext+ZDAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectContext+ZDAdditions.m"; sourceTree = "<group>"; };
 		CF20EF2B194DEA02008E47A4 /* songs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = songs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF20EF2E194DEA02008E47A4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CF20EF30194DEA02008E47A4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -135,6 +144,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CF119D2419704F3000E512F8 /* categories */ = {
+			isa = PBXGroup;
+			children = (
+				CF119D2819704F9D00E512F8 /* NSManagedObjectID+ZDString.h */,
+				CF119D2919704F9D00E512F8 /* NSManagedObjectID+ZDString.m */,
+				CF119D2B19704FCF00E512F8 /* NSManagedObjectContext+ZDAdditions.h */,
+				CF119D2C19704FCF00E512F8 /* NSManagedObjectContext+ZDAdditions.m */,
+			);
+			path = categories;
+			sourceTree = "<group>";
+		};
 		CF20EF22194DEA02008E47A4 = {
 			isa = PBXGroup;
 			children = (
@@ -247,6 +267,7 @@
 			isa = PBXGroup;
 			children = (
 				CF3F792D194DEDE900D9615A /* frameworks */,
+				CF119D2419704F3000E512F8 /* categories */,
 				CFF01A43196965BA00A6E2F6 /* ZDMainController.h */,
 				CFF01A44196965BA00A6E2F6 /* ZDMainController.m */,
 				CFF01A46196965C800A6E2F6 /* ZDMenuController.h */,
@@ -288,6 +309,8 @@
 				CFF4B545196AFB8000FF78F4 /* ZDCoreDataTableVC.m */,
 				CFB44389196DB51500EDB6E2 /* ZDPersistentStack.h */,
 				CFB4438A196DB51500EDB6E2 /* ZDPersistentStack.m */,
+				CF119D211970294D00E512F8 /* ZDCoreDataStack.h */,
+				CF119D221970294D00E512F8 /* ZDCoreDataStack.m */,
 			);
 			path = frameworks;
 			sourceTree = "<group>";
@@ -415,6 +438,7 @@
 				CFF4B549196B48E600FF78F4 /* ZDBar.m in Sources */,
 				CF20EF41194DEA02008E47A4 /* ZDAppDelegate.m in Sources */,
 				CFB44394196DD8FB00EDB6E2 /* ZDBar+Factory.m in Sources */,
+				CF119D231970294D00E512F8 /* ZDCoreDataStack.m in Sources */,
 				CFF01A4B196965E900A6E2F6 /* ZDAuxViewController.m in Sources */,
 				CFF01A511969660E00A6E2F6 /* ZDNewProjectController.m in Sources */,
 				CFF01A48196965C800A6E2F6 /* ZDMenuController.m in Sources */,
@@ -425,10 +449,12 @@
 				CFF4B54F196B48E700FF78F4 /* ZDSongBlock.m in Sources */,
 				CFF4B54C196B48E700FF78F4 /* ZDProject.m in Sources */,
 				CFB44391196DD8EC00EDB6E2 /* ZDSongBlock+Factory.m in Sources */,
+				CF119D2A19704F9D00E512F8 /* NSManagedObjectID+ZDString.m in Sources */,
 				CFF4B546196AFB8000FF78F4 /* ZDCoreDataTableVC.m in Sources */,
 				CFB4438E196DD8C600EDB6E2 /* ZDProject+Factory.m in Sources */,
 				CFF01A4E196965F900A6E2F6 /* ZDSettingsController.m in Sources */,
 				CFF01A45196965BA00A6E2F6 /* ZDMainController.m in Sources */,
+				CF119D2D19704FCF00E512F8 /* NSManagedObjectContext+ZDAdditions.m in Sources */,
 				CFF01A541969661B00A6E2F6 /* ZDLoadProjectController.m in Sources */,
 				CF3F7930194DEDFC00D9615A /* SWRevealViewController.m in Sources */,
 			);
@@ -490,7 +516,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 30;
+				CURRENT_PROJECT_VERSION = 57;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -530,7 +556,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
-				CURRENT_PROJECT_VERSION = 30;
+				CURRENT_PROJECT_VERSION = 57;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
