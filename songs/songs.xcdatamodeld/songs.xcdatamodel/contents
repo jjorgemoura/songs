@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13E28" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="ZDBar" representedClassName="ZDBar" syncable="YES">
-        <attribute name="chordType" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="chordType" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="order" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="songBlock" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="timeSignatureBeatCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>

@@ -13,4 +13,7 @@
 
 + (NSString *)entityName;
 
++ (NSArray *)defaultBars:(NSManagedObjectContext *)moc;
+
+
 @end

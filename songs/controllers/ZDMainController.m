@@ -8,13 +8,15 @@
 
 #import "ZDMainController.h"
 #import "ZDSongCollectionViewCell.h"
+#import "ZDCoreDataStack.h"
+
 
 @interface ZDMainController ()
 
 @property (nonatomic, weak) IBOutlet UIBarButtonItem* revealButtonItem;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem* auxRevealButtonItem;
 
-@property (nonatomic, weak) IBOutlet UICollectionView *mainCollectionView;
+//@property (nonatomic, weak) IBOutlet UICollectionView *mainCollectionView;
 
 @end
 
@@ -56,6 +58,22 @@
     [[self auxRevealButtonItem] setAction: @selector( rightRevealToggle: )];
     //[[[self navigationController] navigationBar] addGestureRecognizer: [[self revealViewController] panGestureRecognizer]];
     
+    
+    
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"ZDBar"];
+    //NSPredicate *predicate = [NSPredicate predicateWithFormat:@"theProject.name"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"theProject.name = 'High'"];
+    [request setPredicate:predicate];
+    [request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"order"
+                                                                ascending:YES]]];
+    
+    
+    [self setFetchedResultsController:[[NSFetchedResultsController alloc] initWithFetchRequest:request
+                                                                          managedObjectContext:[ZDCoreDataStack mainQueueContext]
+                                                                            sectionNameKeyPath:nil
+                                                                                     cacheName:nil]];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -84,24 +102,24 @@
 //---------------------------------------------------------------------------------------
 #pragma mark - UICollectionView Data Source
 //---------------------------------------------------------------------------------------
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    
-    return 1;
-}
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    
-    NSInteger result = 15;
-    
-    if (section == 0) {
-        
-        
-    }
-    
-    
-    //NSLog(@"num cell %i for section %i", result, section);
-    return result;
-}
+//- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+//    
+//    return 1;
+//}
+//
+//- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+//    
+//    NSInteger result = 15;
+//    
+//    if (section == 0) {
+//        
+//        
+//    }
+//    
+//    
+//    //NSLog(@"num cell %i for section %i", result, section);
+//    return result;
+//}
 
 //- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 //{
@@ -113,7 +131,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSLog(@"Collection view indexpath: %i", [indexPath row]);
+    NSLog(@"Collection view indexpath: %li", (long)[indexPath row]);
     
     static NSString *cellIdentifier = @"MY_MAINCOLLECTION_CELL";
     
@@ -122,8 +140,10 @@
     
     if ([indexPath section] == 0) {
         
-        //NSString *theScaleNote = (NSString *)[[[[self theScale] scaleNotes] objectAtIndex:[indexPath row]] description];
-        //[cell mainText:theScaleNote];
+        NSString *theScaleNote = @"Em";
+        NSString *theTimeSig = @"4/4";
+        [cell mainText:theScaleNote];
+        [cell auxText:theTimeSig];
     }
     
     return cell;

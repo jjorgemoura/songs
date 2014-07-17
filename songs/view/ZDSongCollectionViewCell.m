@@ -10,6 +10,9 @@
 
 @interface ZDSongCollectionViewCell ()
 
+@property(weak) IBOutlet UILabel *mainLabel;
+@property(weak) IBOutlet UILabel *auxLabel;
+
 @end
 
 @implementation ZDSongCollectionViewCell
@@ -41,6 +44,16 @@
     [[self layer] setBorderColor:[bColor CGColor]];
     [[self layer] setBorderWidth:1.5];
     
+}
+
+- (void)mainText:(NSString *)text {
+    
+    [[self mainLabel] setText:text];
+}
+
+- (void)auxText:(NSString *)text {
+    
+    [[self auxLabel] setText:text];
 }
 
 

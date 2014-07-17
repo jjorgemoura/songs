@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ZDCoreCollectionVC.h"
 
-@interface ZDMainController : UICollectionViewController <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface ZDMainController : ZDCoreCollectionVC <UICollectionViewDataSource, UICollectionViewDelegate>
 
 
 @end

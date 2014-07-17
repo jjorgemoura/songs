@@ -9,6 +9,7 @@
 #import "ZDNewProjectController.h"
 #import "ZDCoreDataStack.h"
 #import "ZDProject+Factory.h"
+#import "ZDBar+Factory.h"
 #import "NSManagedObjectID+ZDString.h"
 
 @interface ZDNewProjectController ()
@@ -144,6 +145,16 @@
             [newProject setKey:pKey];
             [newProject setCreateOn:pCreateOn];
             [newProject setCreateDate:[NSDate date]];
+            
+            
+            
+            NSArray *theSet = [ZDBar defaultBars:moc];
+            for (ZDBar *b in theSet) {
+                
+                [newProject addBarsObject:b];
+            }
+            
+            
             
             
             NSError *error = nil;

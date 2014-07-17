@@ -13,7 +13,7 @@
 
 @interface ZDBar : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * chordType;
+@property (nonatomic, retain) NSString * chordType;
 @property (nonatomic, retain) NSNumber * order;
 @property (nonatomic, retain) NSNumber * songBlock;
 @property (nonatomic, retain) NSNumber * timeSignatureBeatCount;

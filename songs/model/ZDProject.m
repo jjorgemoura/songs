@@ -23,4 +23,12 @@
 @dynamic year;
 @dynamic bars;
 
+- (void)addBarsObject:(ZDBar *)value {
+
+    NSMutableOrderedSet* tempSet = [NSMutableOrderedSet orderedSetWithOrderedSet:[self bars]];
+    [tempSet addObject:value];
+    [self setBars: tempSet];
+
+}
+
 @end

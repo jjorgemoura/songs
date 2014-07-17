@@ -201,7 +201,7 @@
     //Check if already exists data
     NSError *error = nil;
     NSNumber *registerCount = [ZDSongBlock qtEntities:privateContext withError:&error];
-    NSNumber *registerCount2 = [ZDSongBlock countEntities:privateContext withError:&error];
+    //NSNumber *registerCount2 = [ZDSongBlock countEntities:privateContext withError:&error];
     
     
     //decision
@@ -215,19 +215,23 @@
     }
     
     
-    __block int fff = 8;
+//    __block int fff = 8;
+//    
+//    [privateContext performBlockAndWait:^{
+//    
+//        int ddd = 5;
+//        fff = 10;
+//        
+//        int zzz = ddd + fff;
+//        NSLog(@"logs: %d", zzz);
+//    }];
+//    
+//    
+//    NSLog(@"logs: %d", fff);
     
-    [privateContext performBlockAndWait:^{
-    
-        int ddd = 5;
-        fff = 10;
-        
-        int zzz = ddd + fff;
-        NSLog(@"logs: %d", zzz);
-    }];
     
     
-    NSLog(@"logs: %d", fff);
+    
     
     
     

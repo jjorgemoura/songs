@@ -10,4 +10,7 @@
 
 @interface ZDSongCollectionViewCell : UICollectionViewCell
 
+- (void)mainText:(NSString *)text;
+- (void)auxText:(NSString *)text;
+
 @end

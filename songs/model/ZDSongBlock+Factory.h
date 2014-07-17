@@ -16,6 +16,7 @@
 //+ (void (^)(NSManagedObjectContext *))prefillDatabaseBlock;
 + (void (^)(void))prefillDatabaseBlock:(NSManagedObjectContext *)moc;
 
++ (instancetype)objectWithName:(NSString *)name inContext:(NSManagedObjectContext *)moc;
 + (BOOL)deleteAllFromDatabase:(NSManagedObjectContext *)context;
 
 + (NSFetchRequest *)allEntities;

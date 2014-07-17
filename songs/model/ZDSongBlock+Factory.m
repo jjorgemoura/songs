@@ -172,6 +172,36 @@
 
 
 
+
++ (instancetype)objectWithName:(NSString *)name inContext:(NSManagedObjectContext *)moc {
+
+    ZDSongBlock *x = nil;
+
+    NSFetchRequest *fetchRequest = [ZDSongBlock allEntities];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:[ZDSongBlock entityName] inManagedObjectContext:moc];
+    [fetchRequest setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == %@", name];
+    [fetchRequest setPredicate:predicate];
+    
+    NSError *error = nil;
+    NSArray *result = [moc executeFetchRequest:fetchRequest error:&error];
+    
+    
+    //in case of being nil
+    if(result) {
+        
+        x = [result objectAtIndex:0];
+    }
+    else {
+    
+        NSLog(@"Load ZDSongBlock Entity Error: %@", error);
+    }
+
+    
+    return x;
+}
+
 + (BOOL)deleteAllFromDatabase:(NSManagedObjectContext *)context {
 
     
