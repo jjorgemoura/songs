@@ -9,9 +9,14 @@
 #import "ZDMainController.h"
 #import "ZDSongCollectionViewCell.h"
 #import "ZDCoreDataStack.h"
+#import "ZDBar.h"
+#import "ZDProject+Factory.h"
+#import "NSManagedObjectID+ZDString.h"
 
 
 @interface ZDMainController ()
+
+@property (nonatomic, strong) ZDProject *theProject;
 
 @property (nonatomic, weak) IBOutlet UIBarButtonItem* revealButtonItem;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem* auxRevealButtonItem;
@@ -48,6 +53,24 @@
     // Do any additional setup after loading the view.
     
     
+    //Prepare Default Scale
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *projectIDStored = [userDefaults objectForKey:@"projectID"];
+    
+    if (projectIDStored) {
+        
+        NSManagedObjectID *moID = [ZDCoreDataStack managedObjectIDFromString:projectIDStored];
+        ZDProject *theProject = (ZDProject *)[[ZDCoreDataStack mainQueueContext] objectWithID:moID];
+        [self setTheProject:theProject];
+    }
+    else {
+        
+        [[self revealViewController] performSelector:@selector(revealToggle:) withObject:self];
+    }
+    
+    
+    
+    
     //
     [[self revealButtonItem] setTarget: [self revealViewController]];
     [[self revealButtonItem] setAction: @selector( revealToggle: )];
@@ -56,13 +79,14 @@
     
     [[self auxRevealButtonItem] setTarget: [self revealViewController]];
     [[self auxRevealButtonItem] setAction: @selector( rightRevealToggle: )];
-    //[[[self navigationController] navigationBar] addGestureRecognizer: [[self revealViewController] panGestureRecognizer]];
     
     
     
+    
+    //FetchRequest
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"ZDBar"];
     //NSPredicate *predicate = [NSPredicate predicateWithFormat:@"theProject.name"];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"theProject.name = 'High'"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"theProject.name = %@", [[self theProject] name]];
     [request setPredicate:predicate];
     [request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"order"
                                                                 ascending:YES]]];
@@ -75,6 +99,22 @@
     
     
 }
+
+- (void)viewWillDisappear:(BOOL)animated {
+    
+    
+    //Save to NSUserDefaults
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    if ([self theProject]) {
+        
+        NSManagedObjectID *moID = [[self theProject] objectID];
+        
+        [userDefaults setObject:[moID stringRepresentation]  forKey:@"projectID"];
+        //[userDefaults synchronize];
+    }
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -100,26 +140,8 @@
 
 //---------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------
-#pragma mark - UICollectionView Data Source
+#pragma mark - UICollectionView Data Source / Delegate
 //---------------------------------------------------------------------------------------
-//- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-//    
-//    return 1;
-//}
-//
-//- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-//    
-//    NSInteger result = 15;
-//    
-//    if (section == 0) {
-//        
-//        
-//    }
-//    
-//    
-//    //NSLog(@"num cell %i for section %i", result, section);
-//    return result;
-//}
 
 //- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 //{
@@ -140,8 +162,15 @@
     
     if ([indexPath section] == 0) {
         
-        NSString *theScaleNote = @"Em";
-        NSString *theTimeSig = @"4/4";
+        ZDBar *theBar = [[[self theProject] bars] objectAtIndex:[indexPath row]];
+        
+        NSString *theScaleNote = [theBar chordType];
+        NSNumber *beats = [theBar timeSignatureBeatCount];
+        NSNumber *division = [theBar timeSignatureNoteValue];
+        
+        NSString *theTimeSig = [NSString stringWithFormat:@"%@/%@", beats, division];
+        //NSString *theScaleNote = @"Em";
+        //NSString *theTimeSig = @"4/4";
         [cell mainText:theScaleNote];
         [cell auxText:theTimeSig];
     }
@@ -150,8 +179,65 @@
 }
 
 
+//---------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------
+#pragma mark - Main
+//---------------------------------------------------------------------------------------
+- (void)changeProjectToProjectWithID:(NSString *)projectID {
 
 
+    NSManagedObjectID *moID = [ZDCoreDataStack managedObjectIDFromString:projectID];
+    ZDProject *theProject = (ZDProject *)[[ZDCoreDataStack mainQueueContext] objectWithID:moID];
+    [self setTheProject:theProject];
+    
+    [[self collectionView] reloadData];
+}
+
+
+//---------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------
+#pragma mark - Segue Navigation
+//---------------------------------------------------------------------------------------
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+    if([[segue identifier] isEqualToString:@"menu_main"]) {
+        NSLog(@"SEGUE: menu_main");
+    }
+    
+
+    
+    
+//    // configure the segue.
+//    if ( [segue isKindOfClass: [SWRevealViewControllerSegue class]] ) {
+//        
+//        SWRevealViewControllerSegue* rvcs = (SWRevealViewControllerSegue*) segue;
+//        SWRevealViewController* rvc = [self revealViewController];
+//        
+//        
+//        if([[segue identifier] isEqualToString:@"menu_create"]) {
+//            
+//            ZDNewProjectController *nextVC = [segue destinationViewController];
+//            [nextVC setDelegate:self];
+//            //[[segue destinationViewController] setDelegate:self];
+//        }
+//        
+//        if([[segue identifier] isEqualToString:@"menu_main"]) {
+//            
+//            ZDMainController *nextVC = [segue destinationViewController];
+//            [nextVC changeProjectToProjectWithID:[self theProjectID]];
+//        }
+//        
+//        
+//        
+//        rvcs.performBlock = ^(SWRevealViewControllerSegue* rvc_segue, UIViewController* svc, UIViewController* dvc) {
+//            
+//            UINavigationController* nc = [[UINavigationController alloc] initWithRootViewController:dvc ];
+//            [rvc pushFrontViewController:nc animated:YES];
+//        };
+//    }
+}
 
 
 @end

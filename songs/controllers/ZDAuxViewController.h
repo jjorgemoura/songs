@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ZDProject+Factory.h"
+
 
 @interface ZDAuxViewController : UIViewController
+
+@property (nonatomic, strong) ZDProject *theProject;
 
 @end

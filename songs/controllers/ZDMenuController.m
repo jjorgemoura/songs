@@ -7,9 +7,12 @@
 //
 
 #import "ZDMenuController.h"
+#import "ZDMainController.h"
 
 
 @interface ZDMenuController ()
+
+@property (nonatomic, copy) NSString *theProjectID;
 
 @end
 
@@ -86,6 +89,13 @@
             [nextVC setDelegate:self];
             //[[segue destinationViewController] setDelegate:self];
         }
+        
+        if([[segue identifier] isEqualToString:@"menu_main"]) {
+            
+            ZDMainController *nextVC = [segue destinationViewController];
+            [nextVC changeProjectToProjectWithID:[self theProjectID]];
+        }
+        
         
  
         rvcs.performBlock = ^(SWRevealViewControllerSegue* rvc_segue, UIViewController* svc, UIViewController* dvc) {
@@ -177,6 +187,21 @@
     //[[self navigationController] popViewControllerAnimated:YES];
     
     
+    //Save into NSUserDefault
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    if (projectID) {
+    
+        [userDefaults setObject:projectID  forKey:@"projectID"];
+        //[userDefaults synchronize];
+        
+        //set local param
+        [self setTheProjectID:projectID];
+    }
+    
+    
+    
+    //Perform Segue
     [self performSegueWithIdentifier:@"menu_main" sender:self];
     
 }

@@ -9,7 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "ZDCoreCollectionVC.h"
 
+@class ZDProject;
+
+
 @interface ZDMainController : ZDCoreCollectionVC <UICollectionViewDataSource, UICollectionViewDelegate>
 
+- (void)changeProjectToProjectWithID:(NSString *)projectID;
 
 @end
