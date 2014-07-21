@@ -117,84 +117,84 @@
         [newSongBlock1 setInfo:@"Intro"];
         [newSongBlock1 setName:@"intro"];
         [newSongBlock1 setHexColor:@"#C7C7CC"];
-        [newSongBlock1 setBorderHexColor:@"#4A4A4A"];
+        [newSongBlock1 setBorderHexColor:@"#898c90"];
         
         ZDSongBlock *newSongBlock2 = [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:moc];
         [newSongBlock2 setColor:@"green"];
         [newSongBlock2 setInfo:@"Verse"];
         [newSongBlock2 setName:@"verse"];
         [newSongBlock2 setHexColor:@"#0BD318"];
-        [newSongBlock2 setBorderHexColor:@"#4A4A4A"];
+        [newSongBlock2 setBorderHexColor:@"#898c90"];
         
         ZDSongBlock *newSongBlock3 = [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:moc];
         [newSongBlock3 setColor:@"blue"];
         [newSongBlock3 setInfo:@"Chorus"];
         [newSongBlock3 setName:@"chorus"];
         [newSongBlock3 setHexColor:@"#5BCAFF"];
-        [newSongBlock3 setBorderHexColor:@"#4A4A4A"];
+        [newSongBlock3 setBorderHexColor:@"#898c90"];
         
         ZDSongBlock *newSongBlock4 = [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:moc];
         [newSongBlock4 setColor:@"yellow"];
         [newSongBlock4 setInfo:@"Bridge"];
         [newSongBlock4 setName:@"bridge"];
         [newSongBlock4 setHexColor:@"#FFCC00"];
-        [newSongBlock4 setBorderHexColor:@"#4A4A4A"];
+        [newSongBlock4 setBorderHexColor:@"#898c90"];
         
         ZDSongBlock *newSongBlock5 = [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:moc];
         [newSongBlock5 setColor:@"sea"];
         [newSongBlock5 setInfo:@"Hook"];
         [newSongBlock5 setName:@"hook"];
         [newSongBlock5 setHexColor:@"#55EFCB"];
-        [newSongBlock5 setBorderHexColor:@"#4A4A4A"];
+        [newSongBlock5 setBorderHexColor:@"#898c90"];
         
         ZDSongBlock *newSongBlock6 = [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:moc];
         [newSongBlock6 setColor:@"red"];
         [newSongBlock6 setInfo:@"Solo"];
         [newSongBlock6 setName:@"solo"];
         [newSongBlock6 setHexColor:@"#FF5E3A"];
-        [newSongBlock6 setBorderHexColor:@"#4A4A4A"];
+        [newSongBlock6 setBorderHexColor:@"#898c90"];
         
         ZDSongBlock *newSongBlock7 = [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:moc];
         [newSongBlock7 setColor:@"cyan"];
         [newSongBlock7 setInfo:@"Jam"];
         [newSongBlock7 setName:@"jam"];
         [newSongBlock7 setHexColor:@"#55EFCB"];
-        [newSongBlock7 setBorderHexColor:@"#4A4A4A"];
+        [newSongBlock7 setBorderHexColor:@"#898c90"];
         
         ZDSongBlock *newSongBlock8 = [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:moc];
         [newSongBlock8 setColor:@"orange"];
         [newSongBlock8 setInfo:@"Verse B"];
         [newSongBlock8 setName:@"verse_b"];
         [newSongBlock8 setHexColor:@"#FF9500"];
-        [newSongBlock8 setBorderHexColor:@"#4A4A4A"];
+        [newSongBlock8 setBorderHexColor:@"#898c90"];
         
         ZDSongBlock *newSongBlock9 = [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:moc];
         [newSongBlock9 setColor:@"pink"];
         [newSongBlock9 setInfo:@"Chorus B"];
         [newSongBlock9 setName:@"chorus_b"];
         [newSongBlock9 setHexColor:@"#FF4981"];
-        [newSongBlock9 setBorderHexColor:@"#4A4A4A"];
+        [newSongBlock9 setBorderHexColor:@"#898c90"];
         
         ZDSongBlock *newSongBlock10 = [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:moc];
         [newSongBlock10 setColor:@"smoke"];
         [newSongBlock10 setInfo:@"Break"];
         [newSongBlock10 setName:@"break"];
         [newSongBlock10 setHexColor:@"#E0F8D8"];
-        [newSongBlock10 setBorderHexColor:@"#4A4A4A"];
+        [newSongBlock10 setBorderHexColor:@"#898c90"];
         
         ZDSongBlock *newSongBlock11 = [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:moc];
         [newSongBlock11 setColor:@"purple"];
         [newSongBlock11 setInfo:@"Outro"];
         [newSongBlock11 setName:@"outro"];
         [newSongBlock11 setHexColor:@"#EF4DB6"];
-        [newSongBlock11 setBorderHexColor:@"#4A4A4A"];
+        [newSongBlock11 setBorderHexColor:@"#898c90"];
         
         ZDSongBlock *newSongBlock12 = [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:moc];
         [newSongBlock12 setColor:@"cream"];
         [newSongBlock12 setInfo:@"Coda"];
         [newSongBlock12 setName:@"coda"];
         [newSongBlock12 setHexColor:@"#E4DDCA"];
-        [newSongBlock12 setBorderHexColor:@"#4A4A4A"];
+        [newSongBlock12 setBorderHexColor:@"#898c90"];
         
         NSError *error = nil;
         [moc save:&error];

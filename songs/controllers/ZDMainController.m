@@ -106,6 +106,32 @@
                                                                                      cacheName:nil]];
     
     
+    
+    //GESTURES
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
+
+    //[tapGesture setDelaysTouchesBegan:YES];
+    [tapGesture setNumberOfTapsRequired:2];
+    [tapGesture setNumberOfTouchesRequired:1];
+    [[self collectionView] addGestureRecognizer:tapGesture];
+
+    
+    
+    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
+    
+    [panGesture setMaximumNumberOfTouches:1];
+    [panGesture setMinimumNumberOfTouches:1];
+    //[[self collectionView] addGestureRecognizer:panGesture];
+    
+    
+    
+    UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
+    
+    //[longPressGesture setMinimumPressDuration:0.5];
+    [longPressGesture setNumberOfTapsRequired:2];
+    [longPressGesture setNumberOfTouchesRequired:1];
+    //[longPressGesture setAllowableMovement:10];
+    //[[self collectionView] addGestureRecognizer:longPressGesture];
 }
 
 
@@ -158,16 +184,8 @@
 
 //---------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------
-#pragma mark - UICollectionView Data Source / Delegate
+#pragma mark - UICollectionView Delegate
 //---------------------------------------------------------------------------------------
-
-//- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
-//{
-//    static NSString *cellIdentifier = @"MY_MAINCOLLECTION_HEADER";
-//    
-//    
-//    return headerView;
-//}
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -196,11 +214,90 @@
         [cell mainText:theScaleNote];
         [cell auxText:theTimeSig];
         [cell color:theBlockColor];
-        [cell borderColor:theBlockBorderColor];
+        [[cell layer] setBorderColor:[theBlockBorderColor CGColor]];
     }
     
     return cell;
 }
+
+
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
+
+    return YES;
+}
+
+
+- (void)collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
+
+    UICollectionViewCell *theCell = [collectionView cellForItemAtIndexPath:indexPath];
+    
+    [[theCell contentView] setBackgroundColor:[UIColor whiteColor]];
+}
+
+
+- (void)collectionView:(UICollectionView *)collectionView didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath {
+
+    //the Cell
+    UICollectionViewCell *theCell = [collectionView cellForItemAtIndexPath:indexPath];
+    
+    //the Bar corresponding of this cell
+    ZDBar *theBar = [[[self theProject] bars] objectAtIndex:[indexPath row]];
+
+    //set color
+    UIColor *theBlockColor = [UIColor colorWithHexString:[[theBar theSongBlock] hexColor]];
+    [[theCell contentView] setBackgroundColor:theBlockColor];
+}
+
+
+
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+
+    return YES;
+}
+
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
+
+    return YES;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+
+    //the Cell
+    UICollectionViewCell *theCell = [collectionView cellForItemAtIndexPath:indexPath];
+    
+    [[theCell layer] setBorderColor:[[UIColor colorWithHexString:@"#f7f7f7"] CGColor]];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
+
+    //the Cell
+    UICollectionViewCell *theCell = [collectionView cellForItemAtIndexPath:indexPath];
+    
+    //the Bar corresponding of this cell
+    ZDBar *theBar = [[[self theProject] bars] objectAtIndex:[indexPath row]];
+    
+    UIColor *theBlockBorderColor = [UIColor colorWithHexString:[[theBar theSongBlock] borderHexColor]];
+    [[theCell layer] setBorderColor:[theBlockBorderColor CGColor]];
+}
+
+
+
+
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath {
+
+    return NO;
+}
+
+- (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
+
+    return NO;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
+    
+}
+
+
 
 
 //---------------------------------------------------------------------------------------
@@ -209,12 +306,15 @@
 //---------------------------------------------------------------------------------------
 - (void)changeProjectToProjectWithID:(NSString *)projectID {
 
-
-    NSManagedObjectID *moID = [ZDCoreDataStack managedObjectIDFromString:projectID];
-    ZDProject *theProject = (ZDProject *)[[ZDCoreDataStack mainQueueContext] objectWithID:moID];
-    [self setTheProject:theProject];
+    if(projectID) {
     
-    [[self collectionView] reloadData];
+        NSManagedObjectID *moID = [ZDCoreDataStack managedObjectIDFromString:projectID];
+        ZDProject *theProject = (ZDProject *)[[ZDCoreDataStack mainQueueContext] objectWithID:moID];
+        [self setTheProject:theProject];
+        
+        [[self collectionView] reloadData];
+    }
+
 }
 
 
@@ -263,5 +363,25 @@
 //    }
 }
 
+
+
+//---------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------
+#pragma mark - Gestures
+//---------------------------------------------------------------------------------------
+- (void)handleTapGesture:(UITapGestureRecognizer *)sender {
+    
+    NSLog(@"handleTapGesture");
+}
+
+- (void)handlePanGesture:(UIPanGestureRecognizer *)sender {
+    
+    NSLog(@"handlePanGesture");
+}
+
+- (void)handleLongPressGesture:(UILongPressGestureRecognizer *)sender {
+    
+    NSLog(@"handleLongPressGesture");
+}
 
 @end
