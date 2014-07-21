@@ -120,7 +120,11 @@
         
         
         //Call Delegate
-        [[self delegate] viewController:self willSaveZDProject:pName];
+        if ([[self delegate] respondsToSelector:@selector(viewController:willSaveZDProject:)]) {
+        
+            [[self delegate] viewController:self willSaveZDProject:pName];
+        }
+        
         
         
         
@@ -174,7 +178,11 @@
         
         
         //Call Delegate
-        [[self delegate] viewController:self didSaveZDProjectWithID:objID andMessage:theMessage];
+        if ([[self delegate] respondsToSelector:@selector(viewController:didSaveZDProjectWithID:andMessage:)]) {
+            
+            [[self delegate] viewController:self didSaveZDProjectWithID:objID andMessage:theMessage];;
+        }
+        
 
     }
     

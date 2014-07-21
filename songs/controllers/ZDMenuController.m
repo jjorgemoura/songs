@@ -59,21 +59,6 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    if([[segue identifier] isEqualToString:@"menu_main"]) {
-        NSLog(@"SEGUE: menu_main");
-    }
-    
-    if([[segue identifier] isEqualToString:@"menu_create"]) {
-        NSLog(@"SEGUE: menu_create");
-    }
-    
-    if([[segue identifier] isEqualToString:@"menu_load"]) {
-        NSLog(@"SEGUE: menu_load");
-    }
- 
-    if([[segue identifier] isEqualToString:@"menu_settings"]) {
-        NSLog(@"SEGUE: menu_settings");
-    }
     
     
     // configure the segue.
@@ -90,10 +75,20 @@
             //[[segue destinationViewController] setDelegate:self];
         }
         
+        if([[segue identifier] isEqualToString:@"menu_load"]) {
+            
+            ZDLoadProjectController *nextVC = [segue destinationViewController];
+            [nextVC setDelegate:self];
+        }
+        
         if([[segue identifier] isEqualToString:@"menu_main"]) {
             
             ZDMainController *nextVC = [segue destinationViewController];
             [nextVC changeProjectToProjectWithID:[self theProjectID]];
+        }
+        
+        if([[segue identifier] isEqualToString:@"menu_settings"]) {
+            //NSLog(@"SEGUE: menu_settings");
         }
         
         
@@ -162,12 +157,12 @@
 //---------------------------------------------------------------------------------------
 #pragma mark - ZDNewProjectController Delegate
 //---------------------------------------------------------------------------------------
--(void) viewController:(ZDNewProjectController *)viewController willSaveZDProject:(NSString *)projectName {
+- (void)viewController:(ZDNewProjectController *)viewController willSaveZDProject:(NSString *)projectName {
     
     NSLog(@"New Project will Save");
 }
 
--(void) viewController:(ZDNewProjectController *)viewController didSaveZDProjectWithID:(NSString *)projectID andMessage:(NSString *)message {
+- (void)viewController:(ZDNewProjectController *)viewController didSaveZDProjectWithID:(NSString *)projectID andMessage:(NSString *)message {
     
     NSLog(@"New Project did Save");
     
@@ -205,5 +200,33 @@
     [self performSegueWithIdentifier:@"menu_main" sender:self];
     
 }
+
+//---------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------
+#pragma mark - ZDLoadProjectControllerDelegate Delegate
+//---------------------------------------------------------------------------------------
+- (void)viewController:(ZDLoadProjectController *)viewController didLoadZDProjectWithID:(NSString *)projectID {
+
+    NSLog(@"Load Project did load");
+    
+    //Save into NSUserDefault
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    if (projectID) {
+        
+        [userDefaults setObject:projectID  forKey:@"projectID"];
+        //[userDefaults synchronize];
+        
+        //set local param
+        [self setTheProjectID:projectID];
+    }
+    
+    
+    
+    //Perform Segue
+    [self performSegueWithIdentifier:@"menu_main" sender:self];
+}
+
+
 
 @end

@@ -12,6 +12,8 @@
 #import "ZDBar.h"
 #import "ZDProject+Factory.h"
 #import "NSManagedObjectID+ZDString.h"
+#import "UIColor+HexString.h"
+#import "ZDSongBlock+Factory.h"
 
 
 @interface ZDMainController ()
@@ -51,6 +53,12 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    //Backgrounf color
+    [[self collectionView] setBackgroundColor:[UIColor colorWithHexString:@"#4A4A4A"]];
+    
+    
+    
     
     
     //Prepare Default Scale
@@ -99,6 +107,16 @@
     
     
 }
+
+
+- (void)viewWillAppear:(BOOL)animated {
+
+    if ([self theProject]) {
+        
+        [self setTitle:[[self theProject] name]];
+    }
+}
+
 
 - (void)viewWillDisappear:(BOOL)animated {
     
@@ -169,10 +187,16 @@
         NSNumber *division = [theBar timeSignatureNoteValue];
         
         NSString *theTimeSig = [NSString stringWithFormat:@"%@/%@", beats, division];
-        //NSString *theScaleNote = @"Em";
-        //NSString *theTimeSig = @"4/4";
+        
+
+        UIColor *theBlockColor = [UIColor colorWithHexString:[[theBar theSongBlock] hexColor]];
+        UIColor *theBlockBorderColor = [UIColor colorWithHexString:[[theBar theSongBlock] borderHexColor]];
+        
+        
         [cell mainText:theScaleNote];
         [cell auxText:theTimeSig];
+        [cell color:theBlockColor];
+        [cell borderColor:theBlockBorderColor];
     }
     
     return cell;

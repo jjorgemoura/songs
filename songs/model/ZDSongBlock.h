@@ -13,6 +13,8 @@
 @interface ZDSongBlock : NSManagedObject
 
 @property (nonatomic, retain) NSString * color;
+@property (nonatomic, retain) NSString * hexColor;
+@property (nonatomic, retain) NSString * borderHexColor;
 @property (nonatomic, retain) NSString * info;
 @property (nonatomic, retain) NSString * name;
 

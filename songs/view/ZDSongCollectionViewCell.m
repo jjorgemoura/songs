@@ -56,5 +56,14 @@
     [[self auxLabel] setText:text];
 }
 
+- (void)color:(UIColor *)color {
+
+    [self setBackgroundColor:color];
+}
+
+- (void)borderColor:(UIColor *)color {
+
+    [[self layer] setBorderColor:[[UIColor redColor] CGColor]];
+}
 
 @end

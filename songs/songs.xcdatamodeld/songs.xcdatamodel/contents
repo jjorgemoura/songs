@@ -22,13 +22,15 @@
         <relationship name="bars" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="ZDBar" inverseName="theProject" inverseEntity="ZDBar" syncable="YES"/>
     </entity>
     <entity name="ZDSongBlock" representedClassName="ZDSongBlock" syncable="YES">
+        <attribute name="borderHexColor" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="color" attributeType="String" syncable="YES"/>
+        <attribute name="hexColor" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="info" attributeType="String" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
         <element name="ZDBar" positionX="151" positionY="108" width="128" height="148"/>
         <element name="ZDProject" positionX="-63" positionY="-18" width="128" height="193"/>
-        <element name="ZDSongBlock" positionX="358" positionY="9" width="128" height="88"/>
+        <element name="ZDSongBlock" positionX="358" positionY="9" width="128" height="120"/>
     </elements>
 </model>

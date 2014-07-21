@@ -9,6 +9,7 @@
 #import "ZDLoadProjectController.h"
 #import "ZDCoreDataStack.h"
 #import "ZDProject+Factory.h"
+#import "NSManagedObjectID+ZDString.h"
 
 @interface ZDLoadProjectController ()
 
@@ -120,5 +121,37 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+//---------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------
+#pragma mark - TableView Delegate
+//---------------------------------------------------------------------------------------
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    ZDProject *theProject = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+    
+    
+    //Call Delegate
+    if([[self delegate] respondsToSelector:@selector(viewController:willLoadZDProject:andProjectID:)]){
+        
+        [[self delegate] viewController:self willLoadZDProject:[theProject name] andProjectID:[[theProject objectID] stringRepresentation]];
+    }
+    
+    
+    
+    
+    
+    
+    
+    NSLog(@"Project Loaded: %@", [theProject name]);
+    
+    
+    //Call Delegate
+    if ([[self delegate] respondsToSelector:@selector(viewController:didLoadZDProjectWithID:)]) {
+
+        [[self delegate] viewController:self didLoadZDProjectWithID:[[theProject objectID] stringRepresentation]];
+    }
+    
+}
 
 @end

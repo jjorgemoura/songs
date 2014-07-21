@@ -29,10 +29,10 @@
 		CF3F7930194DEDFC00D9615A /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF3F792F194DEDFC00D9615A /* SWRevealViewController.m */; };
 		CF3F7932194DF1AF00D9615A /* Storyboard_iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF3F7931194DF1AF00D9615A /* Storyboard_iphone.storyboard */; };
 		CF3F7934194DF1DC00D9615A /* Storyboard_ipad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF3F7933194DF1DC00D9615A /* Storyboard_ipad.storyboard */; };
-		CF4CC58519772D44001D49A4 /* AFMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4CC58419772D44001D49A4 /* AFMasterViewController.m */; };
 		CFB4438E196DD8C600EDB6E2 /* ZDProject+Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = CFB4438D196DD8C600EDB6E2 /* ZDProject+Factory.m */; };
 		CFB44391196DD8EC00EDB6E2 /* ZDSongBlock+Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = CFB44390196DD8EC00EDB6E2 /* ZDSongBlock+Factory.m */; };
 		CFB44394196DD8FB00EDB6E2 /* ZDBar+Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = CFB44393196DD8FB00EDB6E2 /* ZDBar+Factory.m */; };
+		CFD6A0F1197D20360006A0AC /* UIColor+HexString.m in Sources */ = {isa = PBXBuildFile; fileRef = CFD6A0F0197D20360006A0AC /* UIColor+HexString.m */; };
 		CFD88A11196C0A7100FC1F1B /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CFD88A10196C0A7100FC1F1B /* Settings.bundle */; };
 		CFF01A45196965BA00A6E2F6 /* ZDMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF01A44196965BA00A6E2F6 /* ZDMainController.m */; };
 		CFF01A48196965C800A6E2F6 /* ZDMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF01A47196965C800A6E2F6 /* ZDMenuController.m */; };
@@ -88,14 +88,14 @@
 		CF3F792F194DEDFC00D9615A /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		CF3F7931194DF1AF00D9615A /* Storyboard_iphone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard_iphone.storyboard; sourceTree = "<group>"; };
 		CF3F7933194DF1DC00D9615A /* Storyboard_ipad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard_ipad.storyboard; sourceTree = "<group>"; };
-		CF4CC58319772D44001D49A4 /* AFMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFMasterViewController.h; sourceTree = "<group>"; };
-		CF4CC58419772D44001D49A4 /* AFMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFMasterViewController.m; sourceTree = "<group>"; };
 		CFB4438C196DD8C600EDB6E2 /* ZDProject+Factory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ZDProject+Factory.h"; sourceTree = "<group>"; };
 		CFB4438D196DD8C600EDB6E2 /* ZDProject+Factory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ZDProject+Factory.m"; sourceTree = "<group>"; };
 		CFB4438F196DD8EC00EDB6E2 /* ZDSongBlock+Factory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ZDSongBlock+Factory.h"; sourceTree = "<group>"; };
 		CFB44390196DD8EC00EDB6E2 /* ZDSongBlock+Factory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ZDSongBlock+Factory.m"; sourceTree = "<group>"; };
 		CFB44392196DD8FB00EDB6E2 /* ZDBar+Factory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ZDBar+Factory.h"; sourceTree = "<group>"; };
 		CFB44393196DD8FB00EDB6E2 /* ZDBar+Factory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ZDBar+Factory.m"; sourceTree = "<group>"; };
+		CFD6A0EF197D20360006A0AC /* UIColor+HexString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HexString.h"; sourceTree = "<group>"; };
+		CFD6A0F0197D20360006A0AC /* UIColor+HexString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HexString.m"; sourceTree = "<group>"; };
 		CFD88A10196C0A7100FC1F1B /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		CFF01A43196965BA00A6E2F6 /* ZDMainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDMainController.h; sourceTree = "<group>"; };
 		CFF01A44196965BA00A6E2F6 /* ZDMainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDMainController.m; sourceTree = "<group>"; };
@@ -150,6 +150,8 @@
 		CF119D2419704F3000E512F8 /* categories */ = {
 			isa = PBXGroup;
 			children = (
+				CFD6A0EF197D20360006A0AC /* UIColor+HexString.h */,
+				CFD6A0F0197D20360006A0AC /* UIColor+HexString.m */,
 				CF119D2819704F9D00E512F8 /* NSManagedObjectID+ZDString.h */,
 				CF119D2919704F9D00E512F8 /* NSManagedObjectID+ZDString.m */,
 				CF119D2B19704FCF00E512F8 /* NSManagedObjectContext+ZDAdditions.h */,
@@ -312,8 +314,6 @@
 				CFF4B545196AFB8000FF78F4 /* ZDCoreDataTableVC.m */,
 				CF0756751976E22C007C420C /* ZDCoreCollectionVC.h */,
 				CF0756761976E22C007C420C /* ZDCoreCollectionVC.m */,
-				CF4CC58319772D44001D49A4 /* AFMasterViewController.h */,
-				CF4CC58419772D44001D49A4 /* AFMasterViewController.m */,
 				CF119D211970294D00E512F8 /* ZDCoreDataStack.h */,
 				CF119D221970294D00E512F8 /* ZDCoreDataStack.m */,
 			);
@@ -458,8 +458,8 @@
 				CFF4B546196AFB8000FF78F4 /* ZDCoreDataTableVC.m in Sources */,
 				CFB4438E196DD8C600EDB6E2 /* ZDProject+Factory.m in Sources */,
 				CFF01A4E196965F900A6E2F6 /* ZDSettingsController.m in Sources */,
+				CFD6A0F1197D20360006A0AC /* UIColor+HexString.m in Sources */,
 				CFF01A45196965BA00A6E2F6 /* ZDMainController.m in Sources */,
-				CF4CC58519772D44001D49A4 /* AFMasterViewController.m in Sources */,
 				CF119D2D19704FCF00E512F8 /* NSManagedObjectContext+ZDAdditions.m in Sources */,
 				CFF01A541969661B00A6E2F6 /* ZDLoadProjectController.m in Sources */,
 				CF3F7930194DEDFC00D9615A /* SWRevealViewController.m in Sources */,
@@ -522,7 +522,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 97;
+				CURRENT_PROJECT_VERSION = 118;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -562,7 +562,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
-				CURRENT_PROJECT_VERSION = 97;
+				CURRENT_PROJECT_VERSION = 118;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

@@ -12,5 +12,7 @@
 
 - (void)mainText:(NSString *)text;
 - (void)auxText:(NSString *)text;
+- (void)color:(UIColor *)color;
+- (void)borderColor:(UIColor *)color;
 
 @end

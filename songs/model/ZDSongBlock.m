@@ -14,5 +14,7 @@
 @dynamic color;
 @dynamic info;
 @dynamic name;
+@dynamic hexColor;
+@dynamic borderHexColor;
 
 @end
