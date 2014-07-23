@@ -139,19 +139,20 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="L7E-Mx-bsG">
-                        <barButtonItem key="rightBarButtonItem" image="reveal-icon" id="527-00-Fn6"/>
                         <connections>
                             <outlet property="leftBarButtonItem" destination="527-00-Fn6" id="3fg-ux-9En"/>
-                            <outlet property="rightBarButtonItem" destination="WJO-AM-8OX" id="DV5-B4-VBl"/>
+                            <outletCollection property="rightBarButtonItemsCollection" destination="fOI-wR-mWd" id="lWI-ye-Q7H"/>
+                            <outletCollection property="rightBarButtonItemsCollection" destination="WJO-AM-8OX" id="FyA-KL-Z1C"/>
                         </connections>
                     </navigationItem>
                     <connections>
-                        <outlet property="auxRevealButtonItem" destination="WJO-AM-8OX" id="Y5n-J8-uXO"/>
                         <outlet property="revealButtonItem" destination="527-00-Fn6" id="JzG-oK-oPu"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hht-Tz-hU7" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <barButtonItem image="reveal-icon" id="WJO-AM-8OX"/>
+                <barButtonItem image="reveal-icon" id="527-00-Fn6"/>
+                <barButtonItem systemItem="action" id="WJO-AM-8OX"/>
+                <barButtonItem title="..." id="fOI-wR-mWd"/>
             </objects>
             <point key="canvasLocation" x="1856" y="-518"/>
         </scene>

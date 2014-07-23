@@ -23,6 +23,9 @@
 @property (nonatomic, weak) IBOutlet UIBarButtonItem* revealButtonItem;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem* auxRevealButtonItem;
 
+
+
+
 //@property (nonatomic, weak) IBOutlet UICollectionView *mainCollectionView;
 
 @end
@@ -85,10 +88,9 @@
     [[[self navigationController] navigationBar] addGestureRecognizer: [[self revealViewController] panGestureRecognizer]];
     
     
-    [[self auxRevealButtonItem] setTarget: [self revealViewController]];
-    [[self auxRevealButtonItem] setAction: @selector( rightRevealToggle: )];
-    
-    
+    //[[self auxRevealButtonItem] setTarget: [self revealViewController]];
+    //[[self auxRevealButtonItem] setAction: @selector( rightRevealToggle: )];
+
     
     
     //FetchRequest
@@ -383,5 +385,10 @@
     
     NSLog(@"handleLongPressGesture");
 }
+
+
+
+
+
 
 @end
