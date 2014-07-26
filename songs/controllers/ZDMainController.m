@@ -14,11 +14,13 @@
 #import "NSManagedObjectID+ZDString.h"
 #import "UIColor+HexString.h"
 #import "ZDSongBlock+Factory.h"
+#import "ZDDetailsBarController.h"
 
 
 @interface ZDMainController ()
 
 @property (nonatomic, strong) ZDProject *theProject;
+@property (nonatomic, strong) ZDBar *selectedBar;
 
 @property (nonatomic, weak) IBOutlet UIBarButtonItem* revealButtonItem;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem* auxRevealButtonItem;
@@ -159,6 +161,11 @@
         [userDefaults setObject:[moID stringRepresentation]  forKey:@"projectID"];
         //[userDefaults synchronize];
     }
+    
+    
+    
+    //Gestures
+    [[self collectionView] gestureRecognizers];
 }
 
 
@@ -266,8 +273,12 @@
 
     //the Cell
     UICollectionViewCell *theCell = [collectionView cellForItemAtIndexPath:indexPath];
-    
     [[theCell layer] setBorderColor:[[UIColor colorWithHexString:@"#f7f7f7"] CGColor]];
+    
+    ZDBar *theBar = [[[self theProject] bars] objectAtIndex:[indexPath row]];
+    [self setSelectedBar:theBar];
+    
+    [self performSegueWithIdentifier:@"details_bar" sender:self];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -332,37 +343,15 @@
         NSLog(@"SEGUE: menu_main");
     }
     
+    
+    if([[segue identifier] isEqualToString:@"details_bar"]) {
+       
+        ZDDetailsBarController *nextVC = [segue destinationViewController];
+        [nextVC setTheBar:[self selectedBar]];
+    }
+
 
     
-    
-//    // configure the segue.
-//    if ( [segue isKindOfClass: [SWRevealViewControllerSegue class]] ) {
-//        
-//        SWRevealViewControllerSegue* rvcs = (SWRevealViewControllerSegue*) segue;
-//        SWRevealViewController* rvc = [self revealViewController];
-//        
-//        
-//        if([[segue identifier] isEqualToString:@"menu_create"]) {
-//            
-//            ZDNewProjectController *nextVC = [segue destinationViewController];
-//            [nextVC setDelegate:self];
-//            //[[segue destinationViewController] setDelegate:self];
-//        }
-//        
-//        if([[segue identifier] isEqualToString:@"menu_main"]) {
-//            
-//            ZDMainController *nextVC = [segue destinationViewController];
-//            [nextVC changeProjectToProjectWithID:[self theProjectID]];
-//        }
-//        
-//        
-//        
-//        rvcs.performBlock = ^(SWRevealViewControllerSegue* rvc_segue, UIViewController* svc, UIViewController* dvc) {
-//            
-//            UINavigationController* nc = [[UINavigationController alloc] initWithRootViewController:dvc ];
-//            [rvc pushFrontViewController:nc animated:YES];
-//        };
-//    }
 }
 
 
