@@ -348,6 +348,7 @@
        
         ZDDetailsBarController *nextVC = [segue destinationViewController];
         [nextVC setTheBar:[self selectedBar]];
+        [nextVC setDelegate:self];
     }
 
 
@@ -378,6 +379,20 @@
 
 
 
+
+//---------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------
+#pragma mark - ZDDetailsBarControllerDelegate
+//---------------------------------------------------------------------------------------
+- (void)viewControllerDidCancel:(ZDDetailsBarController *)viewController {
+
+    [viewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)viewController:(ZDDetailsBarController *)viewController didSaveZDBar:(ZDBar *)bar {
+
+    [viewController dismissViewControllerAnimated:YES completion:nil];
+}
 
 
 @end

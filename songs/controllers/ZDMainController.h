@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "ZDCoreCollectionVC.h"
+#import "ZDDetailsBarController.h"
 
 @class ZDProject;
 
 
-@interface ZDMainController : ZDCoreCollectionVC <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface ZDMainController : ZDCoreCollectionVC <UICollectionViewDataSource, UICollectionViewDelegate, ZDDetailsBarControllerDelegate>
 
 - (void)changeProjectToProjectWithID:(NSString *)projectID;
 

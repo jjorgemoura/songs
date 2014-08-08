@@ -9,10 +9,23 @@
 #import <UIKit/UIKit.h>
 
 @class ZDBar;
+@class ZDDetailsBarController;
+
+
+@protocol ZDDetailsBarControllerDelegate <NSObject>
+
+@optional
+- (void)viewController:(ZDDetailsBarController *)viewController willSaveZDBar:(ZDBar *)bar;
+- (void)viewController:(ZDDetailsBarController *)viewController didSaveZDBar:(ZDBar *)bar;
+- (void)viewControllerDidCancel:(ZDDetailsBarController *)viewController;
+
+@end
+
 
 
 @interface ZDDetailsBarController : UIViewController
 
 @property (nonatomic, strong) ZDBar *theBar;
+@property (nonatomic, weak) id <ZDDetailsBarControllerDelegate> delegate;
 
 @end

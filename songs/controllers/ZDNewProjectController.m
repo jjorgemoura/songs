@@ -180,7 +180,7 @@
         //Call Delegate
         if ([[self delegate] respondsToSelector:@selector(viewController:didSaveZDProjectWithID:andMessage:)]) {
             
-            [[self delegate] viewController:self didSaveZDProjectWithID:objID andMessage:theMessage];;
+            [[self delegate] viewController:self didSaveZDProjectWithID:objID andMessage:theMessage];
         }
         
 

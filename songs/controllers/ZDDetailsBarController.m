@@ -63,10 +63,66 @@
     }
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapBehind:)];
+    [recognizer setNumberOfTapsRequired:1];
+    [recognizer setCancelsTouchesInView:NO]; //So the user can still interact with controls in the modal view
+    [[[self view] window] addGestureRecognizer:recognizer];
+    
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+
+    //REMOVE ALL GESTURES
+    NSArray * gesturesList = [[[self view] window] gestureRecognizers];
+    NSLog(@"SIZE OF GESTURES LIST: %lu", (unsigned long)[gesturesList count]);
+    
+    for (UIGestureRecognizer *x in gesturesList) {
+        
+        NSLog(@"The Gesture: %@", [x description]);
+        if ([x isKindOfClass:[UITapGestureRecognizer class]]) {
+            
+            [[[self view] window] removeGestureRecognizer:x];
+        }
+
+    }
+    
+    
+    
+}
+
+
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+
+
+//---------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------
+#pragma mark - Gestures
+//---------------------------------------------------------------------------------------
+- (void)handleTapBehind:(UITapGestureRecognizer *)sender {
+
+    if ([sender state] == UIGestureRecognizerStateEnded) {
+        
+        CGPoint location = [sender locationInView:nil]; //Passing nil gives us coordinates in the window
+        
+        //Then we convert the tap's location into the local view's coordinate system, and test to see if it's in or outside. If outside, dismiss the view.
+        
+        if (![[self view] pointInside:[[self view] convertPoint:location fromView:[[self view] window]] withEvent:nil]) {
+
+            [self dismissViewControllerAnimated:YES completion:nil];
+            
+            NSLog(@"There are %lu Gesture Recognizers", (unsigned long)[[[[self view] window] gestureRecognizers] count]);
+            [[[self view] window] removeGestureRecognizer:sender];
+        }
+    }
 }
 
 
@@ -76,12 +132,39 @@
 #pragma mark - Target Action
 //---------------------------------------------------------------------------------------
 - (IBAction)saveButtonPressed:(id)sender {
+   
+    
+    if ([[self delegate] respondsToSelector:@selector(viewController:willSaveZDBar:)]) {
+        
+        [[self delegate] viewController:self willSaveZDBar:nil];
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    if ([[self delegate] respondsToSelector:@selector(viewController:didSaveZDBar:)]) {
+        
+        [[self delegate] viewController:self didSaveZDBar:nil];
+    }
+    
     
     
 }
 
 - (IBAction)cancelButtonPressed:(id)sender {
     
+    if ([[self delegate] respondsToSelector:@selector(viewControllerDidCancel:)]) {
+        
+        [[self delegate] viewControllerDidCancel:self];
+    }
     
 }
 
