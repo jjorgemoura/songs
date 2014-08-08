@@ -76,11 +76,11 @@
 
     //REMOVE ALL GESTURES
     NSArray * gesturesList = [[[self view] window] gestureRecognizers];
-    NSLog(@"SIZE OF GESTURES LIST: %lu", (unsigned long)[gesturesList count]);
+    //NSLog(@"SIZE OF GESTURES LIST: %lu", (unsigned long)[gesturesList count]);
     
     for (UIGestureRecognizer *x in gesturesList) {
         
-        NSLog(@"The Gesture: %@", [x description]);
+        //NSLog(@"The Gesture: %@", [x description]);
         if ([x isKindOfClass:[UITapGestureRecognizer class]]) {
             
             [[[self view] window] removeGestureRecognizer:x];

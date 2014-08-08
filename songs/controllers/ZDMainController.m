@@ -111,6 +111,8 @@
     
     
     
+    
+    
     //GESTURES
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
 
@@ -230,6 +232,9 @@
 }
 
 
+
+
+
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
 
     return YES;
@@ -269,6 +274,11 @@
     return YES;
 }
 
+
+
+
+
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 
     //the Cell
@@ -292,6 +302,7 @@
     UIColor *theBlockBorderColor = [UIColor colorWithHexString:[[theBar theSongBlock] borderHexColor]];
     [[theCell layer] setBorderColor:[theBlockBorderColor CGColor]];
 }
+
 
 
 
@@ -352,6 +363,11 @@
     }
 
 
+    if([[segue identifier] isEqualToString:@"addinsert_bar"]) {
+        
+        ZDAddInsertBarsController *nextVC = [segue destinationViewController];
+        [nextVC setDelegate:self];
+    }
     
 }
 

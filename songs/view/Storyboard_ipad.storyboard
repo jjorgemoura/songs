@@ -148,6 +148,9 @@
                     <connections>
                         <outlet property="revealButtonItem" destination="527-00-Fn6" id="JzG-oK-oPu"/>
                         <segue destination="ppl-ez-0Ab" kind="modal" identifier="details_bar" modalPresentationStyle="formSheet" modalTransitionStyle="flipHorizontal" id="jDf-US-Gs4"/>
+                        <segue destination="hvW-90-fCn" kind="popover" identifier="addinsert_bar" popoverAnchorView="9wM-ZN-oIl" id="PN6-2k-AXx">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES" left="YES" right="YES"/>
+                        </segue>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hht-Tz-hU7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -156,6 +159,24 @@
                 <barButtonItem title="..." id="fOI-wR-mWd"/>
             </objects>
             <point key="canvasLocation" x="1856" y="-518"/>
+        </scene>
+        <!--Add Insert Bars Controller-->
+        <scene sceneID="BJi-SE-CH7">
+            <objects>
+                <viewController id="hvW-90-fCn" customClass="ZDAddInsertBarsController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="pZ5-jB-XUB"/>
+                        <viewControllerLayoutGuide type="bottom" id="FPC-st-4yi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lQb-9B-CKO">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="B3I-Lk-WCi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3006" y="1051"/>
         </scene>
         <!--Details Bar Controller-->
         <scene sceneID="B1L-Nh-g1R">
@@ -254,7 +275,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KH0-nH-ngB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2862" y="483"/>
+            <point key="canvasLocation" x="2982" y="115"/>
         </scene>
         <!--Menu Controller-->
         <scene sceneID="fQx-MJ-Tic">
@@ -552,24 +573,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vq3-5d-NQG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-612" y="-1858"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="R63-qh-rXZ">
-            <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Vde-mo-rOV" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ew9-vO-SKy"/>
-                        <viewControllerLayoutGuide type="bottom" id="C3c-Ku-fr6"/>
-                    </layoutGuides>
-                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="aw1-ky-ubs">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <toolbarItems/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="g4N-jC-rV5" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
         </scene>
     </scenes>
     <resources>

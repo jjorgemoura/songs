@@ -36,6 +36,7 @@
 		CFB4438E196DD8C600EDB6E2 /* ZDProject+Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = CFB4438D196DD8C600EDB6E2 /* ZDProject+Factory.m */; };
 		CFB44391196DD8EC00EDB6E2 /* ZDSongBlock+Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = CFB44390196DD8EC00EDB6E2 /* ZDSongBlock+Factory.m */; };
 		CFB44394196DD8FB00EDB6E2 /* ZDBar+Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = CFB44393196DD8FB00EDB6E2 /* ZDBar+Factory.m */; };
+		CFB4B9B4199565BF0028962F /* ZDAddInsertBarsController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFB4B9B3199565BF0028962F /* ZDAddInsertBarsController.m */; };
 		CFD6A0F1197D20360006A0AC /* UIColor+HexString.m in Sources */ = {isa = PBXBuildFile; fileRef = CFD6A0F0197D20360006A0AC /* UIColor+HexString.m */; };
 		CFD88A11196C0A7100FC1F1B /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CFD88A10196C0A7100FC1F1B /* Settings.bundle */; };
 		CFF01A45196965BA00A6E2F6 /* ZDMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF01A44196965BA00A6E2F6 /* ZDMainController.m */; };
@@ -106,6 +107,8 @@
 		CFB44390196DD8EC00EDB6E2 /* ZDSongBlock+Factory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ZDSongBlock+Factory.m"; sourceTree = "<group>"; };
 		CFB44392196DD8FB00EDB6E2 /* ZDBar+Factory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ZDBar+Factory.h"; sourceTree = "<group>"; };
 		CFB44393196DD8FB00EDB6E2 /* ZDBar+Factory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ZDBar+Factory.m"; sourceTree = "<group>"; };
+		CFB4B9B2199565BF0028962F /* ZDAddInsertBarsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDAddInsertBarsController.h; sourceTree = "<group>"; };
+		CFB4B9B3199565BF0028962F /* ZDAddInsertBarsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDAddInsertBarsController.m; sourceTree = "<group>"; };
 		CFD6A0EF197D20360006A0AC /* UIColor+HexString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HexString.h"; sourceTree = "<group>"; };
 		CFD6A0F0197D20360006A0AC /* UIColor+HexString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HexString.m"; sourceTree = "<group>"; };
 		CFD88A10196C0A7100FC1F1B /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -301,6 +304,8 @@
 				CFF01A531969661B00A6E2F6 /* ZDLoadProjectController.m */,
 				CF8D099D1981169F002C73D3 /* ZDDetailsBarController.h */,
 				CF8D099E1981169F002C73D3 /* ZDDetailsBarController.m */,
+				CFB4B9B2199565BF0028962F /* ZDAddInsertBarsController.h */,
+				CFB4B9B3199565BF0028962F /* ZDAddInsertBarsController.m */,
 			);
 			name = controller;
 			path = controllers;
@@ -474,6 +479,7 @@
 				CF20EF3D194DEA02008E47A4 /* main.m in Sources */,
 				CFF4B54F196B48E700FF78F4 /* ZDSongBlock.m in Sources */,
 				CF0756771976E22C007C420C /* ZDCoreCollectionVC.m in Sources */,
+				CFB4B9B4199565BF0028962F /* ZDAddInsertBarsController.m in Sources */,
 				CF3398871980116E007A701C /* ZDPDFEngine.m in Sources */,
 				CFF4B54C196B48E700FF78F4 /* ZDProject.m in Sources */,
 				CF33988A198011B4007A701C /* ZDSongsPDFManager.m in Sources */,
@@ -546,7 +552,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 193;
+				CURRENT_PROJECT_VERSION = 202;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -586,7 +592,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
-				CURRENT_PROJECT_VERSION = 193;
+				CURRENT_PROJECT_VERSION = 202;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
