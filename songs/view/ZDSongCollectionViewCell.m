@@ -66,4 +66,12 @@
     [[self layer] setBorderColor:[[UIColor redColor] CGColor]];
 }
 
+
+
+- (NSString *)description {
+
+    return [NSString stringWithFormat:@"Main note: %@", [[self mainLabel] text]];
+}
+
+
 @end

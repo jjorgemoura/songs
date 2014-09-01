@@ -25,6 +25,8 @@
 @property (nonatomic, weak) IBOutlet UIBarButtonItem* revealButtonItem;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem* auxRevealButtonItem;
 
+@property (nonatomic, strong) ZDAddInsertBarsController *addInsertPopoverVC;
+@property (nonatomic, strong) UIPopoverController *theAddPopoverController;
 
 
 
@@ -116,10 +118,12 @@
     //GESTURES
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
 
-    //[tapGesture setDelaysTouchesBegan:YES];
+    //This is to delay the delegate methods of being called
+    [tapGesture setDelaysTouchesBegan:YES];
+    
     [tapGesture setNumberOfTapsRequired:2];
-    [tapGesture setNumberOfTouchesRequired:1];
-    [[self collectionView] addGestureRecognizer:tapGesture];
+    //[tapGesture setNumberOfTouchesRequired:1];
+    //[[self collectionView] addGestureRecognizer:tapGesture];
 
     
     
@@ -133,11 +137,11 @@
     
     UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
     
-    //[longPressGesture setMinimumPressDuration:0.5];
-    [longPressGesture setNumberOfTapsRequired:2];
+    [longPressGesture setMinimumPressDuration:1.5];
+    [longPressGesture setNumberOfTapsRequired:0];
     [longPressGesture setNumberOfTouchesRequired:1];
-    //[longPressGesture setAllowableMovement:10];
-    //[[self collectionView] addGestureRecognizer:longPressGesture];
+    [longPressGesture setAllowableMovement:2];
+    [[self collectionView] addGestureRecognizer:longPressGesture];
 }
 
 
@@ -200,7 +204,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSLog(@"Collection view indexpath: %li", (long)[indexPath row]);
+    //NSLog(@"Collection view indexpath: %li", (long)[indexPath row]);
     
     static NSString *cellIdentifier = @"MY_MAINCOLLECTION_CELL";
     
@@ -246,6 +250,8 @@
     UICollectionViewCell *theCell = [collectionView cellForItemAtIndexPath:indexPath];
     
     [[theCell contentView] setBackgroundColor:[UIColor whiteColor]];
+    
+    //NSLog(@"row: %li and section: %li", (long)indexPath.row, (long)indexPath.section);
 }
 
 
@@ -366,7 +372,16 @@
     if([[segue identifier] isEqualToString:@"addinsert_bar"]) {
         
         ZDAddInsertBarsController *nextVC = [segue destinationViewController];
+        [self setAddInsertPopoverVC:nextVC];
         [nextVC setDelegate:self];
+        
+    
+        
+        [self setTheAddPopoverController:[[UIPopoverController alloc] initWithContentViewController:nextVC]];
+        
+        [[self theAddPopoverController] setPopoverContentSize:CGSizeMake(300.0, 300.0) animated:YES];
+        [[self theAddPopoverController] presentPopoverFromRect:[(UICollectionViewCell *)sender frame] inView:[self collectionView] permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+
     }
     
 }
@@ -380,6 +395,44 @@
 - (void)handleTapGesture:(UITapGestureRecognizer *)sender {
     
     NSLog(@"handleTapGesture");
+    
+    if ([sender state] == UIGestureRecognizerStateBegan){
+        NSLog(@"UIGestureRecognizerStateBegan.");
+        //Do Whatever You want on Began of Gesture
+    }
+    
+    if ([sender state] == UIGestureRecognizerStateEnded) {
+        NSLog(@"UIGestureRecognizerStateEnded");
+        //Do Whatever You want on End of Gesture
+    }
+    
+    if ([sender state] == UIGestureRecognizerStateCancelled){
+        NSLog(@"UIGestureRecognizerStateCancelled.");
+        //Do Whatever You want on Began of Gesture
+    }
+    
+    if ([sender state] == UIGestureRecognizerStateChanged) {
+        NSLog(@"UIGestureRecognizerStateChanged");
+        //Do Whatever You want on End of Gesture
+    }
+    
+    if ([sender state] == UIGestureRecognizerStateFailed){
+        NSLog(@"UIGestureRecognizerStateFailed.");
+        //Do Whatever You want on Began of Gesture
+    }
+    
+    if ([sender state] == UIGestureRecognizerStatePossible) {
+        NSLog(@"UIGestureRecognizerStatePossible");
+        //Do Whatever You want on End of Gesture
+    }
+    
+    if ([sender state] == UIGestureRecognizerStateRecognized){
+        NSLog(@"UIGestureRecognizerStateRecognized.");
+        //Do Whatever You want on Began of Gesture
+    }
+    
+    
+    
 }
 
 - (void)handlePanGesture:(UIPanGestureRecognizer *)sender {
@@ -390,6 +443,49 @@
 - (void)handleLongPressGesture:(UILongPressGestureRecognizer *)sender {
     
     NSLog(@"handleLongPressGesture");
+
+    
+    if ([sender state] != UIGestureRecognizerStateBegan) {
+        return;
+    }
+    
+//    if ([sender state] == UIGestureRecognizerStateBegan){
+//        NSLog(@"UIGestureRecognizerStateBegan.");
+//        //Do Whatever You want on Began of Gesture
+//    }
+//    
+//    if ([sender state] == UIGestureRecognizerStateEnded) {
+//        NSLog(@"UIGestureRecognizerStateEnded");
+//        //Do Whatever You want on End of Gesture
+//    }
+    
+    
+    
+    
+    CGPoint p = [sender locationInView:[self collectionView]];
+    NSIndexPath *indexPath = [[self collectionView] indexPathForItemAtPoint:p];
+    
+    //NSLog(@"row: %li and section: %li", (long)indexPath.row, (long)indexPath.section);
+    
+    
+    if (indexPath == nil){
+        
+        NSLog(@"Couldn't find index path");
+    }
+    else {
+
+        // get the cell at indexPath (the one you long pressed)
+        UICollectionViewCell *cell = [[self collectionView] cellForItemAtIndexPath:indexPath];
+
+        
+        //ZDSongCollectionViewCell *xxx = (ZDSongCollectionViewCell *)cell;
+        //NSString *yyyt = [xxx description];
+
+        
+        // do stuff with the cell
+        [self performSegueWithIdentifier:@"addinsert_bar" sender:cell];
+    }
+    
 }
 
 
