@@ -8,13 +8,15 @@
 
 #import "ZDBar+Factory.h"
 #import "ZDSongBlock+Factory.h"
+#import "ZDNote.h"
+#import "ZDChordType.h"
 
 @implementation ZDBar (Factory)
 
 
 //---------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------
-#pragma mark - Public Methods
+#pragma mark - Class Methods
 //---------------------------------------------------------------------------------------
 + (NSString *)entityName {
     
@@ -31,7 +33,8 @@
     ZDSongBlock *songBlockBreak = [ZDSongBlock objectWithName:@"break" inContext:moc];
     
     ZDBar *newBar1 = [NSEntityDescription insertNewObjectForEntityForName:[ZDBar entityName] inManagedObjectContext:moc];
-    [newBar1 setChordType:@"C"];
+    [newBar1 setChordType:[NSNumber numberWithInt:1]];
+    [newBar1 setChordNote:[NSNumber numberWithInt:1]];
     [newBar1 setOrder:[NSNumber numberWithInt:1]];
     [newBar1 setSongBlock:[NSNumber numberWithInt:1]];
     [newBar1 setTimeSignatureBeatCount:[NSNumber numberWithInt:4]];
@@ -39,7 +42,8 @@
     [newBar1 setTheSongBlock:songBlockIntro];
     
     ZDBar *newBar2 = [NSEntityDescription insertNewObjectForEntityForName:[ZDBar entityName] inManagedObjectContext:moc];
-    [newBar2 setChordType:@"C"];
+    [newBar2 setChordType:[NSNumber numberWithInt:1]];
+    [newBar2 setChordNote:[NSNumber numberWithInt:1]];
     [newBar2 setOrder:[NSNumber numberWithInt:2]];
     [newBar2 setSongBlock:[NSNumber numberWithInt:1]];
     [newBar2 setTimeSignatureBeatCount:[NSNumber numberWithInt:4]];
@@ -47,7 +51,8 @@
     [newBar2 setTheSongBlock:songBlockIntro];
     
     ZDBar *newBar3 = [NSEntityDescription insertNewObjectForEntityForName:[ZDBar entityName] inManagedObjectContext:moc];
-    [newBar3 setChordType:@"A"];
+    [newBar3 setChordType:[NSNumber numberWithInt:1]];
+    [newBar3 setChordNote:[NSNumber numberWithInt:10]];
     [newBar3 setOrder:[NSNumber numberWithInt:3]];
     [newBar3 setSongBlock:[NSNumber numberWithInt:1]];
     [newBar3 setTimeSignatureBeatCount:[NSNumber numberWithInt:4]];
@@ -55,7 +60,8 @@
     [newBar3 setTheSongBlock:songBlockIntro];
     
     ZDBar *newBar4 = [NSEntityDescription insertNewObjectForEntityForName:[ZDBar entityName] inManagedObjectContext:moc];
-    [newBar4 setChordType:@"A"];
+    [newBar4 setChordType:[NSNumber numberWithInt:1]];
+    [newBar4 setChordNote:[NSNumber numberWithInt:10]];
     [newBar4 setOrder:[NSNumber numberWithInt:4]];
     [newBar4 setSongBlock:[NSNumber numberWithInt:1]];
     [newBar4 setTimeSignatureBeatCount:[NSNumber numberWithInt:4]];
@@ -63,7 +69,8 @@
     [newBar4 setTheSongBlock:songBlockIntro];
     
     ZDBar *newBar5 = [NSEntityDescription insertNewObjectForEntityForName:[ZDBar entityName] inManagedObjectContext:moc];
-    [newBar5 setChordType:@"C"];
+    [newBar5 setChordType:[NSNumber numberWithInt:1]];
+    [newBar5 setChordNote:[NSNumber numberWithInt:1]];
     [newBar5 setOrder:[NSNumber numberWithInt:5]];
     [newBar5 setSongBlock:[NSNumber numberWithInt:1]];
     [newBar5 setTimeSignatureBeatCount:[NSNumber numberWithInt:4]];
@@ -71,7 +78,8 @@
     [newBar5 setTheSongBlock:songBlockVerse];
     
     ZDBar *newBar6 = [NSEntityDescription insertNewObjectForEntityForName:[ZDBar entityName] inManagedObjectContext:moc];
-    [newBar6 setChordType:@"G"];
+    [newBar6 setChordType:[NSNumber numberWithInt:1]];
+    [newBar6 setChordNote:[NSNumber numberWithInt:8]];
     [newBar6 setOrder:[NSNumber numberWithInt:6]];
     [newBar6 setSongBlock:[NSNumber numberWithInt:1]];
     [newBar6 setTimeSignatureBeatCount:[NSNumber numberWithInt:4]];
@@ -79,7 +87,8 @@
     [newBar6 setTheSongBlock:songBlockVerse];
     
     ZDBar *newBar7 = [NSEntityDescription insertNewObjectForEntityForName:[ZDBar entityName] inManagedObjectContext:moc];
-    [newBar7 setChordType:@"C"];
+    [newBar7 setChordType:[NSNumber numberWithInt:1]];
+    [newBar7 setChordNote:[NSNumber numberWithInt:1]];
     [newBar7 setOrder:[NSNumber numberWithInt:7]];
     [newBar7 setSongBlock:[NSNumber numberWithInt:1]];
     [newBar7 setTimeSignatureBeatCount:[NSNumber numberWithInt:4]];
@@ -87,7 +96,8 @@
     [newBar7 setTheSongBlock:songBlockVerse];
     
     ZDBar *newBar8 = [NSEntityDescription insertNewObjectForEntityForName:[ZDBar entityName] inManagedObjectContext:moc];
-    [newBar8 setChordType:@"G"];
+    [newBar8 setChordType:[NSNumber numberWithInt:1]];
+    [newBar8 setChordNote:[NSNumber numberWithInt:8]];
     [newBar8 setOrder:[NSNumber numberWithInt:8]];
     [newBar8 setSongBlock:[NSNumber numberWithInt:1]];
     [newBar8 setTimeSignatureBeatCount:[NSNumber numberWithInt:4]];
@@ -95,7 +105,8 @@
     [newBar8 setTheSongBlock:songBlockVerse];
     
     ZDBar *newBar9 = [NSEntityDescription insertNewObjectForEntityForName:[ZDBar entityName] inManagedObjectContext:moc];
-    [newBar9 setChordType:@"Em"];
+    [newBar9 setChordType:[NSNumber numberWithInt:2]];
+    [newBar9 setChordNote:[NSNumber numberWithInt:5]];
     [newBar9 setOrder:[NSNumber numberWithInt:9]];
     [newBar9 setSongBlock:[NSNumber numberWithInt:1]];
     [newBar9 setTimeSignatureBeatCount:[NSNumber numberWithInt:4]];
@@ -103,7 +114,8 @@
     [newBar9 setTheSongBlock:songBlockBreak];
     
     ZDBar *newBar10 = [NSEntityDescription insertNewObjectForEntityForName:[ZDBar entityName] inManagedObjectContext:moc];
-    [newBar10 setChordType:@"Em"];
+    [newBar10 setChordType:[NSNumber numberWithInt:2]];
+    [newBar10 setChordNote:[NSNumber numberWithInt:5]];
     [newBar10 setOrder:[NSNumber numberWithInt:10]];
     [newBar10 setSongBlock:[NSNumber numberWithInt:1]];
     [newBar10 setTimeSignatureBeatCount:[NSNumber numberWithInt:4]];
@@ -111,7 +123,8 @@
     [newBar10 setTheSongBlock:songBlockBreak];
     
     ZDBar *newBar11 = [NSEntityDescription insertNewObjectForEntityForName:[ZDBar entityName] inManagedObjectContext:moc];
-    [newBar11 setChordType:@"C"];
+    [newBar11 setChordType:[NSNumber numberWithInt:1]];
+    [newBar11 setChordNote:[NSNumber numberWithInt:1]];
     [newBar11 setOrder:[NSNumber numberWithInt:11]];
     [newBar11 setSongBlock:[NSNumber numberWithInt:1]];
     [newBar11 setTimeSignatureBeatCount:[NSNumber numberWithInt:4]];
@@ -119,7 +132,8 @@
     [newBar11 setTheSongBlock:songBlockVerse];
     
     ZDBar *newBar12 = [NSEntityDescription insertNewObjectForEntityForName:[ZDBar entityName] inManagedObjectContext:moc];
-    [newBar12 setChordType:@"G"];
+    [newBar12 setChordType:[NSNumber numberWithInt:1]];
+    [newBar12 setChordNote:[NSNumber numberWithInt:8]];
     [newBar12 setOrder:[NSNumber numberWithInt:12]];
     [newBar12 setSongBlock:[NSNumber numberWithInt:1]];
     [newBar12 setTimeSignatureBeatCount:[NSNumber numberWithInt:4]];
@@ -127,7 +141,8 @@
     [newBar12 setTheSongBlock:songBlockVerse];
     
     ZDBar *newBar13 = [NSEntityDescription insertNewObjectForEntityForName:[ZDBar entityName] inManagedObjectContext:moc];
-    [newBar13 setChordType:@"C"];
+    [newBar13 setChordType:[NSNumber numberWithInt:1]];
+    [newBar13 setChordNote:[NSNumber numberWithInt:1]];
     [newBar13 setOrder:[NSNumber numberWithInt:13]];
     [newBar13 setSongBlock:[NSNumber numberWithInt:1]];
     [newBar13 setTimeSignatureBeatCount:[NSNumber numberWithInt:4]];
@@ -135,7 +150,8 @@
     [newBar13 setTheSongBlock:songBlockVerse];
     
     ZDBar *newBar14 = [NSEntityDescription insertNewObjectForEntityForName:[ZDBar entityName] inManagedObjectContext:moc];
-    [newBar14 setChordType:@"G"];
+    [newBar14 setChordType:[NSNumber numberWithInt:1]];
+    [newBar14 setChordNote:[NSNumber numberWithInt:8]];
     [newBar14 setOrder:[NSNumber numberWithInt:14]];
     [newBar14 setSongBlock:[NSNumber numberWithInt:1]];
     [newBar14 setTimeSignatureBeatCount:[NSNumber numberWithInt:4]];
@@ -143,7 +159,8 @@
     [newBar14 setTheSongBlock:songBlockVerse];
     
     ZDBar *newBar15 = [NSEntityDescription insertNewObjectForEntityForName:[ZDBar entityName] inManagedObjectContext:moc];
-    [newBar15 setChordType:@"G"];
+    [newBar15 setChordType:[NSNumber numberWithInt:1]];
+    [newBar15 setChordNote:[NSNumber numberWithInt:8]];
     [newBar15 setOrder:[NSNumber numberWithInt:15]];
     [newBar15 setSongBlock:[NSNumber numberWithInt:1]];
     [newBar15 setTimeSignatureBeatCount:[NSNumber numberWithInt:4]];
@@ -151,7 +168,8 @@
     [newBar15 setTheSongBlock:songBlockChorus];
     
     ZDBar *newBar16 = [NSEntityDescription insertNewObjectForEntityForName:[ZDBar entityName] inManagedObjectContext:moc];
-    [newBar16 setChordType:@"F"];
+    [newBar16 setChordType:[NSNumber numberWithInt:1]];
+    [newBar16 setChordNote:[NSNumber numberWithInt:6]];
     [newBar16 setOrder:[NSNumber numberWithInt:16]];
     [newBar16 setSongBlock:[NSNumber numberWithInt:1]];
     [newBar16 setTimeSignatureBeatCount:[NSNumber numberWithInt:4]];
@@ -159,7 +177,8 @@
     [newBar16 setTheSongBlock:songBlockChorus];
     
     ZDBar *newBar17 = [NSEntityDescription insertNewObjectForEntityForName:[ZDBar entityName] inManagedObjectContext:moc];
-    [newBar17 setChordType:@"G"];
+    [newBar17 setChordType:[NSNumber numberWithInt:1]];
+    [newBar17 setChordNote:[NSNumber numberWithInt:8]];
     [newBar17 setOrder:[NSNumber numberWithInt:17]];
     [newBar17 setSongBlock:[NSNumber numberWithInt:1]];
     [newBar17 setTimeSignatureBeatCount:[NSNumber numberWithInt:4]];
@@ -167,7 +186,8 @@
     [newBar17 setTheSongBlock:songBlockChorus];
     
     ZDBar *newBar18 = [NSEntityDescription insertNewObjectForEntityForName:[ZDBar entityName] inManagedObjectContext:moc];
-    [newBar18 setChordType:@"F"];
+    [newBar18 setChordType:[NSNumber numberWithInt:1]];
+    [newBar18 setChordNote:[NSNumber numberWithInt:6]];
     [newBar18 setOrder:[NSNumber numberWithInt:18]];
     [newBar18 setSongBlock:[NSNumber numberWithInt:1]];
     [newBar18 setTimeSignatureBeatCount:[NSNumber numberWithInt:4]];
@@ -175,7 +195,8 @@
     [newBar18 setTheSongBlock:songBlockChorus];
     
     ZDBar *newBar19 = [NSEntityDescription insertNewObjectForEntityForName:[ZDBar entityName] inManagedObjectContext:moc];
-    [newBar19 setChordType:@"Em"];
+    [newBar19 setChordType:[NSNumber numberWithInt:2]];
+    [newBar19 setChordNote:[NSNumber numberWithInt:5]];
     [newBar19 setOrder:[NSNumber numberWithInt:19]];
     [newBar19 setSongBlock:[NSNumber numberWithInt:1]];
     [newBar19 setTimeSignatureBeatCount:[NSNumber numberWithInt:4]];
@@ -183,7 +204,8 @@
     [newBar19 setTheSongBlock:songBlockBreak];
     
     ZDBar *newBar20 = [NSEntityDescription insertNewObjectForEntityForName:[ZDBar entityName] inManagedObjectContext:moc];
-    [newBar20 setChordType:@"Em"];
+    [newBar20 setChordType:[NSNumber numberWithInt:2]];
+    [newBar20 setChordNote:[NSNumber numberWithInt:5]];
     [newBar20 setOrder:[NSNumber numberWithInt:20]];
     [newBar20 setSongBlock:[NSNumber numberWithInt:1]];
     [newBar20 setTimeSignatureBeatCount:[NSNumber numberWithInt:4]];
@@ -196,6 +218,27 @@
     
     return theSet;
 }
+
+
+//---------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------
+#pragma mark - Public Methods
+//---------------------------------------------------------------------------------------
+- (NSString *)chordTypeText {
+
+    NSString *result = nil;
+    
+    
+    ZDNote *noteRim = [[ZDNote alloc] initWithNote:[[self chordNote] integerValue]];
+    ZDChordType *chordRim = [ZDChordType instanceWithID:[self chordType]];
+    
+    //build final
+    result = [NSString stringWithFormat:[noteRim noteText], [chordRim typeShort], nil];
+
+    
+    return result;
+}
+
 
 
 @end

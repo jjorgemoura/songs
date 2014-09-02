@@ -62,7 +62,6 @@
             [[[self view] window] removeGestureRecognizer:x];
         }
     }
-
 }
 
 
@@ -90,11 +89,14 @@
         
         if (![[self view] pointInside:[[self view] convertPoint:location fromView:[[self view] window]] withEvent:nil]) {
             
-            [self dismissViewControllerAnimated:YES completion:nil];
-            //[fs.popoverController dismissPopoverAnimated:TRUE];
-            //[self popovo]
+            //Call its delegate
+            if ([[self delegate] respondsToSelector:@selector(viewControllerXBarsDidCancel:)]) {
+                
+                [[self delegate] viewControllerXBarsDidCancel:self];
+            }
             
-            NSLog(@"There are %lu Gesture Recognizers", (unsigned long)[[[[self view] window] gestureRecognizers] count]);
+            
+            //NSLog(@"There are %lu Gesture Recognizers", (unsigned long)[[[[self view] window] gestureRecognizers] count]);
             [[[self view] window] removeGestureRecognizer:sender];
         }
     }

@@ -2,7 +2,7 @@
 //  ZDProject.m
 //  songs
 //
-//  Created by Jorge Moura on 07/07/14.
+//  Created by Jorge Moura on 01/09/14.
 //  Copyright (c) 2014 Jorge Moura. All rights reserved.
 //
 
@@ -24,11 +24,11 @@
 @dynamic bars;
 
 - (void)addBarsObject:(ZDBar *)value {
-
+    
     NSMutableOrderedSet* tempSet = [NSMutableOrderedSet orderedSetWithOrderedSet:[self bars]];
     [tempSet addObject:value];
     [self setBars: tempSet];
-
+    
 }
 
 @end

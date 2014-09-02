@@ -15,5 +15,6 @@
 
 + (NSArray *)defaultBars:(NSManagedObjectContext *)moc;
 
+- (NSString *)chordTypeText;
 
 @end

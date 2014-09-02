@@ -55,7 +55,7 @@
         NSString *timeSig = [NSString stringWithFormat:@"%@/%@", [[self theBar] timeSignatureBeatCount], [[self theBar] timeSignatureNoteValue]];
         NSString *barNumber = [NSString stringWithFormat:@"Bar #%@", [[[self theBar] order] stringValue]];
         
-        [[self theChord] setText:[[self theBar] chordType]];
+        [[self theChord] setText:[[self theBar] chordTypeText]];
         [[self theTimeSig] setText:timeSig];
         [[self theBarNumber] setText:barNumber];
         [[self theChordBKColor] setBackgroundColor:[UIColor colorWithHexString:[[[self theBar] theSongBlock] color]]];

@@ -10,6 +10,10 @@
 
 @implementation NSManagedObjectID (ZDString)
 
+//---------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------
+#pragma mark - Public Methods
+//---------------------------------------------------------------------------------------
 - (NSString *)stringRepresentation {
 
     return [[self URIRepresentation] absoluteString];

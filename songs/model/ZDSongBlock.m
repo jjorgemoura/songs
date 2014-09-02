@@ -2,7 +2,7 @@
 //  ZDSongBlock.m
 //  songs
 //
-//  Created by Jorge Moura on 07/07/14.
+//  Created by Jorge Moura on 01/09/14.
 //  Copyright (c) 2014 Jorge Moura. All rights reserved.
 //
 
@@ -11,10 +11,10 @@
 
 @implementation ZDSongBlock
 
+@dynamic borderHexColor;
 @dynamic color;
+@dynamic hexColor;
 @dynamic info;
 @dynamic name;
-@dynamic hexColor;
-@dynamic borderHexColor;
 
 @end

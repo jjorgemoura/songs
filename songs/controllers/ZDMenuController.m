@@ -19,6 +19,7 @@
 
 @implementation ZDMenuController
 
+
 //---------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------
 #pragma mark - Contructor
@@ -31,6 +32,7 @@
     }
     return self;
 }
+
 
 //---------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------
@@ -168,19 +170,6 @@
     
     
     
-    //close viewcontroller
-    //NSLog(@"The presented VC: %@", [[self presentedViewController] description]);
-    //    UIViewController *xxx = [self presentedViewController];
-    //    UIViewController *yyy = viewController;
-    //    UINavigationController *zzz = [self navigationController];
-    //    UIViewController *ttt = [viewController presentingViewController];
-    //    UIViewController *ttt2 = [viewController presentedViewController];
-    
-    //[[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
-    //[self dismissViewControllerAnimated:YES completion: nil];
-    //[[self navigationController] dismissViewControllerAnimated:YES completion:nil];
-    //[[self navigationController] popViewControllerAnimated:YES];
-    
     
     //Save into NSUserDefault
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -200,6 +189,7 @@
     [self performSegueWithIdentifier:@"menu_main" sender:self];
     
 }
+
 
 //---------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------

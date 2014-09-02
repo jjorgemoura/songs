@@ -18,7 +18,7 @@
 @optional
 - (void)viewController:(ZDAddInsertBarsController *)viewController willInsertXBars:(NSNumber *)barsQuantity ofType:(ZDSongBlock *)barBlockType;
 - (void)viewController:(ZDAddInsertBarsController *)viewController didInsertXBars:(NSNumber *)barsQuantity ofType:(ZDSongBlock *)barBlockType;
-- (void)viewControllerDidCancel:(ZDAddInsertBarsController *)viewController;
+- (void)viewControllerXBarsDidCancel:(ZDAddInsertBarsController *)viewController;
 
 @end
 

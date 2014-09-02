@@ -9,7 +9,7 @@
 #import "ZDMainController.h"
 #import "ZDSongCollectionViewCell.h"
 #import "ZDCoreDataStack.h"
-#import "ZDBar.h"
+#import "ZDBar+Factory.h"
 #import "ZDProject+Factory.h"
 #import "NSManagedObjectID+ZDString.h"
 #import "UIColor+HexString.h"
@@ -25,18 +25,17 @@
 @property (nonatomic, weak) IBOutlet UIBarButtonItem* revealButtonItem;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem* auxRevealButtonItem;
 
-@property (nonatomic, strong) ZDAddInsertBarsController *addInsertPopoverVC;
+//@property (nonatomic, strong) ZDAddInsertBarsController *addInsertPopoverVC;
 @property (nonatomic, strong) UIPopoverController *theAddPopoverController;
 
 
-
-//@property (nonatomic, weak) IBOutlet UICollectionView *mainCollectionView;
 
 @end
 
 
 
 @implementation ZDMainController
+
 
 //---------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------
@@ -183,20 +182,6 @@
 
 
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-
-
-
 //---------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------
 #pragma mark - UICollectionView Delegate
@@ -215,7 +200,7 @@
         
         ZDBar *theBar = [[[self theProject] bars] objectAtIndex:[indexPath row]];
         
-        NSString *theScaleNote = [theBar chordType];
+        NSString *theScaleNote = [theBar chordTypeText];
         NSNumber *beats = [theBar timeSignatureBeatCount];
         NSNumber *division = [theBar timeSignatureNoteValue];
         
@@ -372,18 +357,17 @@
     if([[segue identifier] isEqualToString:@"addinsert_bar"]) {
         
         ZDAddInsertBarsController *nextVC = [segue destinationViewController];
-        [self setAddInsertPopoverVC:nextVC];
+        //[self setAddInsertPopoverVC:nextVC];
         [nextVC setDelegate:self];
         
     
-        
+        //instanciate and set Property
         [self setTheAddPopoverController:[[UIPopoverController alloc] initWithContentViewController:nextVC]];
         
         [[self theAddPopoverController] setPopoverContentSize:CGSizeMake(300.0, 300.0) animated:YES];
         [[self theAddPopoverController] presentPopoverFromRect:[(UICollectionViewCell *)sender frame] inView:[self collectionView] permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 
     }
-    
 }
 
 
@@ -444,22 +428,9 @@
     
     NSLog(@"handleLongPressGesture");
 
-    
     if ([sender state] != UIGestureRecognizerStateBegan) {
         return;
     }
-    
-//    if ([sender state] == UIGestureRecognizerStateBegan){
-//        NSLog(@"UIGestureRecognizerStateBegan.");
-//        //Do Whatever You want on Began of Gesture
-//    }
-//    
-//    if ([sender state] == UIGestureRecognizerStateEnded) {
-//        NSLog(@"UIGestureRecognizerStateEnded");
-//        //Do Whatever You want on End of Gesture
-//    }
-    
-    
     
     
     CGPoint p = [sender locationInView:[self collectionView]];
@@ -477,15 +448,9 @@
         // get the cell at indexPath (the one you long pressed)
         UICollectionViewCell *cell = [[self collectionView] cellForItemAtIndexPath:indexPath];
 
-        
-        //ZDSongCollectionViewCell *xxx = (ZDSongCollectionViewCell *)cell;
-        //NSString *yyyt = [xxx description];
-
-        
         // do stuff with the cell
         [self performSegueWithIdentifier:@"addinsert_bar" sender:cell];
     }
-    
 }
 
 
@@ -505,6 +470,21 @@
 
     [viewController dismissViewControllerAnimated:YES completion:nil];
 }
+
+
+
+//---------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------
+#pragma mark - ZDAddInsertsBarsDelegate
+//---------------------------------------------------------------------------------------
+- (void)viewControllerXBarsDidCancel:(ZDAddInsertBarsController *)viewController {
+    
+    [[self theAddPopoverController] dismissPopoverAnimated:YES];
+    [self setTheAddPopoverController:nil];
+}
+
+
+
 
 
 @end
