@@ -20,6 +20,7 @@
 + (BOOL)deleteAllFromDatabase:(NSManagedObjectContext *)context;
 
 + (NSFetchRequest *)allEntities;
++ (NSArray *)allEntitiesNames:(NSManagedObjectContext *)moc withError:(NSError **)error;
 + (NSNumber *)qtEntities:(NSManagedObjectContext *)moc withError:(NSError **)error;
 + (NSNumber *)countEntities:(NSManagedObjectContext *)moc withError:(NSError **)error;
 

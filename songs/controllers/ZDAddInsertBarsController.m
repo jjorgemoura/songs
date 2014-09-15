@@ -7,6 +7,23 @@
 //
 
 #import "ZDAddInsertBarsController.h"
+#import "ZDBar+Factory.h"
+#import "ZDSongBlock+Factory.h"
+#import "ZDCoreDataStack.h"
+
+
+@interface ZDAddInsertBarsController ()
+
+
+@property (nonatomic, weak) IBOutlet UILabel *numberOfBars;
+@property (nonatomic, weak) IBOutlet UIPickerView *songBlockSlider;
+
+@property (nonatomic, strong) NSArray *songBlocksDataSource;
+@property (nonatomic, strong) NSString *selectedBlock;
+
+@end
+
+
 
 @implementation ZDAddInsertBarsController
 
@@ -33,6 +50,14 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    
+    
+    //Load the Picker Data Source
+    NSError *error = nil;
+    NSManagedObjectContext *moc = [ZDCoreDataStack mainQueueContext];
+    NSArray *songBlocksList = [ZDSongBlock allEntitiesNames:moc withError:&error];
+    [self setSongBlocksDataSource:songBlocksList];
     
     
 }
@@ -104,23 +129,145 @@
 
 
 
+
+//---------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------
+#pragma mark - PickerView Datasource
+//---------------------------------------------------------------------------------------
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    
+    NSInteger numRows = 0;
+    
+    if (component == 0) {
+        numRows = [[self songBlocksDataSource] count];
+    }
+    
+    return numRows;
+}
+
+
+
+//---------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------
+#pragma mark - PickerView Delegate
+//---------------------------------------------------------------------------------------
+- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    
+    NSAttributedString *as = nil;
+    
+    
+    if (component == 0) {
+        NSString *obj = [[self songBlocksDataSource] objectAtIndex:row];
+        as = [[NSAttributedString alloc] initWithString:obj];
+    }
+    
+    return as;
+}
+
+
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    
+    if(pickerView == [self songBlockSlider]) {
+        
+        if (component == 0) {
+            
+            [self setSelectedBlock:[[self songBlocksDataSource] objectAtIndex:row]];
+        }
+    }
+}
+
+
 //---------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------
 #pragma mark - Target Action
 //---------------------------------------------------------------------------------------
-- (IBAction)saveButtonPressed:(id)sender {
+
+- (IBAction)InsertBeforeButtonPressed:(id)sender {
+    
+    NSLog(@"Insert Before");
+    
+
+    //the new Data
+    NSNumber *numberOfBarsToInsert = [NSNumber numberWithInteger:[[[self numberOfBars] text] integerValue]];
+    
+    NSManagedObjectContext *moc = [ZDCoreDataStack mainQueueContext];
+    ZDSongBlock *songBlockToSave = [ZDSongBlock objectWithName:[self selectedBlock] inContext:moc];
+    
+    NSLog(@"name: %@", [songBlockToSave name]);
+    
+    
+    //delegate before
+    if ([[self delegate] respondsToSelector:@selector(viewController:willInsertXBars:ofType:beforeTheCurrentBar:)]) {
+        
+        [[self delegate] viewController:self willInsertXBars:numberOfBarsToInsert ofType:songBlockToSave beforeTheCurrentBar:YES];
+    }
     
     
     
+    
+    
+    //delegate after
+    if ([[self delegate] respondsToSelector:@selector(viewController:didInsertXBars:ofType:beforeTheCurrentBar:)]) {
+        
+        [[self delegate] viewController:self didInsertXBars:numberOfBarsToInsert ofType:songBlockToSave beforeTheCurrentBar:YES];
+    }
+   
+    
+}
+
+
+- (IBAction)InsertAfterButtonPressed:(id)sender {
+
+    NSLog(@"Insert After");
+    
+    //the new Data
+    NSNumber *numberOfBarsToInsert = [NSNumber numberWithInteger:[[[self numberOfBars] text] integerValue]];
+    
+    NSManagedObjectContext *moc = [ZDCoreDataStack mainQueueContext];
+    ZDSongBlock *songBlockToSave = [ZDSongBlock objectWithName:[self selectedBlock] inContext:moc];
+    
+    
+    
+    
+    
+    //delegate before
+    if ([[self delegate] respondsToSelector:@selector(viewController:willInsertXBars:ofType:beforeTheCurrentBar:)]) {
+        
+         [[self delegate] viewController:self willInsertXBars:numberOfBarsToInsert ofType:songBlockToSave beforeTheCurrentBar:NO];
+    }
+    
+    
+    
+    
+    
+    //delegate after    
+    if ([[self delegate] respondsToSelector:@selector(viewController:didInsertXBars:ofType:beforeTheCurrentBar:)]) {
+        
+         [[self delegate] viewController:self didInsertXBars:numberOfBarsToInsert ofType:songBlockToSave beforeTheCurrentBar:NO];
+    }
     
     
 }
 
-- (IBAction)cancelButtonPressed:(id)sender {
+- (IBAction)valueStepperChanged:(id)sender {
+    
+    if ([sender isKindOfClass:[UIStepper class]]) {
+    
+        UIStepper *myStepper = (UIStepper *)sender;
+        double newNumberBars = [myStepper value];
+        
+        [[self numberOfBars] setText:[NSString stringWithFormat:@"%d", (int)newNumberBars]];
+    }
     
     
 }
-
 
 
 @end

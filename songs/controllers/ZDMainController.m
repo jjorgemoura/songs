@@ -14,7 +14,7 @@
 #import "NSManagedObjectID+ZDString.h"
 #import "UIColor+HexString.h"
 #import "ZDSongBlock+Factory.h"
-#import "ZDDetailsBarController.h"
+
 
 
 @interface ZDMainController ()
@@ -360,13 +360,38 @@
         //[self setAddInsertPopoverVC:nextVC];
         [nextVC setDelegate:self];
         
-    
-        //instanciate and set Property
-        [self setTheAddPopoverController:[[UIPopoverController alloc] initWithContentViewController:nextVC]];
         
-        [[self theAddPopoverController] setPopoverContentSize:CGSizeMake(300.0, 300.0) animated:YES];
-        [[self theAddPopoverController] presentPopoverFromRect:[(UICollectionViewCell *)sender frame] inView:[self collectionView] permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-
+        
+        
+        if ([nextVC respondsToSelector:@selector(popoverPresentationController)]) {
+            
+            //THIS IS iOS 8 CODE
+            nextVC.modalPresentationStyle = UIModalPresentationPopover;
+            [nextVC setPreferredContentSize:CGSizeMake(325.0,325.0)];
+            
+            UIPopoverPresentationController *popoverPresentation = nextVC.popoverPresentationController;
+            [popoverPresentation setSourceView:[self collectionView]];
+            [popoverPresentation setSourceRect:[(UICollectionViewCell *)sender frame]];
+            [popoverPresentation setPermittedArrowDirections:(UIPopoverArrowDirectionLeft | UIPopoverArrowDirectionRight)];
+            
+            [self presentViewController:nextVC animated:YES completion:nil];
+            
+        } else {
+            //THIS IS IOS 7- CODE
+            //existing code...
+            
+            //fix or turn around to fix a problem with the popover content size
+            [nextVC setPreferredContentSize:CGSizeMake(325.0, 325.0)];
+            
+            
+            
+            //instanciate and set Property
+            [self setTheAddPopoverController:[[UIPopoverController alloc] initWithContentViewController:nextVC]];
+            
+            [[self theAddPopoverController] setPopoverContentSize:CGSizeMake(325.0, 325.0) animated:YES];
+            [[self theAddPopoverController] presentPopoverFromRect:[(UICollectionViewCell *)sender frame] inView:[self collectionView] permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        }
+        
     }
 }
 
@@ -483,8 +508,19 @@
     [self setTheAddPopoverController:nil];
 }
 
+- (void)viewController:(ZDAddInsertBarsController *)viewController willInsertXBars:(NSNumber *)barsQuantity ofType:(ZDSongBlock *)barBlockType beforeTheCurrentBar:(BOOL)before {
 
 
+    
+}
+
+- (void)viewController:(ZDAddInsertBarsController *)viewController didInsertXBars:(NSNumber *)barsQuantity ofType:(ZDSongBlock *)barBlockType beforeTheCurrentBar:(BOOL)before {
+
+    [[self collectionView] reloadData];
+    
+    [[self theAddPopoverController] dismissPopoverAnimated:YES];
+    [self setTheAddPopoverController:nil];
+}
 
 
 @end

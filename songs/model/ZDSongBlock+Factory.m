@@ -254,6 +254,37 @@
     return request;
 }
 
++ (NSArray *)allEntitiesNames:(NSManagedObjectContext *)moc withError:(NSError **)error {
+
+    NSMutableArray *result = nil;
+    
+    NSFetchRequest *fetchRequest = [ZDSongBlock allEntities];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:[ZDSongBlock entityName] inManagedObjectContext:moc];
+    [fetchRequest setEntity:entity];
+    
+    NSArray *fetchedObjects = [moc executeFetchRequest:fetchRequest error:error];
+    
+
+    
+    result = [[NSMutableArray alloc] initWithCapacity:[fetchedObjects count]];
+    
+    //in case of being nil
+    if(fetchedObjects) {
+        
+        for (NSManagedObject *x in fetchedObjects) {
+        
+            ZDSongBlock *domObj = (ZDSongBlock *)x;
+            
+            [result addObject:[domObj name]];
+        }
+    }
+    
+    return result;
+}
+
+
+
+
 + (NSNumber *)qtEntities:(NSManagedObjectContext *)moc withError:(NSError **)error {
 
     NSNumber *result = nil;
