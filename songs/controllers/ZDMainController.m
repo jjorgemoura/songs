@@ -19,7 +19,9 @@
 
 @interface ZDMainController ()
 
-@property (nonatomic, strong) ZDProject *theProject;
+//@property (nonatomic, strong) ZDProject *theProject;
+@property (nonatomic, strong) NSString *theProjectID;
+@property (nonatomic, strong) NSString *theProjectName;
 @property (nonatomic, strong) ZDBar *selectedBar;
 
 @property (nonatomic, weak) IBOutlet UIBarButtonItem* revealButtonItem;
@@ -73,9 +75,13 @@
     
     if (projectIDStored) {
         
+        //I think that I don't need store the object
         NSManagedObjectID *moID = [ZDCoreDataStack managedObjectIDFromString:projectIDStored];
         ZDProject *theProject = (ZDProject *)[[ZDCoreDataStack mainQueueContext] objectWithID:moID];
-        [self setTheProject:theProject];
+        //[self setTheProject:theProject];
+        
+        [self setTheProjectID:projectIDStored];
+        [self setTheProjectName:[theProject name]];
     }
     else {
         
@@ -99,10 +105,14 @@
     //FetchRequest
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"ZDBar"];
     //NSPredicate *predicate = [NSPredicate predicateWithFormat:@"theProject.name"];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"theProject.name = %@", [[self theProject] name]];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"theProject.name = %@", [self theProjectName]];
     [request setPredicate:predicate];
-    [request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"order"
-                                                                ascending:YES]]];
+    //[request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"order" ascending:YES]]];
+    
+    
+    NSSortDescriptor *orderDescriptor = [[NSSortDescriptor alloc] initWithKey:@"order" ascending:YES];
+    NSArray *orderDescriptors = @[orderDescriptor];
+    [request setSortDescriptors:orderDescriptors];
     
     
     [self setFetchedResultsController:[[NSFetchedResultsController alloc] initWithFetchRequest:request
@@ -146,9 +156,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
 
-    if ([self theProject]) {
+    if ([self theProjectName]) {
         
-        [self setTitle:[[self theProject] name]];
+        [self setTitle:[self theProjectName]];
     }
 }
 
@@ -159,11 +169,12 @@
     //Save to NSUserDefaults
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
-    if ([self theProject]) {
+    if ([self theProjectID]) {
         
-        NSManagedObjectID *moID = [[self theProject] objectID];
+        //NSManagedObjectID *moID = [[self theProject] objectID];
         
-        [userDefaults setObject:[moID stringRepresentation]  forKey:@"projectID"];
+        //[userDefaults setObject:[moID stringRepresentation]  forKey:@"projectID"];
+        [userDefaults setObject:[self theProjectID ]  forKey:@"projectID"];
         //[userDefaults synchronize];
     }
     
@@ -198,7 +209,15 @@
     
     if ([indexPath section] == 0) {
         
-        ZDBar *theBar = [[[self theProject] bars] objectAtIndex:[indexPath row]];
+        //clear cell
+        //[cell color:[UIColor blackColor]];
+        
+        
+        //ZDBar *theBar_old = [[[self theProject] bars] objectAtIndex:[indexPath row]];
+        //NSUInteger wwww = [[[self fetchedResultsController] sections] count];
+        ZDBar *theBar = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+        
+        
         
         NSString *theScaleNote = [theBar chordTypeText];
         NSNumber *beats = [theBar timeSignatureBeatCount];
@@ -213,13 +232,17 @@
         
         [cell mainText:theScaleNote];
         [cell auxText:theTimeSig];
-        [cell color:theBlockColor];
         [cell orderNumber:[theBar order]];
+        [cell color:theBlockColor];
         [[cell layer] setBorderColor:[theBlockBorderColor CGColor]];
+        
+        
+        NSLog(@"CELL: %@ - %@ - order: %@", theScaleNote, [[theBar theSongBlock] hexColor], [[theBar order] stringValue]);
     }
     
     return cell;
 }
+
 
 
 
@@ -235,9 +258,8 @@
 
     UICollectionViewCell *theCell = [collectionView cellForItemAtIndexPath:indexPath];
     
-    [[theCell contentView] setBackgroundColor:[UIColor whiteColor]];
-    
-    //NSLog(@"row: %li and section: %li", (long)indexPath.row, (long)indexPath.section);
+    //[[theCell contentView] setBackgroundColor:[UIColor whiteColor]];
+    [[theCell backgroundView] setBackgroundColor:[UIColor whiteColor]];
 }
 
 
@@ -247,11 +269,14 @@
     UICollectionViewCell *theCell = [collectionView cellForItemAtIndexPath:indexPath];
     
     //the Bar corresponding of this cell
-    ZDBar *theBar = [[[self theProject] bars] objectAtIndex:[indexPath row]];
+    //ZDBar *theBar = [[[self theProject] bars] objectAtIndex:[indexPath row]];
+    ZDBar *theBar = [[self fetchedResultsController] objectAtIndexPath:indexPath];
 
+    
     //set color
     UIColor *theBlockColor = [UIColor colorWithHexString:[[theBar theSongBlock] hexColor]];
-    [[theCell contentView] setBackgroundColor:theBlockColor];
+    //[[theCell contentView] setBackgroundColor:theBlockColor];
+    [[theCell backgroundView] setBackgroundColor:theBlockColor];
 }
 
 
@@ -277,7 +302,8 @@
     UICollectionViewCell *theCell = [collectionView cellForItemAtIndexPath:indexPath];
     [[theCell layer] setBorderColor:[[UIColor colorWithHexString:@"#f7f7f7"] CGColor]];
     
-    ZDBar *theBar = [[[self theProject] bars] objectAtIndex:[indexPath row]];
+    //ZDBar *theBar = [[[self theProject] bars] objectAtIndex:[indexPath row]];
+    ZDBar *theBar = [[self fetchedResultsController] objectAtIndexPath:indexPath];
     [self setSelectedBar:theBar];
     
     [self performSegueWithIdentifier:@"details_bar" sender:self];
@@ -289,7 +315,8 @@
     UICollectionViewCell *theCell = [collectionView cellForItemAtIndexPath:indexPath];
     
     //the Bar corresponding of this cell
-    ZDBar *theBar = [[[self theProject] bars] objectAtIndex:[indexPath row]];
+    //ZDBar *theBar = [[[self theProject] bars] objectAtIndex:[indexPath row]];
+    ZDBar *theBar = [[self fetchedResultsController] objectAtIndexPath:indexPath];
     
     UIColor *theBlockBorderColor = [UIColor colorWithHexString:[[theBar theSongBlock] borderHexColor]];
     [[theCell layer] setBorderColor:[theBlockBorderColor CGColor]];
@@ -326,9 +353,14 @@
     
         NSManagedObjectID *moID = [ZDCoreDataStack managedObjectIDFromString:projectID];
         ZDProject *theProject = (ZDProject *)[[ZDCoreDataStack mainQueueContext] objectWithID:moID];
-        [self setTheProject:theProject];
+        //[self setTheProject:theProject];
         
-        [[self collectionView] reloadData];
+        //[[self collectionView] reloadData];
+        
+        
+        [self setTheProjectID:projectID];
+        [self setTheProjectName:[theProject name]];
+        [self performFetch];
     }
 
 }
@@ -473,7 +505,8 @@
     else {
      
         //This is to save the selected bar.
-        ZDBar *theBar = [[[self theProject] bars] objectAtIndex:[indexPath row]];
+        //ZDBar *theBar = [[[self theProject] bars] objectAtIndex:[indexPath row]];
+        ZDBar *theBar = [[self fetchedResultsController] objectAtIndexPath:indexPath];
         [self setSelectedBar:theBar];
 
         
@@ -525,7 +558,7 @@
 
 - (void)viewController:(ZDAddInsertBarsController *)viewController didInsertXBars:(NSNumber *)barsQuantity ofType:(ZDSongBlock *)barBlockType beforeTheCurrentBar:(BOOL)before {
 
-    [[self collectionView] reloadData];
+    //[[self collectionView] reloadData];
     
     
     
@@ -536,7 +569,6 @@
         //id yyy = [viewController popoverPresentationController];
     
         [viewController dismissViewControllerAnimated:YES completion:nil];
-        
     }
     else {
     
@@ -546,6 +578,8 @@
     }
     
     
+    [self setSelectedBar:nil];
+    [self performFetch];
 }
 
 

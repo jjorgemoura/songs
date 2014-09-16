@@ -72,6 +72,10 @@
 
 - (void)color:(UIColor *)color {
 
+    [self setBackgroundColor:nil];
+    
+    NSLog(@"COLOR: %@ - ORDER: %@", [color description], [[self orderLabel] text]);
+    
     [self setBackgroundColor:color];
 }
 

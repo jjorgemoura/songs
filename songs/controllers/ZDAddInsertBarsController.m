@@ -235,15 +235,6 @@
 
     
     
-    //the new Data
-    NSNumber *numberOfBarsToInsert = [NSNumber numberWithInteger:[[[self numberOfBars] text] integerValue]];
-    
-    NSManagedObjectContext *moc = [ZDCoreDataStack mainQueueContext];
-    ZDSongBlock *songBlockToSave = [ZDSongBlock objectWithName:[self selectedBlock] inContext:moc];
-    
-    
-    
-    
     //VALIDATE INPUT DATA
     //Validate Project
     if (![self theSelectedZDBar]) {
@@ -254,10 +245,32 @@
     
     
     
+    //the new Data
+    NSNumber *numberOfBarsToInsert = [NSNumber numberWithInteger:[[[self numberOfBars] text] integerValue]];
+    
+    NSManagedObjectContext *moc = [ZDCoreDataStack mainQueueContext];
+    ZDSongBlock *songBlockToSave = [ZDSongBlock objectWithName:[self selectedBlock] inContext:moc];
     
     
     
     
+    //Decide the Order
+    int theCurrentBarOrder = [[[self theSelectedZDBar] order] intValue];
+    int newCurrentInsertOrder = 1;
+    
+    if (beforeTheCurrentBar) {
+        
+        newCurrentInsertOrder = [[[self theSelectedZDBar] order] intValue];
+    }
+    else {
+        
+        newCurrentInsertOrder = [[[self theSelectedZDBar] order] intValue] + 1;
+    }
+    
+    
+    
+    
+
     
     //DELEGATE WILL
     if (beforeTheCurrentBar) {
@@ -278,13 +291,16 @@
     
     
     
+    
     //INSERT INTO DB - First change only the order
     ZDProject *theProject = [[self theSelectedZDBar] theProject];
     
     for (ZDBar *bIterator in [theProject bars]) {
         
+        //NSLog(@"Bars: %d - %@", [[bIterator order] intValue], [bIterator chordTypeText]);
+        
         //Before, do nothing
-        if ([[bIterator order] intValue] < [[[self theSelectedZDBar] order] intValue]) {
+        if ([[bIterator order] intValue] < theCurrentBarOrder) {
             
             continue;
         }
@@ -292,13 +308,15 @@
         
         
         //The selected Bar
-        if ([[bIterator order] intValue] == [[[self theSelectedZDBar] order] intValue]) {
+        if ([[bIterator order] intValue] == theCurrentBarOrder) {
             
             if (beforeTheCurrentBar) {
                 
                 //the to change
                 int newOrder = [[bIterator order] intValue] + [numberOfBarsToInsert intValue];
                 [bIterator setOrder:[NSNumber numberWithInt:newOrder]];
+                //NSLog(@"Bars: %d - %@ - %d", [[bIterator order] intValue], [bIterator chordTypeText], newOrder);
+                continue;
             }
             else {
             
@@ -309,10 +327,12 @@
         
         
         //after
-        if ([[bIterator order] intValue] > [[[self theSelectedZDBar] order] intValue]) {
+        if ([[bIterator order] intValue] > theCurrentBarOrder) {
             
             int newOrder = [[bIterator order] intValue] + [numberOfBarsToInsert intValue];
             [bIterator setOrder:[NSNumber numberWithInt:newOrder]];
+            //NSLog(@"Bars: %d - %@ - %d", [[bIterator order] intValue], [bIterator chordTypeText], newOrder);
+            continue;
         }
     }
     
@@ -323,27 +343,10 @@
     //INSERT INTO DB
     ZDBar *barToSave = nil;
     
-    //decide the order
-    int newCurrentInsertOrder = 1;
-    
-    
-    if (beforeTheCurrentBar) {
-        
-        newCurrentInsertOrder = [[[self theSelectedZDBar] order] intValue];
-    }
-    else {
-        
-        newCurrentInsertOrder = [[[self theSelectedZDBar] order] intValue] + 1;
-    }
-    
-    
-    
-    
     //Now generate the new bars
     for (int i = 0; i < [numberOfBarsToInsert intValue]; i++) {
         
-        NSLog(@"i = %d", i);
-        
+        //NSLog(@"i = %d", i);
         
         barToSave = [NSEntityDescription insertNewObjectForEntityForName:[ZDBar entityName] inManagedObjectContext:moc];
         [barToSave setChordType:[[self theSelectedZDBar] chordType]];
@@ -396,7 +399,6 @@
             [[self delegate] viewController:self didInsertXBars:numberOfBarsToInsert ofType:songBlockToSave beforeTheCurrentBar:NO];
         }
     }
-    
     
 }
 
