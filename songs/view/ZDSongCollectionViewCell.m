@@ -12,8 +12,10 @@
 
 @property(weak) IBOutlet UILabel *mainLabel;
 @property(weak) IBOutlet UILabel *auxLabel;
+@property(weak) IBOutlet UILabel *orderLabel;
 
 @end
+
 
 @implementation ZDSongCollectionViewCell
 
@@ -76,6 +78,11 @@
 - (void)borderColor:(UIColor *)color {
 
     [[self layer] setBorderColor:[[UIColor redColor] CGColor]];
+}
+
+- (void)orderNumber:(NSNumber *)order {
+
+    [[self orderLabel] setText:[order stringValue]];
 }
 
 

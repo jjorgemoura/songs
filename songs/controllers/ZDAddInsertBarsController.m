@@ -10,6 +10,7 @@
 #import "ZDBar+Factory.h"
 #import "ZDSongBlock+Factory.h"
 #import "ZDCoreDataStack.h"
+#import "ZDProject+Factory.h"
 
 
 @interface ZDAddInsertBarsController ()
@@ -20,6 +21,9 @@
 
 @property (nonatomic, strong) NSArray *songBlocksDataSource;
 @property (nonatomic, strong) NSString *selectedBlock;
+
+
+- (void)saveBars:(BOOL)beforeTheCurrentBar;
 
 @end
 
@@ -69,8 +73,14 @@
     UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapBehind:)];
     [recognizer setNumberOfTapsRequired:1];
     [recognizer setCancelsTouchesInView:NO]; //So the user can still interact with controls in the modal view
-    [[[self view] window] addGestureRecognizer:recognizer];
+    //[[[self view] window] addGestureRecognizer:recognizer];
     
+    
+    
+    //Set default Block Selection
+    if (![self selectedBlock]) {
+        [self setSelectedBlock:[[self songBlocksDataSource] objectAtIndex:0]];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -193,33 +203,7 @@
     
     NSLog(@"Insert Before");
     
-
-    //the new Data
-    NSNumber *numberOfBarsToInsert = [NSNumber numberWithInteger:[[[self numberOfBars] text] integerValue]];
-    
-    NSManagedObjectContext *moc = [ZDCoreDataStack mainQueueContext];
-    ZDSongBlock *songBlockToSave = [ZDSongBlock objectWithName:[self selectedBlock] inContext:moc];
-    
-    NSLog(@"name: %@", [songBlockToSave name]);
-    
-    
-    //delegate before
-    if ([[self delegate] respondsToSelector:@selector(viewController:willInsertXBars:ofType:beforeTheCurrentBar:)]) {
-        
-        [[self delegate] viewController:self willInsertXBars:numberOfBarsToInsert ofType:songBlockToSave beforeTheCurrentBar:YES];
-    }
-    
-    
-    
-    
-    
-    //delegate after
-    if ([[self delegate] respondsToSelector:@selector(viewController:didInsertXBars:ofType:beforeTheCurrentBar:)]) {
-        
-        [[self delegate] viewController:self didInsertXBars:numberOfBarsToInsert ofType:songBlockToSave beforeTheCurrentBar:YES];
-    }
-   
-    
+    [self saveBars:YES];
 }
 
 
@@ -227,33 +211,7 @@
 
     NSLog(@"Insert After");
     
-    //the new Data
-    NSNumber *numberOfBarsToInsert = [NSNumber numberWithInteger:[[[self numberOfBars] text] integerValue]];
-    
-    NSManagedObjectContext *moc = [ZDCoreDataStack mainQueueContext];
-    ZDSongBlock *songBlockToSave = [ZDSongBlock objectWithName:[self selectedBlock] inContext:moc];
-    
-    
-    
-    
-    
-    //delegate before
-    if ([[self delegate] respondsToSelector:@selector(viewController:willInsertXBars:ofType:beforeTheCurrentBar:)]) {
-        
-         [[self delegate] viewController:self willInsertXBars:numberOfBarsToInsert ofType:songBlockToSave beforeTheCurrentBar:NO];
-    }
-    
-    
-    
-    
-    
-    //delegate after    
-    if ([[self delegate] respondsToSelector:@selector(viewController:didInsertXBars:ofType:beforeTheCurrentBar:)]) {
-        
-         [[self delegate] viewController:self didInsertXBars:numberOfBarsToInsert ofType:songBlockToSave beforeTheCurrentBar:NO];
-    }
-    
-    
+    [self saveBars:NO];
 }
 
 - (IBAction)valueStepperChanged:(id)sender {
@@ -264,6 +222,179 @@
         double newNumberBars = [myStepper value];
         
         [[self numberOfBars] setText:[NSString stringWithFormat:@"%d", (int)newNumberBars]];
+    }
+    
+}
+
+
+//---------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------
+#pragma mark - Private Methods
+//---------------------------------------------------------------------------------------
+- (void)saveBars:(BOOL)beforeTheCurrentBar {
+
+    
+    
+    //the new Data
+    NSNumber *numberOfBarsToInsert = [NSNumber numberWithInteger:[[[self numberOfBars] text] integerValue]];
+    
+    NSManagedObjectContext *moc = [ZDCoreDataStack mainQueueContext];
+    ZDSongBlock *songBlockToSave = [ZDSongBlock objectWithName:[self selectedBlock] inContext:moc];
+    
+    
+    
+    
+    //VALIDATE INPUT DATA
+    //Validate Project
+    if (![self theSelectedZDBar]) {
+        
+        //project not set, return without do nothing
+        return;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    //DELEGATE WILL
+    if (beforeTheCurrentBar) {
+        
+        if ([[self delegate] respondsToSelector:@selector(viewController:willInsertXBars:ofType:beforeTheCurrentBar:)]) {
+            
+            [[self delegate] viewController:self willInsertXBars:numberOfBarsToInsert ofType:songBlockToSave beforeTheCurrentBar:YES];
+        }
+    }
+    else {
+    
+        if ([[self delegate] respondsToSelector:@selector(viewController:willInsertXBars:ofType:beforeTheCurrentBar:)]) {
+            
+            [[self delegate] viewController:self willInsertXBars:numberOfBarsToInsert ofType:songBlockToSave beforeTheCurrentBar:NO];
+        }
+    }
+    
+    
+    
+    
+    //INSERT INTO DB - First change only the order
+    ZDProject *theProject = [[self theSelectedZDBar] theProject];
+    
+    for (ZDBar *bIterator in [theProject bars]) {
+        
+        //Before, do nothing
+        if ([[bIterator order] intValue] < [[[self theSelectedZDBar] order] intValue]) {
+            
+            continue;
+        }
+        
+        
+        
+        //The selected Bar
+        if ([[bIterator order] intValue] == [[[self theSelectedZDBar] order] intValue]) {
+            
+            if (beforeTheCurrentBar) {
+                
+                //the to change
+                int newOrder = [[bIterator order] intValue] + [numberOfBarsToInsert intValue];
+                [bIterator setOrder:[NSNumber numberWithInt:newOrder]];
+            }
+            else {
+            
+                //do nothing
+                continue;
+            }
+        }
+        
+        
+        //after
+        if ([[bIterator order] intValue] > [[[self theSelectedZDBar] order] intValue]) {
+            
+            int newOrder = [[bIterator order] intValue] + [numberOfBarsToInsert intValue];
+            [bIterator setOrder:[NSNumber numberWithInt:newOrder]];
+        }
+    }
+    
+    
+    
+    
+
+    //INSERT INTO DB
+    ZDBar *barToSave = nil;
+    
+    //decide the order
+    int newCurrentInsertOrder = 1;
+    
+    
+    if (beforeTheCurrentBar) {
+        
+        newCurrentInsertOrder = [[[self theSelectedZDBar] order] intValue];
+    }
+    else {
+        
+        newCurrentInsertOrder = [[[self theSelectedZDBar] order] intValue] + 1;
+    }
+    
+    
+    
+    
+    //Now generate the new bars
+    for (int i = 0; i < [numberOfBarsToInsert intValue]; i++) {
+        
+        NSLog(@"i = %d", i);
+        
+        
+        barToSave = [NSEntityDescription insertNewObjectForEntityForName:[ZDBar entityName] inManagedObjectContext:moc];
+        [barToSave setChordType:[[self theSelectedZDBar] chordType]];
+        [barToSave setChordNote:[[self theSelectedZDBar] chordNote]];
+        [barToSave setOrder:[NSNumber numberWithInt:newCurrentInsertOrder]];
+        [barToSave setSongBlock:[NSNumber numberWithInt:1]];
+        [barToSave setTimeSignatureBeatCount:[[self theSelectedZDBar] timeSignatureBeatCount]];
+        [barToSave setTimeSignatureNoteValue:[[self theSelectedZDBar] timeSignatureNoteValue]];
+        [barToSave setTheSongBlock:songBlockToSave];
+        
+        
+        //add bar to project
+        [theProject addBarsObject:barToSave];
+        
+        
+        //update next order
+        newCurrentInsertOrder++;
+    }
+    
+    
+    
+    NSError *error = nil;
+    [moc save:&error];
+    
+    if(error) {
+        NSLog(@"CORE DATA ERROR: Saving New Project: %@", [error debugDescription]);
+    }
+    else {
+        
+        NSLog(@"UPDATE: OK");
+    }
+
+    
+    
+    
+    
+    
+    //DELEGATE DID
+    if (beforeTheCurrentBar) {
+       
+        if ([[self delegate] respondsToSelector:@selector(viewController:didInsertXBars:ofType:beforeTheCurrentBar:)]) {
+            
+            [[self delegate] viewController:self didInsertXBars:numberOfBarsToInsert ofType:songBlockToSave beforeTheCurrentBar:YES];
+        }
+    }
+    else {
+        
+        if ([[self delegate] respondsToSelector:@selector(viewController:didInsertXBars:ofType:beforeTheCurrentBar:)]) {
+            
+            [[self delegate] viewController:self didInsertXBars:numberOfBarsToInsert ofType:songBlockToSave beforeTheCurrentBar:NO];
+        }
     }
     
     

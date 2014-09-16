@@ -25,6 +25,7 @@
 
 @interface ZDAddInsertBarsController : UIViewController
 
+@property (nonatomic, strong) ZDBar *theSelectedZDBar;
 @property (nonatomic, weak) id <ZDAddInsertBarsControllerDelegate> delegate;
 
 @end

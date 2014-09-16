@@ -214,6 +214,7 @@
         [cell mainText:theScaleNote];
         [cell auxText:theTimeSig];
         [cell color:theBlockColor];
+        [cell orderNumber:[theBar order]];
         [[cell layer] setBorderColor:[theBlockBorderColor CGColor]];
     }
     
@@ -359,6 +360,7 @@
         ZDAddInsertBarsController *nextVC = [segue destinationViewController];
         //[self setAddInsertPopoverVC:nextVC];
         [nextVC setDelegate:self];
+        [nextVC setTheSelectedZDBar:[self selectedBar]];
         
         
         
@@ -469,7 +471,14 @@
         NSLog(@"Couldn't find index path");
     }
     else {
+     
+        //This is to save the selected bar.
+        ZDBar *theBar = [[[self theProject] bars] objectAtIndex:[indexPath row]];
+        [self setSelectedBar:theBar];
 
+        
+        
+        
         // get the cell at indexPath (the one you long pressed)
         UICollectionViewCell *cell = [[self collectionView] cellForItemAtIndexPath:indexPath];
 
@@ -504,8 +513,8 @@
 //---------------------------------------------------------------------------------------
 - (void)viewControllerXBarsDidCancel:(ZDAddInsertBarsController *)viewController {
     
-    [[self theAddPopoverController] dismissPopoverAnimated:YES];
-    [self setTheAddPopoverController:nil];
+    //[[self theAddPopoverController] dismissPopoverAnimated:YES];
+    //[self setTheAddPopoverController:nil];
 }
 
 - (void)viewController:(ZDAddInsertBarsController *)viewController willInsertXBars:(NSNumber *)barsQuantity ofType:(ZDSongBlock *)barBlockType beforeTheCurrentBar:(BOOL)before {
@@ -518,8 +527,25 @@
 
     [[self collectionView] reloadData];
     
-    [[self theAddPopoverController] dismissPopoverAnimated:YES];
-    [self setTheAddPopoverController:nil];
+    
+    
+    if ([self respondsToSelector:@selector(popoverPresentationController)]) {
+    
+        //iOS 8
+        //id xxx = [self popoverPresentationController];
+        //id yyy = [viewController popoverPresentationController];
+    
+        [viewController dismissViewControllerAnimated:YES completion:nil];
+        
+    }
+    else {
+    
+        //iOS 7
+        [[self theAddPopoverController] dismissPopoverAnimated:YES];
+        [self setTheAddPopoverController:nil];
+    }
+    
+    
 }
 
 

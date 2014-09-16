@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="24u-c3-igZ">
     <dependencies>
-        <deployment defaultVersion="1552" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
@@ -115,12 +114,19 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="order" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XL8-2P-BHx">
+                                            <rect key="frame" x="5" y="48" width="25" height="20"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <connections>
                                     <outlet property="auxLabel" destination="qkG-k8-CG7" id="AWN-wi-Xn2"/>
                                     <outlet property="mainLabel" destination="K3i-gu-CZZ" id="oQG-Bv-AQX"/>
+                                    <outlet property="orderLabel" destination="XL8-2P-BHx" id="uAh-kK-vJb"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
