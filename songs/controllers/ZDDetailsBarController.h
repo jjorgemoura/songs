@@ -15,8 +15,10 @@
 @protocol ZDDetailsBarControllerDelegate <NSObject>
 
 @optional
-- (void)viewController:(ZDDetailsBarController *)viewController willSaveZDBar:(ZDBar *)bar;
-- (void)viewController:(ZDDetailsBarController *)viewController didSaveZDBar:(ZDBar *)bar;
+- (void)viewController:(ZDDetailsBarController *)viewController willEditZDBar:(ZDBar *)bar;
+- (void)viewController:(ZDDetailsBarController *)viewController didEditZDBar:(ZDBar *)bar;
+- (void)viewController:(ZDDetailsBarController *)viewController willDeleteZDBar:(ZDBar *)bar;
+- (void)viewController:(ZDDetailsBarController *)viewController didDeleteZDBar:(ZDBar *)bar;
 - (void)viewControllerDidCancel:(ZDDetailsBarController *)viewController;
 
 @end

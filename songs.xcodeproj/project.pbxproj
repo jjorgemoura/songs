@@ -11,6 +11,7 @@
 		CF119D231970294D00E512F8 /* ZDCoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = CF119D221970294D00E512F8 /* ZDCoreDataStack.m */; };
 		CF119D2A19704F9D00E512F8 /* NSManagedObjectID+ZDString.m in Sources */ = {isa = PBXBuildFile; fileRef = CF119D2919704F9D00E512F8 /* NSManagedObjectID+ZDString.m */; };
 		CF119D2D19704FCF00E512F8 /* NSManagedObjectContext+ZDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = CF119D2C19704FCF00E512F8 /* NSManagedObjectContext+ZDAdditions.m */; };
+		CF18307E19CC89C40008A777 /* ZDEditBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF18307D19CC89C40008A777 /* ZDEditBarController.m */; };
 		CF20EF2F194DEA02008E47A4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF20EF2E194DEA02008E47A4 /* Foundation.framework */; };
 		CF20EF31194DEA02008E47A4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF20EF30194DEA02008E47A4 /* CoreGraphics.framework */; };
 		CF20EF33194DEA02008E47A4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF20EF32194DEA02008E47A4 /* UIKit.framework */; };
@@ -73,6 +74,8 @@
 		CF119D2919704F9D00E512F8 /* NSManagedObjectID+ZDString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectID+ZDString.m"; sourceTree = "<group>"; };
 		CF119D2B19704FCF00E512F8 /* NSManagedObjectContext+ZDAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObjectContext+ZDAdditions.h"; sourceTree = "<group>"; };
 		CF119D2C19704FCF00E512F8 /* NSManagedObjectContext+ZDAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectContext+ZDAdditions.m"; sourceTree = "<group>"; };
+		CF18307C19CC89C40008A777 /* ZDEditBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDEditBarController.h; sourceTree = "<group>"; };
+		CF18307D19CC89C40008A777 /* ZDEditBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDEditBarController.m; sourceTree = "<group>"; };
 		CF20EF2B194DEA02008E47A4 /* songs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = songs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF20EF2E194DEA02008E47A4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CF20EF30194DEA02008E47A4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -314,6 +317,8 @@
 				CFF01A531969661B00A6E2F6 /* ZDLoadProjectController.m */,
 				CF8D099D1981169F002C73D3 /* ZDDetailsBarController.h */,
 				CF8D099E1981169F002C73D3 /* ZDDetailsBarController.m */,
+				CF18307C19CC89C40008A777 /* ZDEditBarController.h */,
+				CF18307D19CC89C40008A777 /* ZDEditBarController.m */,
 				CFB4B9B2199565BF0028962F /* ZDAddInsertBarsController.h */,
 				CFB4B9B3199565BF0028962F /* ZDAddInsertBarsController.m */,
 			);
@@ -502,6 +507,7 @@
 				CFD6A0F1197D20360006A0AC /* UIColor+HexString.m in Sources */,
 				CFF01A45196965BA00A6E2F6 /* ZDMainController.m in Sources */,
 				CF7F5D0619B4D37500070FDE /* ZDSongBlock.m in Sources */,
+				CF18307E19CC89C40008A777 /* ZDEditBarController.m in Sources */,
 				CF119D2D19704FCF00E512F8 /* NSManagedObjectContext+ZDAdditions.m in Sources */,
 				CFF01A541969661B00A6E2F6 /* ZDLoadProjectController.m in Sources */,
 				CF3F7930194DEDFC00D9615A /* SWRevealViewController.m in Sources */,
@@ -564,7 +570,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 315;
+				CURRENT_PROJECT_VERSION = 338;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -604,7 +610,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
-				CURRENT_PROJECT_VERSION = 315;
+				CURRENT_PROJECT_VERSION = 338;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

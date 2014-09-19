@@ -201,7 +201,7 @@
 
 - (IBAction)InsertBeforeButtonPressed:(id)sender {
     
-    NSLog(@"Insert Before");
+    //NSLog(@"Insert Before");
     
     [self saveBars:YES];
 }
@@ -209,7 +209,7 @@
 
 - (IBAction)InsertAfterButtonPressed:(id)sender {
 
-    NSLog(@"Insert After");
+    //NSLog(@"Insert After");
     
     [self saveBars:NO];
 }

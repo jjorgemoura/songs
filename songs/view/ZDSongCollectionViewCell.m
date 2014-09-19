@@ -74,7 +74,7 @@
 
     [self setBackgroundColor:nil];
     
-    NSLog(@"COLOR: %@ - ORDER: %@", [color description], [[self orderLabel] text]);
+    //NSLog(@"COLOR: %@ - ORDER: %@", [color description], [[self orderLabel] text]);
     
     [self setBackgroundColor:color];
 }

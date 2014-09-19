@@ -237,7 +237,7 @@
         [[cell layer] setBorderColor:[theBlockBorderColor CGColor]];
         
         
-        NSLog(@"CELL: %@ - %@ - order: %@", theScaleNote, [[theBar theSongBlock] hexColor], [[theBar order] stringValue]);
+        //NSLog(@"CELL: %@ - %@ - order: %@", theScaleNote, [[theBar theSongBlock] hexColor], [[theBar order] stringValue]);
     }
     
     return cell;
@@ -302,11 +302,17 @@
     UICollectionViewCell *theCell = [collectionView cellForItemAtIndexPath:indexPath];
     [[theCell layer] setBorderColor:[[UIColor colorWithHexString:@"#f7f7f7"] CGColor]];
     
+    
     //ZDBar *theBar = [[[self theProject] bars] objectAtIndex:[indexPath row]];
     ZDBar *theBar = [[self fetchedResultsController] objectAtIndexPath:indexPath];
     [self setSelectedBar:theBar];
     
-    [self performSegueWithIdentifier:@"details_bar" sender:self];
+    
+    
+    //the first version was a modal, now is a popover
+    //[self performSegueWithIdentifier:@"details_bar" sender:self];
+    [self performSegueWithIdentifier:@"details_bar" sender:theCell];
+    
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -384,6 +390,33 @@
         ZDDetailsBarController *nextVC = [segue destinationViewController];
         [nextVC setTheBar:[self selectedBar]];
         [nextVC setDelegate:self];
+        
+        
+        //to work as a popover
+        if ([nextVC respondsToSelector:@selector(popoverPresentationController)]) {
+            
+            //THIS IS iOS 8 CODE
+            nextVC.modalPresentationStyle = UIModalPresentationPopover;
+            [nextVC setPreferredContentSize:CGSizeMake(325.0,325.0)];
+            
+            UIPopoverPresentationController *popoverPresentation = nextVC.popoverPresentationController;
+            [popoverPresentation setSourceView:[self collectionView]];
+            [popoverPresentation setSourceRect:[(UICollectionViewCell *)sender frame]];
+            [popoverPresentation setPermittedArrowDirections:(UIPopoverArrowDirectionLeft | UIPopoverArrowDirectionRight)];
+            
+            [self presentViewController:nextVC animated:YES completion:nil];
+            
+        } else {
+            //THIS IS IOS 7- CODE
+            //fix or turn around to fix a problem with the popover content size
+            [nextVC setPreferredContentSize:CGSizeMake(325.0, 325.0)];
+            
+            //instanciate and set Property
+            [self setTheAddPopoverController:[[UIPopoverController alloc] initWithContentViewController:nextVC]];
+            
+            [[self theAddPopoverController] setPopoverContentSize:CGSizeMake(325.0, 325.0) animated:YES];
+            [[self theAddPopoverController] presentPopoverFromRect:[(UICollectionViewCell *)sender frame] inView:[self collectionView] permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        }
     }
 
 
@@ -528,15 +561,32 @@
 //---------------------------------------------------------------------------------------
 #pragma mark - ZDDetailsBarControllerDelegate
 //---------------------------------------------------------------------------------------
-- (void)viewControllerDidCancel:(ZDDetailsBarController *)viewController {
+- (void)viewController:(ZDDetailsBarController *)viewController willDeleteZDBar:(ZDBar *)bar {
 
-    [viewController dismissViewControllerAnimated:YES completion:nil];
+
 }
 
-- (void)viewController:(ZDDetailsBarController *)viewController didSaveZDBar:(ZDBar *)bar {
+- (void)viewController:(ZDDetailsBarController *)viewController didDeleteZDBar:(ZDBar *)bar {
 
-    [viewController dismissViewControllerAnimated:YES completion:nil];
+
+    if ([self respondsToSelector:@selector(popoverPresentationController)]) {
+        
+        //iOS 8
+        [viewController dismissViewControllerAnimated:YES completion:nil];
+    }
+    else {
+        
+        //iOS 7
+        [[self theAddPopoverController] dismissPopoverAnimated:YES];
+        [self setTheAddPopoverController:nil];
+    }
+    
+    
+    [self setSelectedBar:nil];
+    [self performFetch];
 }
+
+
 
 
 
@@ -546,8 +596,7 @@
 //---------------------------------------------------------------------------------------
 - (void)viewControllerXBarsDidCancel:(ZDAddInsertBarsController *)viewController {
     
-    //[[self theAddPopoverController] dismissPopoverAnimated:YES];
-    //[self setTheAddPopoverController:nil];
+
 }
 
 - (void)viewController:(ZDAddInsertBarsController *)viewController willInsertXBars:(NSNumber *)barsQuantity ofType:(ZDSongBlock *)barBlockType beforeTheCurrentBar:(BOOL)before {
@@ -565,9 +614,6 @@
     if ([self respondsToSelector:@selector(popoverPresentationController)]) {
     
         //iOS 8
-        //id xxx = [self popoverPresentationController];
-        //id yyy = [viewController popoverPresentationController];
-    
         [viewController dismissViewControllerAnimated:YES completion:nil];
     }
     else {

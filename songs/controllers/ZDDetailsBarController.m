@@ -11,13 +11,13 @@
 #import "ZDProject+Factory.h"
 #import "ZDSongBlock+Factory.h"
 #import "UIColor+HexString.h"
+#import "ZDCoreDataStack.h"
 
 @interface ZDDetailsBarController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *theChord;
 @property (weak, nonatomic) IBOutlet UILabel *theTimeSig;
 @property (weak, nonatomic) IBOutlet UILabel *theBarNumber;
-@property (weak, nonatomic) IBOutlet UILabel *theChordBKColor;
 @property (weak, nonatomic) IBOutlet UILabel *theSongBlock;
 
 @end
@@ -58,8 +58,9 @@
         [[self theChord] setText:[[self theBar] chordTypeText]];
         [[self theTimeSig] setText:timeSig];
         [[self theBarNumber] setText:barNumber];
-        [[self theChordBKColor] setBackgroundColor:[UIColor colorWithHexString:[[[self theBar] theSongBlock] color]]];
         [[self theSongBlock] setText:[[[self theBar] theSongBlock] name]];
+        
+        [[self theChord] setBackgroundColor:[UIColor colorWithHexString:[[[self theBar] theSongBlock] hexColor]]];
     }
 }
 
@@ -68,7 +69,7 @@
     UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapBehind:)];
     [recognizer setNumberOfTapsRequired:1];
     [recognizer setCancelsTouchesInView:NO]; //So the user can still interact with controls in the modal view
-    [[[self view] window] addGestureRecognizer:recognizer];
+    //[[[self view] window] addGestureRecognizer:recognizer];
     
 }
 
@@ -76,19 +77,16 @@
 
     //REMOVE ALL GESTURES
     NSArray * gesturesList = [[[self view] window] gestureRecognizers];
-    //NSLog(@"SIZE OF GESTURES LIST: %lu", (unsigned long)[gesturesList count]);
+    NSLog(@"SIZE OF GESTURES LIST: %lu", (unsigned long)[gesturesList count]);
     
     for (UIGestureRecognizer *x in gesturesList) {
         
-        //NSLog(@"The Gesture: %@", [x description]);
+        NSLog(@"The Gesture: %@", [x description]);
         if ([x isKindOfClass:[UITapGestureRecognizer class]]) {
             
             [[[self view] window] removeGestureRecognizer:x];
         }
-
     }
-    
-    
     
 }
 
@@ -131,40 +129,99 @@
 //---------------------------------------------------------------------------------------
 #pragma mark - Target Action
 //---------------------------------------------------------------------------------------
-- (IBAction)saveButtonPressed:(id)sender {
+- (IBAction)editButtonPressed:(id)sender {
    
     
-    if ([[self delegate] respondsToSelector:@selector(viewController:willSaveZDBar:)]) {
-        
-        [[self delegate] viewController:self willSaveZDBar:nil];
-    }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    if ([[self delegate] respondsToSelector:@selector(viewController:didSaveZDBar:)]) {
-        
-        [[self delegate] viewController:self didSaveZDBar:nil];
-    }
     
     
     
 }
 
-- (IBAction)cancelButtonPressed:(id)sender {
+- (IBAction)deleteButtonPressed:(id)sender {
     
-    if ([[self delegate] respondsToSelector:@selector(viewControllerDidCancel:)]) {
-        
-        [[self delegate] viewControllerDidCancel:self];
-    }
+//    UIAlertView *confirmationBox = [[UIAlertView alloc] initWithTitle:@"Delete Bar"
+//                                                              message:@"Do you want to delete the selected bar?"
+//                                                             delegate:self
+//                                                    cancelButtonTitle:@"Cancel"
+//                                                    otherButtonTitles:@"Delete", nil];
+    //[confirmationBox show];
+    
+    
+    
+    UIAlertController *confirmationAlertBox = [UIAlertController alertControllerWithTitle:@"Delete Bar" message:@"Do you want to delete the selected bar?" preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction* deleteAction = [UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDestructive
+                                                          handler:^(UIAlertAction * action) {
+                                                          
+                                                              //DELEGATE
+                                                              if ([[self delegate] respondsToSelector:@selector(viewController:willDeleteZDBar:)]) {
+                                                                  
+                                                                  [[self delegate] viewController:self willDeleteZDBar:[self theBar]];
+                                                              }
+                                                              
+                                                              //Orders
+                                                              int theCurrentBarOrder = [[[self theBar] order] intValue];
+                                                              
+                                                              
+                                                              //INSERT INTO DB - First change only the order
+                                                              ZDProject *theProject = [[self theBar] theProject];
+                                                              
+                                                              for (ZDBar *bIterator in [theProject bars]) {
+                                                                  
+                                                                  //Before, do nothing
+                                                                  if ([[bIterator order] intValue] <= theCurrentBarOrder) {
+                                                                      
+                                                                      continue;
+                                                                  }
+                                                                  
+                                                                  //after
+                                                                  if ([[bIterator order] intValue] > theCurrentBarOrder) {
+                                                                      
+                                                                      int newOrder = [[bIterator order] intValue] - 1;
+                                                                      [bIterator setOrder:[NSNumber numberWithInt:newOrder]];
+                                                                      continue;
+                                                                  }
+                                                              }
+                                                              
+                                                              
+                                                              
+                                                              //DELETE
+                                                              NSManagedObjectContext *moc = [ZDCoreDataStack mainQueueContext];
+                                                              [moc deleteObject:[self theBar]];
+                                                              
+                                                              
+                                                              //DAVE
+                                                              NSError *error = nil;
+                                                              [moc save:&error];
+                                                              
+                                                              if(error) {
+                                                                  NSLog(@"CORE DATA ERROR: Saving New Project: %@", [error debugDescription]);
+                                                              }
+                                                              else {
+                                                                  
+                                                                  NSLog(@"UPDATE: OK");
+                                                              }
+                                                              
+                                                              
+                                                              //DELEGATE
+                                                              if ([[self delegate] respondsToSelector:@selector(viewController:didDeleteZDBar:)]) {
+                                                                  
+                                                                  [[self delegate] viewController:self didDeleteZDBar:nil];
+                                                              }
+                                                          }];
+    
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel
+                                                          handler:^(UIAlertAction * action) {
+                                                          
+                                                          }];
+    
+    [confirmationAlertBox addAction:deleteAction];
+    [confirmationAlertBox addAction:cancelAction];
+    
+    
+    [self presentViewController:confirmationAlertBox animated:YES completion:nil];
     
 }
 
