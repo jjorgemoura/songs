@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="24u-c3-igZ">
     <dependencies>
-        <deployment defaultVersion="1552" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
@@ -155,6 +154,9 @@
                         <segue destination="hvW-90-fCn" kind="popover" identifier="addinsert_bar" popoverAnchorView="9wM-ZN-oIl" id="PN6-2k-AXx">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" left="YES" right="YES"/>
                         </segue>
+                        <segue destination="KDx-0G-j6k" kind="popover" identifier="edit_bar" popoverAnchorView="9wM-ZN-oIl" id="zYb-b1-h4D">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES" left="YES" right="YES"/>
+                        </segue>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hht-Tz-hU7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -235,7 +237,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B3I-Lk-WCi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2655.5" y="585.5"/>
+            <point key="canvasLocation" x="2676.5" y="-410.5"/>
         </scene>
         <!--Details Bar Controller-->
         <scene sceneID="B1L-Nh-g1R">
@@ -292,9 +294,6 @@
                                 </state>
                                 <connections>
                                     <action selector="editButtonPressed:" destination="ppl-ez-0Ab" eventType="touchUpInside" id="4NL-3N-EJQ"/>
-                                    <segue destination="KDx-0G-j6k" kind="popover" popoverAnchorView="RKf-xV-K8y" id="MEo-VY-HEq">
-                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" left="YES" right="YES"/>
-                                    </segue>
                                 </connections>
                             </button>
                         </subviews>
@@ -309,7 +308,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KH0-nH-ngB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2638.5" y="10.5"/>
+            <point key="canvasLocation" x="2676.5" y="-5.5"/>
         </scene>
         <!--Edit Bar Controller-->
         <scene sceneID="BJe-er-mmf">
@@ -320,14 +319,60 @@
                         <viewControllerLayoutGuide type="bottom" id="sSF-Qd-1OE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="86f-gM-LJh">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="325" height="450"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sE2-Wu-QkI">
+                                <rect key="frame" x="5" y="38" width="315" height="1"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wz1-Iv-8om">
+                                <rect key="frame" x="112" y="362" width="100" height="30"/>
+                                <state key="normal" title="cancel">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelButtonPressed:" destination="KDx-0G-j6k" eventType="touchUpInside" id="R3q-T0-KIc"/>
+                                    <action selector="editButtonPressed:" destination="ppl-ez-0Ab" eventType="touchUpInside" id="2wC-hj-A2E"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OuZ-dA-Y6o">
+                                <rect key="frame" x="112" y="400" width="100" height="30"/>
+                                <state key="normal" title="save">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="deleteButtonPressed:" destination="ppl-ez-0Ab" eventType="touchUpInside" id="taW-6d-Rlj"/>
+                                    <action selector="saveButtonPressed:" destination="KDx-0G-j6k" eventType="touchUpInside" id="eiK-bF-Zry"/>
+                                </connections>
+                            </button>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yy2-v7-M7b">
+                                <rect key="frame" x="154" y="82" width="160" height="135"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="KDx-0G-j6k" id="19C-tS-fAD"/>
+                                    <outlet property="delegate" destination="KDx-0G-j6k" id="7e8-53-St9"/>
+                                </connections>
+                            </pickerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Song Block" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UKF-r8-kmx">
+                                <rect key="frame" x="10" y="139" width="136" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o9n-on-a7t">
+                                <rect key="frame" x="5" y="347" width="315" height="1"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="songBlockSlider" destination="Yy2-v7-M7b" id="rkX-76-1bb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zhR-2L-B8c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3302" y="360"/>
+            <point key="canvasLocation" x="2676.5" y="536"/>
         </scene>
         <!--Menu Controller-->
         <scene sceneID="fQx-MJ-Tic">

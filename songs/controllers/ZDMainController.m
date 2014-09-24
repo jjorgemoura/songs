@@ -17,12 +17,14 @@
 
 
 
+
 @interface ZDMainController ()
 
 //@property (nonatomic, strong) ZDProject *theProject;
 @property (nonatomic, strong) NSString *theProjectID;
 @property (nonatomic, strong) NSString *theProjectName;
 @property (nonatomic, strong) ZDBar *selectedBar;
+@property (nonatomic, strong) NSIndexPath *selectedIndexPath;
 
 @property (nonatomic, weak) IBOutlet UIBarButtonItem* revealButtonItem;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem* auxRevealButtonItem;
@@ -306,6 +308,7 @@
     //ZDBar *theBar = [[[self theProject] bars] objectAtIndex:[indexPath row]];
     ZDBar *theBar = [[self fetchedResultsController] objectAtIndexPath:indexPath];
     [self setSelectedBar:theBar];
+    [self setSelectedIndexPath:indexPath];
     
     
     
@@ -415,6 +418,41 @@
             [self setTheAddPopoverController:[[UIPopoverController alloc] initWithContentViewController:nextVC]];
             
             [[self theAddPopoverController] setPopoverContentSize:CGSizeMake(325.0, 325.0) animated:YES];
+            [[self theAddPopoverController] presentPopoverFromRect:[(UICollectionViewCell *)sender frame] inView:[self collectionView] permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        }
+    }
+    
+    
+    if([[segue identifier] isEqualToString:@"edit_bar"]) {
+        
+        ZDEditBarController *nextVC = [segue destinationViewController];
+        [nextVC setTheSelectedZDBar:[self selectedBar]];
+        [nextVC setDelegate:self];
+        
+        
+        //to work as a popover
+        if ([nextVC respondsToSelector:@selector(popoverPresentationController)]) {
+            
+            //THIS IS iOS 8 CODE
+            nextVC.modalPresentationStyle = UIModalPresentationPopover;
+            [nextVC setPreferredContentSize:CGSizeMake(325.0,450.0)];
+            
+            UIPopoverPresentationController *popoverPresentation = nextVC.popoverPresentationController;
+            [popoverPresentation setSourceView:[self collectionView]];
+            [popoverPresentation setSourceRect:[(UICollectionViewCell *)sender frame]];
+            [popoverPresentation setPermittedArrowDirections:(UIPopoverArrowDirectionLeft | UIPopoverArrowDirectionRight)];
+            
+            [self presentViewController:nextVC animated:YES completion:nil];
+            
+        } else {
+            //THIS IS IOS 7- CODE
+            //fix or turn around to fix a problem with the popover content size
+            [nextVC setPreferredContentSize:CGSizeMake(325.0, 450.0)];
+            
+            //instanciate and set Property
+            [self setTheAddPopoverController:[[UIPopoverController alloc] initWithContentViewController:nextVC]];
+            
+            [[self theAddPopoverController] setPopoverContentSize:CGSizeMake(325.0, 450.0) animated:YES];
             [[self theAddPopoverController] presentPopoverFromRect:[(UICollectionViewCell *)sender frame] inView:[self collectionView] permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
         }
     }
@@ -541,6 +579,7 @@
         //ZDBar *theBar = [[[self theProject] bars] objectAtIndex:[indexPath row]];
         ZDBar *theBar = [[self fetchedResultsController] objectAtIndexPath:indexPath];
         [self setSelectedBar:theBar];
+        [self setSelectedIndexPath:indexPath];
 
         
         
@@ -583,10 +622,43 @@
     
     
     [self setSelectedBar:nil];
+    [self setSelectedIndexPath:nil];
     [self performFetch];
 }
 
 
+- (void)viewController:(ZDDetailsBarController *)viewController willEditZDBar:(ZDBar *)bar {
+
+}
+
+- (void)viewController:(ZDDetailsBarController *)viewController didEditZDBar:(ZDBar *)bar {
+    
+    //Close the popover
+    if ([self respondsToSelector:@selector(popoverPresentationController)]) {
+        
+        //iOS 8
+        [viewController dismissViewControllerAnimated:YES completion:nil];
+    }
+    else {
+        
+        //iOS 7
+        [[self theAddPopoverController] dismissPopoverAnimated:YES];
+        [self setTheAddPopoverController:nil];
+    }
+    
+    
+    
+    
+    
+    //Execute the new (edit) popover
+
+    // get the cell at indexPath (the one you long pressed)
+    UICollectionViewCell *cell = [[self collectionView] cellForItemAtIndexPath:[self selectedIndexPath]];
+    
+    // do stuff with the cell
+    [self performSegueWithIdentifier:@"edit_bar" sender:cell];
+    
+}
 
 
 
@@ -625,6 +697,48 @@
     
     
     [self setSelectedBar:nil];
+    [self setSelectedIndexPath:nil];
+    [self performFetch];
+}
+
+
+//---------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------
+#pragma mark - ZDEditBarDelegate
+//---------------------------------------------------------------------------------------
+- (void)viewControllerEditBarCancel:(ZDEditBarController *)viewController {
+
+    if ([self respondsToSelector:@selector(popoverPresentationController)]) {
+        
+        //iOS 8
+        [viewController dismissViewControllerAnimated:YES completion:nil];
+    }
+    else {
+        
+        //iOS 7
+        [[self theAddPopoverController] dismissPopoverAnimated:YES];
+        [self setTheAddPopoverController:nil];
+    }
+}
+
+- (void)viewController:(ZDEditBarController *)viewController willEditBar:(ZDBar *)bar {
+
+}
+
+- (void)viewController:(ZDEditBarController *)viewController didEditBar:(ZDBar *)bar {
+ 
+    if ([self respondsToSelector:@selector(popoverPresentationController)]) {
+        
+        //iOS 8
+        [viewController dismissViewControllerAnimated:YES completion:nil];
+    }
+    else {
+        
+        //iOS 7
+        [[self theAddPopoverController] dismissPopoverAnimated:YES];
+        [self setTheAddPopoverController:nil];
+    }
+    
     [self performFetch];
 }
 

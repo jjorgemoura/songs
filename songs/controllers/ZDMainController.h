@@ -10,11 +10,13 @@
 #import "ZDCoreCollectionVC.h"
 #import "ZDDetailsBarController.h"
 #import "ZDAddInsertBarsController.h"
+#import "ZDEditBarController.h"
+
 
 @class ZDProject;
 
 
-@interface ZDMainController : ZDCoreCollectionVC <UICollectionViewDataSource, UICollectionViewDelegate, ZDDetailsBarControllerDelegate, ZDAddInsertBarsControllerDelegate>
+@interface ZDMainController : ZDCoreCollectionVC <UICollectionViewDataSource, UICollectionViewDelegate, ZDDetailsBarControllerDelegate, ZDAddInsertBarsControllerDelegate, ZDEditBarControllerDelegate>
 
 - (void)changeProjectToProjectWithID:(NSString *)projectID;
 

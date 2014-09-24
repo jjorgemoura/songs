@@ -132,10 +132,16 @@
 - (IBAction)editButtonPressed:(id)sender {
    
     
+    if ([[self delegate] respondsToSelector:@selector(viewController:willEditZDBar:)]) {
+        
+        [[self delegate] viewController:self willEditZDBar:[self theBar]];
+    }
     
     
-    
-    
+    if ([[self delegate] respondsToSelector:@selector(viewController:didEditZDBar:)]) {
+        
+        [[self delegate] viewController:self didEditZDBar:[self theBar]];
+    }
     
 }
 

@@ -8,6 +8,24 @@
 
 #import <UIKit/UIKit.h>
 
+@class ZDEditBarController;
+@class ZDBar;
+
+
+@protocol ZDEditBarControllerDelegate <NSObject>
+
+@optional
+- (void)viewController:(ZDEditBarController *)viewController willEditBar:(ZDBar *)bar;
+- (void)viewController:(ZDEditBarController *)viewController didEditBar:(ZDBar *)bar;
+- (void)viewControllerEditBarCancel:(ZDEditBarController *)viewController;
+
+@end
+
+
+
 @interface ZDEditBarController : UIViewController
+
+@property (nonatomic, weak) id <ZDEditBarControllerDelegate> delegate;
+@property (nonatomic, strong) ZDBar *theSelectedZDBar;
 
 @end
