@@ -21,5 +21,7 @@
 
 - (instancetype)initWithID:(NSNumber *)typeID andType:(NSString *)type andTypeShort:(NSString *)typeShort;
 
+- (BOOL)isEqual:(id)object;
+
 
 @end

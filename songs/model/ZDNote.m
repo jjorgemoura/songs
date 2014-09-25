@@ -148,4 +148,30 @@
     return description;
 }
 
+
+
+
+//---------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------
+#pragma mark - Override
+//---------------------------------------------------------------------------------------
+- (BOOL)isEqual:(id)object {
+
+    BOOL result = NO;
+    
+    
+    if ([object isKindOfClass:[ZDNote class]]) {
+        
+        ZDNote *x = (ZDNote *)object;
+        
+        if ([[x noteText] isEqualToString:[self noteText]]) {
+            
+            result = YES;
+        }
+    }
+
+    return result;
+
+}
+
 @end

@@ -435,7 +435,7 @@
             
             //THIS IS iOS 8 CODE
             nextVC.modalPresentationStyle = UIModalPresentationPopover;
-            [nextVC setPreferredContentSize:CGSizeMake(325.0,450.0)];
+            [nextVC setPreferredContentSize:CGSizeMake(325.0, 525.0)];
             
             UIPopoverPresentationController *popoverPresentation = nextVC.popoverPresentationController;
             [popoverPresentation setSourceView:[self collectionView]];
@@ -447,12 +447,12 @@
         } else {
             //THIS IS IOS 7- CODE
             //fix or turn around to fix a problem with the popover content size
-            [nextVC setPreferredContentSize:CGSizeMake(325.0, 450.0)];
+            [nextVC setPreferredContentSize:CGSizeMake(325.0, 525.0)];
             
             //instanciate and set Property
             [self setTheAddPopoverController:[[UIPopoverController alloc] initWithContentViewController:nextVC]];
             
-            [[self theAddPopoverController] setPopoverContentSize:CGSizeMake(325.0, 450.0) animated:YES];
+            [[self theAddPopoverController] setPopoverContentSize:CGSizeMake(325.0, 525.0) animated:YES];
             [[self theAddPopoverController] presentPopoverFromRect:[(UICollectionViewCell *)sender frame] inView:[self collectionView] permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
         }
     }

@@ -144,7 +144,7 @@
     
     
     
-    NSLog(@"Project Loaded: %@", [theProject name]);
+    //NSLog(@"Project Loaded: %@", [theProject name]);
     
     
     //Call Delegate

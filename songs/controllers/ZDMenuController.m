@@ -161,12 +161,12 @@
 //---------------------------------------------------------------------------------------
 - (void)viewController:(ZDNewProjectController *)viewController willSaveZDProject:(NSString *)projectName {
     
-    NSLog(@"New Project will Save");
+    //NSLog(@"New Project will Save");
 }
 
 - (void)viewController:(ZDNewProjectController *)viewController didSaveZDProjectWithID:(NSString *)projectID andMessage:(NSString *)message {
     
-    NSLog(@"New Project did Save");
+    //NSLog(@"New Project did Save");
     
     
     
@@ -197,7 +197,7 @@
 //---------------------------------------------------------------------------------------
 - (void)viewController:(ZDLoadProjectController *)viewController didLoadZDProjectWithID:(NSString *)projectID {
 
-    NSLog(@"Load Project did load");
+    //NSLog(@"Load Project did load");
     
     //Save into NSUserDefault
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];

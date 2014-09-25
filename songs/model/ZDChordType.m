@@ -68,4 +68,29 @@
     return self;
 }
 
+
+
+//---------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------
+#pragma mark - Override
+//---------------------------------------------------------------------------------------
+- (BOOL)isEqual:(id)object {
+    
+    BOOL result = NO;
+    
+    
+    if ([object isKindOfClass:[ZDChordType class]]) {
+        
+        ZDChordType *x = (ZDChordType *)object;
+        
+        if ([[x type] isEqualToString:[self type]]) {
+            
+            result = YES;
+        }
+    }
+    
+    return result;
+    
+}
+
 @end

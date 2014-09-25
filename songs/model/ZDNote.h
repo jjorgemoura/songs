@@ -40,5 +40,6 @@ typedef NS_ENUM(NSInteger, ZDMusicNote) {
 
 - (instancetype)initWithNote:(ZDMusicNote)note;
 
+- (BOOL)isEqual:(id)object;
 
 @end

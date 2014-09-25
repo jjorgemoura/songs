@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="24u-c3-igZ">
     <dependencies>
+        <deployment defaultVersion="1552" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
@@ -209,7 +210,7 @@
                                 </connections>
                             </stepper>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="4" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pf2-U9-W8G">
-                                <rect key="frame" x="43" y="34" width="60" height="60"/>
+                                <rect key="frame" x="40" y="34" width="60" height="60"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -319,15 +320,73 @@
                         <viewControllerLayoutGuide type="bottom" id="sSF-Qd-1OE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="86f-gM-LJh">
-                        <rect key="frame" x="0.0" y="0.0" width="325" height="450"/>
+                        <rect key="frame" x="0.0" y="0.0" width="325" height="525"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dvj-EW-iBh">
+                                <rect key="frame" x="0.0" y="25" width="325" height="135"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="KDx-0G-j6k" id="Jlw-Lk-9UC"/>
+                                    <outlet property="delegate" destination="KDx-0G-j6k" id="oGK-JN-TeQ"/>
+                                </connections>
+                            </pickerView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sE2-Wu-QkI">
-                                <rect key="frame" x="5" y="38" width="315" height="1"/>
+                                <rect key="frame" x="5" y="187" width="315" height="1"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Time Signature" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ukh-J9-Us1">
+                                <rect key="frame" x="10" y="196" width="305" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="6" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vsc-XC-OB8">
+                                <rect key="frame" x="40" y="229" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="8" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kbH-86-cfe">
+                                <rect key="frame" x="40" y="262" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="4" minimumValue="1" maximumValue="64" translatesAutoresizingMaskIntoConstraints="NO" id="fRJ-9J-cFe">
+                                <rect key="frame" x="187" y="225" width="94" height="29"/>
+                                <connections>
+                                    <action selector="numberBeatsStepper:" destination="KDx-0G-j6k" eventType="valueChanged" id="8VL-jV-yiU"/>
+                                </connections>
+                            </stepper>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="2" minimumValue="1" maximumValue="5" translatesAutoresizingMaskIntoConstraints="NO" id="5s9-G2-r5x">
+                                <rect key="frame" x="187" y="258" width="94" height="29"/>
+                                <connections>
+                                    <action selector="beatValueStepper:" destination="KDx-0G-j6k" eventType="valueChanged" id="lhd-If-8cP"/>
+                                </connections>
+                            </stepper>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6hi-yB-vVo">
+                                <rect key="frame" x="5" y="295" width="315" height="1"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yy2-v7-M7b">
+                                <rect key="frame" x="154" y="290" width="160" height="135"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="KDx-0G-j6k" id="19C-tS-fAD"/>
+                                    <outlet property="delegate" destination="KDx-0G-j6k" id="7e8-53-St9"/>
+                                </connections>
+                            </pickerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Song Block" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UKF-r8-kmx">
+                                <rect key="frame" x="10" y="362" width="135" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o9n-on-a7t">
+                                <rect key="frame" x="5" y="440" width="315" height="1"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wz1-Iv-8om">
-                                <rect key="frame" x="112" y="362" width="100" height="30"/>
+                                <rect key="frame" x="112" y="449" width="100" height="30"/>
                                 <state key="normal" title="cancel">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -337,7 +396,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OuZ-dA-Y6o">
-                                <rect key="frame" x="112" y="400" width="100" height="30"/>
+                                <rect key="frame" x="112" y="487" width="100" height="30"/>
                                 <state key="normal" title="save">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -346,33 +405,27 @@
                                     <action selector="saveButtonPressed:" destination="KDx-0G-j6k" eventType="touchUpInside" id="eiK-bF-Zry"/>
                                 </connections>
                             </button>
-                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yy2-v7-M7b">
-                                <rect key="frame" x="154" y="82" width="160" height="135"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="KDx-0G-j6k" id="19C-tS-fAD"/>
-                                    <outlet property="delegate" destination="KDx-0G-j6k" id="7e8-53-St9"/>
-                                </connections>
-                            </pickerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Song Block" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UKF-r8-kmx">
-                                <rect key="frame" x="10" y="139" width="136" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Chord Note / Chord Type" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aJl-Wo-KQb">
+                                <rect key="frame" x="10" y="5" width="305" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o9n-on-a7t">
-                                <rect key="frame" x="5" y="347" width="315" height="1"/>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="beatCounterSteper" destination="fRJ-9J-cFe" id="EdX-VM-Vms"/>
+                        <outlet property="chordsSlider" destination="Dvj-EW-iBh" id="ymW-Xb-DVy"/>
+                        <outlet property="noteValueSteper" destination="5s9-G2-r5x" id="Ibs-Ht-4Mj"/>
+                        <outlet property="numberOfBeats" destination="Vsc-XC-OB8" id="WCb-XL-jgt"/>
                         <outlet property="songBlockSlider" destination="Yy2-v7-M7b" id="rkX-76-1bb"/>
+                        <outlet property="valueOfTheBeats" destination="kbH-86-cfe" id="V8o-xV-NCr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zhR-2L-B8c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2676.5" y="536"/>
+            <point key="canvasLocation" x="2666.5" y="539.5"/>
         </scene>
         <!--Menu Controller-->
         <scene sceneID="fQx-MJ-Tic">
