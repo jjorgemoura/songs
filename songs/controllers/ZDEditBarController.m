@@ -68,6 +68,7 @@
     [self setChordNotesList:[ZDNote list]];
     
     [self setChordTypesList:[ZDChordType list]];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -216,7 +217,7 @@
     
     if (pickerView == [self chordsSlider] && component == 1) {
         ZDChordType *cType = [[self chordTypesList] objectAtIndex:row];
-        NSString *obj = [cType type];
+        NSString *obj = [cType typeShort];
         as = [[NSAttributedString alloc] initWithString:obj];
     }
     
@@ -237,10 +238,12 @@
     
     if(pickerView == [self chordsSlider] && component == 0) {
         
+        [self setSelectedChordNote:[[self chordNotesList] objectAtIndex:row]];
     }
 
     if(pickerView == [self chordsSlider] && component == 1) {
         
+        [self setSelectedChordType:[[self chordTypesList] objectAtIndex:row]];
     }
 }
 
@@ -361,6 +364,21 @@
     
         NSNumber *vb = [NSNumber numberWithInteger:[[[self valueOfTheBeats] text] integerValue]];
         [[self theSelectedZDBar] setTimeSignatureNoteValue:vb];
+    }
+    
+    
+    
+    //CHORDS
+    if ([self selectedChordNote]) {
+        
+        NSInteger cn = [[self selectedChordNote] note];
+        [[self theSelectedZDBar] setChordNote:[NSNumber numberWithInteger:cn]];
+    }
+    
+    if ([self selectedChordType]) {
+
+        NSNumber *ct = [[self selectedChordType] typeID];
+        [[self theSelectedZDBar] setChordType:ct];
     }
     
     

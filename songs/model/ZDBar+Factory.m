@@ -233,7 +233,7 @@
     ZDChordType *chordRim = [ZDChordType instanceWithID:[self chordType]];
     
     //build final
-    result = [NSString stringWithFormat:[noteRim noteText], [chordRim typeShort], nil];
+    result = [NSString stringWithFormat:@"%@%@", [noteRim noteText], [chordRim typeShort]];
 
     
     return result;
