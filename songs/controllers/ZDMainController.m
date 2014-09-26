@@ -14,7 +14,8 @@
 #import "NSManagedObjectID+ZDString.h"
 #import "UIColor+HexString.h"
 #import "ZDSongBlock+Factory.h"
-
+#import "ZDProjectDetailController.h"
+#import "ZDProjectExportController.h"
 
 
 
@@ -29,10 +30,13 @@
 @property (nonatomic, weak) IBOutlet UIBarButtonItem* revealButtonItem;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem* auxRevealButtonItem;
 
-//@property (nonatomic, strong) ZDAddInsertBarsController *addInsertPopoverVC;
+
 @property (nonatomic, strong) UIPopoverController *theAddPopoverController;
 
 
+
+@property (nonatomic, weak) IBOutlet UIBarButtonItem* detailsButtonItem;
+@property (nonatomic, weak) IBOutlet UIBarButtonItem* exportButtonItem;
 
 @end
 
@@ -93,15 +97,20 @@
     
     
     
-    //
+    //LEFT BAR BUTTONS
     [[self revealButtonItem] setTarget: [self revealViewController]];
     [[self revealButtonItem] setAction: @selector( revealToggle: )];
     [[[self navigationController] navigationBar] addGestureRecognizer: [[self revealViewController] panGestureRecognizer]];
     
     
-    //[[self auxRevealButtonItem] setTarget: [self revealViewController]];
-    //[[self auxRevealButtonItem] setAction: @selector( rightRevealToggle: )];
+    //RIGHT BAR BUTTONS
+    [[self detailsButtonItem] setTarget:self];
+    [[self detailsButtonItem] setAction: @selector(detailsButtonPressed:)];
 
+    [[self exportButtonItem] setTarget:self];
+    [[self exportButtonItem] setAction: @selector(exportButtonPressed:)];
+    
+    
     
     
     //FetchRequest
@@ -371,8 +380,29 @@
         [self setTheProjectName:[theProject name]];
         [self performFetch];
     }
-
 }
+
+
+//---------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------
+#pragma mark - Target Action Buttons
+//---------------------------------------------------------------------------------------
+- (IBAction)detailsButtonPressed:(id)sender {
+
+    //NSLog(@"DETAILS .........");
+    
+    [self performSegueWithIdentifier:@"projectdetail_button" sender:sender];
+}
+
+
+- (IBAction)exportButtonPressed:(id)sender {
+
+    [self performSegueWithIdentifier:@"projectexport_button" sender:sender];
+}
+
+
+
+
 
 
 //---------------------------------------------------------------------------------------
@@ -472,7 +502,7 @@
             
             //THIS IS iOS 8 CODE
             nextVC.modalPresentationStyle = UIModalPresentationPopover;
-            [nextVC setPreferredContentSize:CGSizeMake(325.0,325.0)];
+            [nextVC setPreferredContentSize:CGSizeMake(325.0, 575.0)];
             
             UIPopoverPresentationController *popoverPresentation = nextVC.popoverPresentationController;
             [popoverPresentation setSourceView:[self collectionView]];
@@ -486,17 +516,84 @@
             //existing code...
             
             //fix or turn around to fix a problem with the popover content size
-            [nextVC setPreferredContentSize:CGSizeMake(325.0, 325.0)];
+            [nextVC setPreferredContentSize:CGSizeMake(325.0, 575.0)];
             
             
             
             //instanciate and set Property
             [self setTheAddPopoverController:[[UIPopoverController alloc] initWithContentViewController:nextVC]];
             
-            [[self theAddPopoverController] setPopoverContentSize:CGSizeMake(325.0, 325.0) animated:YES];
+            [[self theAddPopoverController] setPopoverContentSize:CGSizeMake(325.0, 575.0) animated:YES];
             [[self theAddPopoverController] presentPopoverFromRect:[(UICollectionViewCell *)sender frame] inView:[self collectionView] permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
         }
+    }
+    
+    if([[segue identifier] isEqualToString:@"projectdetail_button"]) {
         
+        ZDProjectDetailController *nextVC = [segue destinationViewController];
+        [nextVC setSongProjectName:@"Musica do engate"];
+        
+        
+        //to work as a popover
+        if ([nextVC respondsToSelector:@selector(popoverPresentationController)]) {
+            
+            //THIS IS iOS 8 CODE
+            nextVC.modalPresentationStyle = UIModalPresentationPopover;
+            [nextVC setPreferredContentSize:CGSizeMake(325.0, 450.0)];
+            
+            UIPopoverPresentationController *popoverPresentation = nextVC.popoverPresentationController;
+            [popoverPresentation setBarButtonItem:[self detailsButtonItem]];
+            //[popoverPresentation setSourceView:[self collectionView]];
+            //[popoverPresentation setSourceRect:[(UIBarButtonItem *)sender ]];
+            [popoverPresentation setPermittedArrowDirections:(UIPopoverArrowDirectionLeft | UIPopoverArrowDirectionRight | UIPopoverArrowDirectionUp)];
+            
+            [self presentViewController:nextVC animated:YES completion:nil];
+            
+        } else {
+            //THIS IS IOS 7- CODE
+            //fix or turn around to fix a problem with the popover content size
+            [nextVC setPreferredContentSize:CGSizeMake(325.0, 450.0)];
+            
+            //instanciate and set Property
+            [self setTheAddPopoverController:[[UIPopoverController alloc] initWithContentViewController:nextVC]];
+            
+            [[self theAddPopoverController] setPopoverContentSize:CGSizeMake(325.0, 450.0) animated:YES];
+            //[[self theAddPopoverController] presentPopoverFromRect:[(UICollectionViewCell *)sender frame] inView:[self collectionView] permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        }
+    }
+    
+    if([[segue identifier] isEqualToString:@"projectexport_button"]) {
+        
+        ZDProjectExportController *nextVC = [segue destinationViewController];
+        //[nextVC setSongProjectName:@"Musica do engate"];
+        
+        
+        //to work as a popover
+        if ([nextVC respondsToSelector:@selector(popoverPresentationController)]) {
+            
+            //THIS IS iOS 8 CODE
+            nextVC.modalPresentationStyle = UIModalPresentationPopover;
+            [nextVC setPreferredContentSize:CGSizeMake(325.0, 325.0)];
+            
+            UIPopoverPresentationController *popoverPresentation = nextVC.popoverPresentationController;
+            [popoverPresentation setBarButtonItem:[self exportButtonItem]];
+            //[popoverPresentation setSourceView:[self collectionView]];
+            //[popoverPresentation setSourceRect:[(UIBarButtonItem *)sender ]];
+            [popoverPresentation setPermittedArrowDirections:(UIPopoverArrowDirectionLeft | UIPopoverArrowDirectionRight | UIPopoverArrowDirectionUp)];
+            
+            [self presentViewController:nextVC animated:YES completion:nil];
+            
+        } else {
+            //THIS IS IOS 7- CODE
+            //fix or turn around to fix a problem with the popover content size
+            [nextVC setPreferredContentSize:CGSizeMake(325.0, 325.0)];
+            
+            //instanciate and set Property
+            [self setTheAddPopoverController:[[UIPopoverController alloc] initWithContentViewController:nextVC]];
+            
+            [[self theAddPopoverController] setPopoverContentSize:CGSizeMake(325.0, 325.0) animated:YES];
+            //[[self theAddPopoverController] presentPopoverFromRect:[(UICollectionViewCell *)sender frame] inView:[self collectionView] permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        }
     }
 }
 

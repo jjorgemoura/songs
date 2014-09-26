@@ -29,6 +29,8 @@
 		CF20EF5A194DEA02008E47A4 /* songsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CF20EF59194DEA02008E47A4 /* songsTests.m */; };
 		CF3398871980116E007A701C /* ZDPDFEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = CF3398861980116E007A701C /* ZDPDFEngine.m */; };
 		CF33988A198011B4007A701C /* ZDSongsPDFManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CF339889198011B4007A701C /* ZDSongsPDFManager.m */; };
+		CF341BC619D5748700BD9CFA /* ZDProjectDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF341BC519D5748700BD9CFA /* ZDProjectDetailController.m */; };
+		CF341BC919D58A7900BD9CFA /* ZDProjectExportController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF341BC819D58A7900BD9CFA /* ZDProjectExportController.m */; };
 		CF3F7930194DEDFC00D9615A /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF3F792F194DEDFC00D9615A /* SWRevealViewController.m */; };
 		CF3F7932194DF1AF00D9615A /* Storyboard_iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF3F7931194DF1AF00D9615A /* Storyboard_iphone.storyboard */; };
 		CF3F7934194DF1DC00D9615A /* Storyboard_ipad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF3F7933194DF1DC00D9615A /* Storyboard_ipad.storyboard */; };
@@ -98,6 +100,10 @@
 		CF3398861980116E007A701C /* ZDPDFEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDPDFEngine.m; sourceTree = "<group>"; };
 		CF339888198011B4007A701C /* ZDSongsPDFManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDSongsPDFManager.h; sourceTree = "<group>"; };
 		CF339889198011B4007A701C /* ZDSongsPDFManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDSongsPDFManager.m; sourceTree = "<group>"; };
+		CF341BC419D5748700BD9CFA /* ZDProjectDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDProjectDetailController.h; sourceTree = "<group>"; };
+		CF341BC519D5748700BD9CFA /* ZDProjectDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDProjectDetailController.m; sourceTree = "<group>"; };
+		CF341BC719D58A7900BD9CFA /* ZDProjectExportController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDProjectExportController.h; sourceTree = "<group>"; };
+		CF341BC819D58A7900BD9CFA /* ZDProjectExportController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDProjectExportController.m; sourceTree = "<group>"; };
 		CF3F792E194DEDFC00D9615A /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		CF3F792F194DEDFC00D9615A /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		CF3F7931194DF1AF00D9615A /* Storyboard_iphone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard_iphone.storyboard; sourceTree = "<group>"; };
@@ -321,6 +327,10 @@
 				CF18307D19CC89C40008A777 /* ZDEditBarController.m */,
 				CFB4B9B2199565BF0028962F /* ZDAddInsertBarsController.h */,
 				CFB4B9B3199565BF0028962F /* ZDAddInsertBarsController.m */,
+				CF341BC419D5748700BD9CFA /* ZDProjectDetailController.h */,
+				CF341BC519D5748700BD9CFA /* ZDProjectDetailController.m */,
+				CF341BC719D58A7900BD9CFA /* ZDProjectExportController.h */,
+				CF341BC819D58A7900BD9CFA /* ZDProjectExportController.m */,
 			);
 			name = controller;
 			path = controllers;
@@ -482,7 +492,9 @@
 			files = (
 				CF8D099F1981169F002C73D3 /* ZDDetailsBarController.m in Sources */,
 				CF20EF41194DEA02008E47A4 /* ZDAppDelegate.m in Sources */,
+				CF341BC619D5748700BD9CFA /* ZDProjectDetailController.m in Sources */,
 				CFB44394196DD8FB00EDB6E2 /* ZDBar+Factory.m in Sources */,
+				CF341BC919D58A7900BD9CFA /* ZDProjectExportController.m in Sources */,
 				CF7F5D0919B4D3BB00070FDE /* ZDNote.m in Sources */,
 				CF119D231970294D00E512F8 /* ZDCoreDataStack.m in Sources */,
 				CF4E7121197E785F00A23592 /* UINavigationItem+MultipleButtonsAddition.m in Sources */,
@@ -570,7 +582,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 410;
+				CURRENT_PROJECT_VERSION = 427;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -610,7 +622,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
-				CURRENT_PROJECT_VERSION = 410;
+				CURRENT_PROJECT_VERSION = 427;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

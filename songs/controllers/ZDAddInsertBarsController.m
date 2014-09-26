@@ -11,21 +11,40 @@
 #import "ZDSongBlock+Factory.h"
 #import "ZDCoreDataStack.h"
 #import "ZDProject+Factory.h"
+#import "ZDNote.h"
+#import "ZDChordType.h"
 
 
 @interface ZDAddInsertBarsController ()
 
 
 @property (nonatomic, weak) IBOutlet UILabel *numberOfBars;
-@property (nonatomic, weak) IBOutlet UIPickerView *songBlockSlider;
 
+
+@property (nonatomic, weak) IBOutlet UIPickerView *songBlockSlider;
 @property (nonatomic, strong) NSArray *songBlocksDataSource;
 @property (nonatomic, strong) NSString *selectedBlock;
+
+
+@property (nonatomic, weak) IBOutlet UILabel *numberOfBeats;
+@property (nonatomic, weak) IBOutlet UILabel *valueOfTheBeats;
+@property (weak, nonatomic) IBOutlet UIStepper *beatCounterSteper;
+@property (weak, nonatomic) IBOutlet UIStepper *noteValueSteper;
+@property (nonatomic) BOOL numberOfBeatsChanged;
+@property (nonatomic) BOOL valueOfBeatsChanged;
+
+
+@property (nonatomic, weak) IBOutlet UIPickerView *chordsSlider;
+@property (nonatomic, strong) NSArray *chordNotesList;
+@property (nonatomic, strong) NSArray *chordTypesList;
+@property (nonatomic, strong) ZDNote *selectedChordNote;
+@property (nonatomic, strong) ZDChordType *selectedChordType;
 
 
 - (void)saveBars:(BOOL)beforeTheCurrentBar;
 
 @end
+
 
 
 
@@ -64,6 +83,10 @@
     [self setSongBlocksDataSource:songBlocksList];
     
     
+    
+    //Load The Picker Data Source - Chords
+    [self setChordNotesList:[ZDNote list]];
+    [self setChordTypesList:[ZDChordType list]];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -80,6 +103,69 @@
     //Set default Block Selection
     if (![self selectedBlock]) {
         [self setSelectedBlock:[[self songBlocksDataSource] objectAtIndex:0]];
+    }
+    
+    
+    
+    
+    //Set the Chords List Pre Selection
+    if (![self selectedChordNote]) {
+        
+        NSNumber *cNoteNumber = [[self theSelectedZDBar] chordNote];
+        ZDNote *tempNote = [[ZDNote alloc] initWithNote:[cNoteNumber intValue]];
+        
+        NSUInteger theListIndex = [[self chordNotesList] indexOfObject:tempNote];
+        
+        [[self chordsSlider] selectRow:theListIndex inComponent:0 animated:YES];
+    }
+    
+    if (![self selectedChordType]) {
+        
+        NSNumber *cTypeNumber = [[self theSelectedZDBar] chordType];
+        ZDChordType *tempType = [ZDChordType instanceWithID:cTypeNumber];
+        
+        NSUInteger theListIndex = [[self chordTypesList] indexOfObject:tempType];
+        
+        [[self chordsSlider] selectRow:theListIndex inComponent:1 animated:YES];
+    }
+    
+    
+    
+    //Steppers - Time Signature
+    [self setNumberOfBeatsChanged:NO];
+    [self setValueOfBeatsChanged:NO];
+    
+    
+    
+    [[self beatCounterSteper] setValue:[[[self theSelectedZDBar] timeSignatureBeatCount] intValue]];
+    [[self numberOfBeats] setText:[[[self theSelectedZDBar] timeSignatureBeatCount] stringValue]];
+    
+    
+    switch ([[[self theSelectedZDBar] timeSignatureNoteValue] intValue]) {
+        case 2:
+            [[self noteValueSteper] setValue:1];
+            [[self valueOfTheBeats] setText:[NSString stringWithFormat:@"%d", 2]];
+            break;
+        case 4:
+            [[self noteValueSteper] setValue:2];
+            [[self valueOfTheBeats] setText:[NSString stringWithFormat:@"%d", 4]];
+            break;
+        case 8:
+            [[self noteValueSteper] setValue:3];
+            [[self valueOfTheBeats] setText:[NSString stringWithFormat:@"%d", 8]];
+            break;
+        case 16:
+            [[self noteValueSteper] setValue:4];
+            [[self valueOfTheBeats] setText:[NSString stringWithFormat:@"%d", 16]];
+            break;
+        case 32:
+            [[self noteValueSteper] setValue:6];
+            [[self valueOfTheBeats] setText:[NSString stringWithFormat:@"%d", 32]];
+            break;
+        default:
+            [[self noteValueSteper] setValue:2];
+            [[self valueOfTheBeats] setText:[NSString stringWithFormat:@"%d", 4]];
+            break;
     }
 }
 
@@ -147,15 +233,29 @@
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
     
-    return 1;
+    int result = 1;
+    
+    if (pickerView == [self chordsSlider]) {
+        result = 2;
+    }
+    
+    return result;
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
     
     NSInteger numRows = 0;
     
-    if (component == 0) {
+    if (pickerView == [self songBlockSlider] && component == 0) {
         numRows = [[self songBlocksDataSource] count];
+    }
+    
+    if (pickerView == [self chordsSlider] && component == 0) {
+        numRows = 12;
+    }
+    
+    if (pickerView == [self chordsSlider] && component == 1) {
+        numRows = [[self chordTypesList] count];
     }
     
     return numRows;
@@ -177,6 +277,18 @@
         as = [[NSAttributedString alloc] initWithString:obj];
     }
     
+    
+    if (pickerView == [self chordsSlider] && component == 0) {
+        NSString *obj = [[[self chordNotesList] objectAtIndex:row] noteText];
+        as = [[NSAttributedString alloc] initWithString:obj];
+    }
+    
+    if (pickerView == [self chordsSlider] && component == 1) {
+        ZDChordType *cType = [[self chordTypesList] objectAtIndex:row];
+        NSString *obj = [cType typeShort];
+        as = [[NSAttributedString alloc] initWithString:obj];
+    }
+    
     return as;
 }
 
@@ -184,12 +296,20 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     
-    if(pickerView == [self songBlockSlider]) {
-        
-        if (component == 0) {
+    if(pickerView == [self songBlockSlider] && component == 0) {
             
-            [self setSelectedBlock:[[self songBlocksDataSource] objectAtIndex:row]];
-        }
+        [self setSelectedBlock:[[self songBlocksDataSource] objectAtIndex:row]];
+    }
+    
+    
+    if(pickerView == [self chordsSlider] && component == 0) {
+        
+        [self setSelectedChordNote:[[self chordNotesList] objectAtIndex:row]];
+    }
+    
+    if(pickerView == [self chordsSlider] && component == 1) {
+        
+        [self setSelectedChordType:[[self chordTypesList] objectAtIndex:row]];
     }
 }
 
@@ -214,6 +334,11 @@
     [self saveBars:NO];
 }
 
+
+//---------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------
+#pragma mark - Stepper
+//---------------------------------------------------------------------------------------
 - (IBAction)valueStepperChanged:(id)sender {
     
     if ([sender isKindOfClass:[UIStepper class]]) {
@@ -223,7 +348,57 @@
         
         [[self numberOfBars] setText:[NSString stringWithFormat:@"%d", (int)newNumberBars]];
     }
+}
+
+
+- (IBAction)numberBeatsStepper:(id)sender {
     
+    if ([sender isKindOfClass:[UIStepper class]]) {
+        
+        UIStepper *myStepper = (UIStepper *)sender;
+        double newNumberBeats = [myStepper value];
+        
+        [[self numberOfBeats] setText:[NSString stringWithFormat:@"%d", (int)newNumberBeats]];
+    }
+    
+    
+    [self setNumberOfBeatsChanged:YES];
+}
+
+
+- (IBAction)beatValueStepper:(id)sender {
+    
+    if ([sender isKindOfClass:[UIStepper class]]) {
+        
+        UIStepper *myStepper = (UIStepper *)sender;
+        int theStepper = (int)[myStepper value];
+        
+        
+        switch (theStepper) {
+            case 1:
+                [[self valueOfTheBeats] setText:[NSString stringWithFormat:@"%d", 2]];
+                break;
+            case 2:
+                [[self valueOfTheBeats] setText:[NSString stringWithFormat:@"%d", 4]];
+                break;
+            case 3:
+                [[self valueOfTheBeats] setText:[NSString stringWithFormat:@"%d", 8]];
+                break;
+            case 4:
+                [[self valueOfTheBeats] setText:[NSString stringWithFormat:@"%d", 16]];
+                break;
+            case 5:
+                [[self valueOfTheBeats] setText:[NSString stringWithFormat:@"%d", 32]];
+                break;
+            default:
+                [[self valueOfTheBeats] setText:[NSString stringWithFormat:@"%d", 4]];
+                break;
+        }
+        
+        
+        
+        [self setValueOfBeatsChanged:YES];
+    }
 }
 
 
@@ -338,6 +513,37 @@
     
     
     
+    //Process Time Signature
+    NSNumber *nb = [[self theSelectedZDBar] timeSignatureBeatCount];
+    NSNumber *vb = [[self theSelectedZDBar] timeSignatureNoteValue];
+    
+    
+    if ([self numberOfBeatsChanged]) {
+        
+        nb = [NSNumber numberWithInteger:[[[self numberOfBeats] text] integerValue]];
+    }
+    
+    if ([self valueOfBeatsChanged]) {
+        
+        vb = [NSNumber numberWithInteger:[[[self valueOfTheBeats] text] integerValue]];
+    }
+    
+    
+    //Process Chords
+    NSNumber *newCN = [[self theSelectedZDBar] chordNote];
+    NSNumber *newCT = [[self theSelectedZDBar] chordType];
+    
+    if ([self selectedChordNote]) {
+        
+        NSInteger cn = [[self selectedChordNote] note];
+        newCN = [NSNumber numberWithInteger:cn];
+    }
+    
+    if ([self selectedChordType]) {
+        
+        newCT = [[self selectedChordType] typeID];
+    }
+    
     
 
     //INSERT INTO DB
@@ -349,12 +555,12 @@
         //NSLog(@"i = %d", i);
         
         barToSave = [NSEntityDescription insertNewObjectForEntityForName:[ZDBar entityName] inManagedObjectContext:moc];
-        [barToSave setChordType:[[self theSelectedZDBar] chordType]];
-        [barToSave setChordNote:[[self theSelectedZDBar] chordNote]];
+        [barToSave setChordNote:newCN];
+        [barToSave setChordType:newCT];
         [barToSave setOrder:[NSNumber numberWithInt:newCurrentInsertOrder]];
         [barToSave setSongBlock:[NSNumber numberWithInt:1]];
-        [barToSave setTimeSignatureBeatCount:[[self theSelectedZDBar] timeSignatureBeatCount]];
-        [barToSave setTimeSignatureNoteValue:[[self theSelectedZDBar] timeSignatureNoteValue]];
+        [barToSave setTimeSignatureBeatCount:nb];
+        [barToSave setTimeSignatureNoteValue:vb];
         [barToSave setTheSongBlock:songBlockToSave];
         
         

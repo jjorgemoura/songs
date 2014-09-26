@@ -203,7 +203,6 @@
     NSAttributedString *as = nil;
     
 
-    
     if (pickerView == [self songBlockSlider] && component == 0) {
         NSString *obj = [[self songBlocksDataSource] objectAtIndex:row];
         as = [[NSAttributedString alloc] initWithString:obj];
@@ -220,7 +219,6 @@
         NSString *obj = [cType typeShort];
         as = [[NSAttributedString alloc] initWithString:obj];
     }
-    
     
     
     return as;
@@ -409,7 +407,6 @@
         [[self delegate] viewController:self didEditBar:nil];
     }
 }
-
 
 
 
