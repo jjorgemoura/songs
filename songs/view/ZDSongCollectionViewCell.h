@@ -12,6 +12,7 @@
 
 - (void)mainText:(NSString *)text;
 - (void)auxText:(NSString *)text;
+- (void)songBlock:(NSString *)songBlock;
 - (void)color:(UIColor *)color;
 - (void)borderColor:(UIColor *)color;
 - (void)orderNumber:(NSNumber *)order;

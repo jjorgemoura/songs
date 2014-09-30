@@ -13,6 +13,7 @@
 @property(weak) IBOutlet UILabel *mainLabel;
 @property(weak) IBOutlet UILabel *auxLabel;
 @property(weak) IBOutlet UILabel *orderLabel;
+@property(weak) IBOutlet UILabel *songBlock;
 
 @end
 
@@ -68,6 +69,11 @@
 - (void)auxText:(NSString *)text {
     
     [[self auxLabel] setText:text];
+}
+
+- (void)songBlock:(NSString *)text {
+    
+    [[self songBlock] setText:text];
 }
 
 - (void)color:(UIColor *)color {

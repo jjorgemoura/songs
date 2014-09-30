@@ -78,6 +78,7 @@
 		CF119D2C19704FCF00E512F8 /* NSManagedObjectContext+ZDAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectContext+ZDAdditions.m"; sourceTree = "<group>"; };
 		CF18307C19CC89C40008A777 /* ZDEditBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDEditBarController.h; sourceTree = "<group>"; };
 		CF18307D19CC89C40008A777 /* ZDEditBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDEditBarController.m; sourceTree = "<group>"; };
+		CF1DFB0919D734F5006EB91D /* ZDDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDDefinitions.h; sourceTree = "<group>"; };
 		CF20EF2B194DEA02008E47A4 /* songs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = songs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF20EF2E194DEA02008E47A4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CF20EF30194DEA02008E47A4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -339,6 +340,7 @@
 		CF3F792B194DED8500D9615A /* others */ = {
 			isa = PBXGroup;
 			children = (
+				CF1DFB0919D734F5006EB91D /* ZDDefinitions.h */,
 			);
 			path = others;
 			sourceTree = "<group>";
@@ -582,7 +584,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 427;
+				CURRENT_PROJECT_VERSION = 506;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -622,7 +624,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
-				CURRENT_PROJECT_VERSION = 427;
+				CURRENT_PROJECT_VERSION = 506;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

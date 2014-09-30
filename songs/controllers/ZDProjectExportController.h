@@ -7,7 +7,24 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 
-@interface ZDProjectExportController : UIViewController
+@class ZDProjectExportController;
+@class ZDProject;
 
+
+
+@protocol ZDProjectExportControllerDelegate <NSObject>
+
+@optional
+- (void)viewControllerExportFinished:(ZDProjectExportController *)viewController;
+
+@end
+
+
+
+@interface ZDProjectExportController : UIViewController <MFMailComposeViewControllerDelegate>
+
+@property (nonatomic, weak) id <ZDProjectExportControllerDelegate> delegate;
+@property (nonatomic, strong) ZDProject *theSelectedZDProject;
 @end

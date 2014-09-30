@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ZDProjectDetailController : UIViewController
+@interface ZDProjectDetailController : UIViewController <NSURLSessionDelegate, NSURLSessionTaskDelegate, NSURLSessionDownloadDelegate>
 
 
 @property (nonatomic, copy) NSString *songProjectName;
@@ -19,7 +19,7 @@
 @property (nonatomic, copy) NSString *bpm;
 @property (nonatomic, copy) NSString *songKey;
 @property (nonatomic, copy) NSString *numberBars;
-@property (nonatomic, copy) NSString *TimeSignature;
+@property (nonatomic, copy) NSString *timeSignature;
 
 
 @end

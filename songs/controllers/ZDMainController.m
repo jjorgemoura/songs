@@ -83,11 +83,19 @@
         
         //I think that I don't need store the object
         NSManagedObjectID *moID = [ZDCoreDataStack managedObjectIDFromString:projectIDStored];
-        ZDProject *theProject = (ZDProject *)[[ZDCoreDataStack mainQueueContext] objectWithID:moID];
-        //[self setTheProject:theProject];
         
-        [self setTheProjectID:projectIDStored];
-        [self setTheProjectName:[theProject name]];
+        if (moID) {
+        
+            ZDProject *theProject = (ZDProject *)[[ZDCoreDataStack mainQueueContext] objectWithID:moID];
+            //[self setTheProject:theProject];
+            
+            [self setTheProjectID:projectIDStored];
+            [self setTheProjectName:[theProject name]];
+        }
+        else {
+        
+            [[self revealViewController] performSelector:@selector(revealToggle:) withObject:self];
+        }
     }
     else {
         
@@ -231,6 +239,7 @@
         
         
         NSString *theScaleNote = [theBar chordTypeText];
+        NSString *theSongBlockText = [[theBar theSongBlock] name];
         NSNumber *beats = [theBar timeSignatureBeatCount];
         NSNumber *division = [theBar timeSignatureNoteValue];
         
@@ -245,6 +254,7 @@
         [cell auxText:theTimeSig];
         [cell orderNumber:[theBar order]];
         [cell color:theBlockColor];
+        [cell songBlock:theSongBlockText];
         [[cell layer] setBorderColor:[theBlockBorderColor CGColor]];
         
         
@@ -530,8 +540,31 @@
     
     if([[segue identifier] isEqualToString:@"projectdetail_button"]) {
         
+        ZDProject *theProject = nil;
+        
+        if ([self selectedBar]) {
+            
+            theProject = [[self selectedBar] theProject];
+        }
+        else {
+        
+            //NSIndexPath *ip = [NSIndexPath indexPathWithIndex:0.0];
+            ZDBar *tempBar = [[[self fetchedResultsController] fetchedObjects] objectAtIndex:0];
+            //ZDBar *tempBar = [[self fetchedResultsController] objectAtIndexPath:ip];
+            theProject = [tempBar theProject];
+        }
+        
+        
         ZDProjectDetailController *nextVC = [segue destinationViewController];
-        [nextVC setSongProjectName:@"Musica do engate"];
+        [nextVC setSongProjectName:[theProject name]];
+        [nextVC setBandName:[theProject band]];
+        [nextVC setComposerName:[theProject composer]];
+        [nextVC setLyricsByName:[theProject lyricsBy]];
+        [nextVC setYear:[[theProject year] stringValue]];
+        [nextVC setBpm:[[theProject bpm] stringValue]];
+        [nextVC setSongKey:[theProject key]];
+        [nextVC setNumberBars:[NSString stringWithFormat:@"%u", [[theProject bars] count]]];
+        [nextVC setTimeSignature:nil];
         
         
         //to work as a popover
@@ -565,7 +598,15 @@
     if([[segue identifier] isEqualToString:@"projectexport_button"]) {
         
         ZDProjectExportController *nextVC = [segue destinationViewController];
-        //[nextVC setSongProjectName:@"Musica do engate"];
+        if ([self selectedBar]) {
+            
+            [nextVC setTheSelectedZDProject:[[self selectedBar] theProject]];
+        }
+        else {
+            
+            ZDBar *tempBar = [[[self fetchedResultsController] fetchedObjects] objectAtIndex:0];
+            [nextVC setTheSelectedZDProject:[tempBar theProject]];
+        }
         
         
         //to work as a popover
@@ -837,6 +878,27 @@
     }
     
     [self performFetch];
+}
+
+
+
+//---------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------
+#pragma mark - ZDProjectExportControllerDelegate
+//---------------------------------------------------------------------------------------
+- (void)viewControllerExportFinished:(ZDProjectExportController *)viewController {
+
+    if ([self respondsToSelector:@selector(popoverPresentationController)]) {
+        
+        //iOS 8
+        [viewController dismissViewControllerAnimated:YES completion:nil];
+    }
+    else {
+        
+        //iOS 7
+        [[self theAddPopoverController] dismissPopoverAnimated:YES];
+        [self setTheAddPopoverController:nil];
+    }
 }
 
 

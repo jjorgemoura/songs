@@ -20,4 +20,6 @@
     #import <CoreData/CoreData.h>
 
     #import "SWRevealViewController.h"
+
+    #import "ZDDefinitions.h"
 #endif
