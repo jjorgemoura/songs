@@ -10,6 +10,8 @@
 #import "ZDCoreDataStack.h"
 #import "ZDProject+Factory.h"
 #import "NSManagedObjectID+ZDString.h"
+#import "ZDLoadTableViewCell.h"
+
 
 @interface ZDLoadProjectController ()
 
@@ -44,6 +46,11 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    
+    //Force/Set the height of each cell in order to remove the warning in iOS8
+    [[self tableView] setRowHeight:44];
+    
     
     //
     [[self revealButtonItem] setTarget: [self revealViewController]];
@@ -81,16 +88,20 @@
 //---------------------------------------------------------------------------------------
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"MY_PROJECT_LOAD";
+    static NSString *cellIdentifier = @"MY_PROJECT_LOAD";
+    
+    
     //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    ZDLoadTableViewCell *cell = (ZDLoadTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+
     
     
     
     // Configure the cell...
     if(!cell) {
         
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"MY_PROJECT_LOAD"];
+        cell = [[ZDLoadTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"MY_PROJECT_LOAD"];
     }
     
     
@@ -108,20 +119,79 @@
     
     [[cell textLabel] setText:sss];
     
+    
+    //special features fo SWTableCell
+    NSMutableArray *rightUtilityButtons = [NSMutableArray new];
+    [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor colorWithRed:1.0f green:0.231f blue:0.188 alpha:1.0f] title:@"Delete"];
+    
+    [cell setDelegate:self];
+    [cell setRightUtilityButtons:rightUtilityButtons];
+    
     return cell;
 }
 
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+//---------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------
+#pragma mark - SWTableCell Delegate
+//---------------------------------------------------------------------------------------
+- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerLeftUtilityButtonWithIndex:(NSInteger)index {
+    
 }
-*/
+
+- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {
+    
+    switch (index) {
+        case 0:
+        {
+            // Delete button is pressed
+            NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
+            
+            
+            //select the project to delete
+            ZDProject *theProject = [[self fetchedResultsController] objectAtIndexPath:cellIndexPath];
+            NSString *theProjectID = [[theProject objectID] stringRepresentation];
+            
+            
+            //delete
+            NSError *error = nil;
+            NSManagedObjectContext *moc = [ZDCoreDataStack mainQueueContext];
+            [moc deleteObject:theProject];
+            
+            //SAVE
+            [moc save:&error];
+            
+            if(error) {
+                NSLog(@"CORE DATA ERROR: Deleting a Project: %@", [error debugDescription]);
+            }
+            else {
+                NSLog(@"DELETE: OK");
+            }
+
+
+            //update UI
+            //[[self tableView] deleteRowsAtIndexPaths:@[cellIndexPath] withRowAnimation:UITableViewRowAnimationLeft];
+            
+            
+            //test if the deleted project is the one selected
+            //Call Delegate
+            if([[self delegate] respondsToSelector:@selector(viewController:didDeleteZDProjectWithID:)]){
+                
+                [[self delegate] viewController:self didDeleteZDProjectWithID:theProjectID];
+            }
+            
+            
+            
+            
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+
+
 
 //---------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------
@@ -142,8 +212,6 @@
     
     
     
-    
-    
     //NSLog(@"Project Loaded: %@", [theProject name]);
     
     
@@ -154,5 +222,20 @@
     }
     
 }
+
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    
+    if(self.editing) {
+        
+        return UITableViewCellEditingStyleDelete;
+    }
+    
+    return UITableViewCellEditingStyleNone;
+}
+
+
+
 
 @end

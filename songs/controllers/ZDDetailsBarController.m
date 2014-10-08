@@ -66,6 +66,9 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
+    
+    
     UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapBehind:)];
     [recognizer setNumberOfTapsRequired:1];
     [recognizer setCancelsTouchesInView:NO]; //So the user can still interact with controls in the modal view
@@ -75,13 +78,16 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
 
+    [super viewWillDisappear:animated];
+    
+    
     //REMOVE ALL GESTURES
     NSArray * gesturesList = [[[self view] window] gestureRecognizers];
-    NSLog(@"SIZE OF GESTURES LIST: %lu", (unsigned long)[gesturesList count]);
+    //NSLog(@"SIZE OF GESTURES LIST: %lu", (unsigned long)[gesturesList count]);
     
     for (UIGestureRecognizer *x in gesturesList) {
         
-        NSLog(@"The Gesture: %@", [x description]);
+        //NSLog(@"The Gesture: %@", [x description]);
         if ([x isKindOfClass:[UITapGestureRecognizer class]]) {
             
             [[[self view] window] removeGestureRecognizer:x];
@@ -117,7 +123,7 @@
 
             [self dismissViewControllerAnimated:YES completion:nil];
             
-            NSLog(@"There are %lu Gesture Recognizers", (unsigned long)[[[[self view] window] gestureRecognizers] count]);
+            //NSLog(@"There are %lu Gesture Recognizers", (unsigned long)[[[[self view] window] gestureRecognizers] count]);
             [[[self view] window] removeGestureRecognizer:sender];
         }
     }

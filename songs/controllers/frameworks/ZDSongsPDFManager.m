@@ -24,7 +24,7 @@
 
     NSString *result = nil;
 
-    NSString *dateToString = [NSDate date];
+    //NSString *dateToString = [NSDate date];
     
 
     return result;
@@ -55,18 +55,18 @@
     
     
     //For Each Bar
-    for (ZDBar *theBar in [project bars]) {
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    }
+//    for (ZDBar *theBar in [project bars]) {
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//    }
     
     
     //Closing

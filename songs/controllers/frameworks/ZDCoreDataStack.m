@@ -7,6 +7,7 @@
 //
 
 #import "ZDCoreDataStack.h"
+#import "ZDAppDelegate.h"
 
 
 static NSString *const ZDCoreDataModelFileName = @"songs";
@@ -73,6 +74,7 @@ static NSString *const ZDCoreDataModelFileName = @"songs";
     self = [super init];
     if (self) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(contextDidSavePrivateQueueContext:)name:NSManagedObjectContextDidSaveNotification object:[self privateQueueContext]];
+        
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(contextDidSaveMainQueueContext:) name:NSManagedObjectContextDidSaveNotification object:[self mainQueueContext]];
     }
     return self;
@@ -169,8 +171,8 @@ static NSString *const ZDCoreDataModelFileName = @"songs";
     NSString *appName = [[NSBundle mainBundle] infoDictionary][@"CFBundleDisplayName"];
     appName = [appName stringByAppendingString:@".sqlite"];
     
-    
-    NSURL *appDocsDirURL = [[[UIApplication sharedApplication] delegate] performSelector:@selector(applicationDocumentsDirectory)];
+    ZDAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    NSURL *appDocsDirURL = [appDelegate performSelector:@selector(applicationDocumentsDirectory)];
     
     //return [[NSFileManager appLibraryDirectory] URLByAppendingPathComponent:appName];
     return [appDocsDirURL URLByAppendingPathComponent:appName];
@@ -183,3 +185,7 @@ static NSString *const ZDCoreDataModelFileName = @"songs";
 }
 
 @end
+
+
+
+

@@ -79,6 +79,9 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
+    
+    
     
     //Set default Block Selection
     if (![self selectedBlock]) {

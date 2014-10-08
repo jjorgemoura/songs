@@ -17,7 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *emailImageView;
 
 - (NSString *)bodyTextFromProject;
-
+- (NSString *)returnFormattedStringWithPrefixFromString:(NSString *)theString toSize:(int)size;
 @end
 
 
@@ -129,57 +129,103 @@
 //---------------------------------------------------------------------------------------
 - (NSString *)bodyTextFromProject {
 
-    //NSString *result = nil;
-
-    
     NSMutableString *body = [NSMutableString string];
+
+    NSString *currentBlock = @"none";
+    
+    
     
     // add HTML before the link here with line breaks (\n)
     
-    [body appendString:@"<h1>SongZ</h1>\n"];
+    [body appendString:@"<h3>SongZ</h3>\n"];
     [body appendString:@" \n"];
     [body appendString:@"<div> \n"];
     [body appendString:@" \n"];
-    [body appendString:@" <h2>Project: "];
+    [body appendString:@" <h5>Project: "];
     [body appendString:[[self theSelectedZDProject] name]];
-    [body appendString:@" </h2>\n"];
-    [body appendString:@" \n"];
-    [body appendString:@" <h3>Band: \n"];
-    [body appendString:[[self theSelectedZDProject] band]];
-    [body appendString:@" </h3>\n"];
-//    [body appendString:@" \n"];
-//    [body appendString:@" \n"];
-//    [body appendString:@" \n"];
-//    [body appendString:@" \n"];
-//    [body appendString:@" \n"];
-//    [body appendString:@" \n"];
-//    [body appendString:@" \n"];
-//    [body appendString:@" \n"];
-//    [body appendString:@" \n"];
-//    [body appendString:@" \n"];
+    
+    if ([[self theSelectedZDProject] band]) {
+
+        [body appendString:@" <br>\n"];
+        [body appendString:@" Band: \n"];
+        [body appendString:[[self theSelectedZDProject] band]];
+    }
+    
+    if ([[self theSelectedZDProject] key]) {
+        if (![[[self theSelectedZDProject] key] isEqualToString:@""]) {
+            [body appendString:@" <br>\n"];
+            [body appendString:@" Key: \n"];
+            [body appendString:[[self theSelectedZDProject] key]];
+        }
+    }
+    
+    if ([[self theSelectedZDProject] year]) {
+
+        [body appendString:@" <br>\n"];
+        [body appendString:@" Year: \n"];
+        [body appendString:[[[self theSelectedZDProject] year] stringValue]];
+    }
+    
+    [body appendString:@" </h5>\n"];
+
+    
     [body appendString:@"</div>\n"];
     [body appendString:@" \n"];
     [body appendString:@"<div>\n"];
-    [body appendString:@" <h2>Song Structure</h2>\n"];
-    [body appendString:@" \n"];
+    [body appendString:@" <h5>Song Structure</h5>\n"];
+    
     
     
     for (ZDBar *theBar in [[self theSelectedZDProject] bars]) {
         
-        [body appendString:@" Chord: "];
-        [body appendString:[theBar chordTypeText]];
-        [body appendString:@" "];
-        [body appendString:@" | "];
-    }
+        if ([[[theBar theSongBlock] name] isEqualToString:currentBlock]) {
+            
+            [body appendString:@" "];
+            [body appendString:[theBar chordTypeText]];
+            [body appendString:@" | "];
 
-    [body appendString:@"\n"];
+        }
+        else {
+        
+            if (![currentBlock isEqualToString:@"none"]) {
+                [body appendString:@"</p>"];
+            }
+            
+            [body appendString:@" \n"];
+            [body appendString:@"<p>"];
+            //[body appendString:[[theBar theSongBlock] name]];
+            [body appendString:[self returnFormattedStringWithPrefixFromString:[[theBar theSongBlock] name] toSize:10]];
+            [body appendString:@": | "];
+            [body appendString:[theBar chordTypeText]];
+            [body appendString:@" | "];
+            
+            currentBlock = [[theBar theSongBlock] name];
+        }
+    }
+    
+    [body appendString:@"</p>"];
+    //[body appendString:@"\n"];
     [body appendString:@"</div>\n"];
     
     
-    NSLog(@"%@", body);
+    //NSLog(@"%@", body);
 
     
     return [NSString stringWithString:body];
+}
+
+
+- (NSString *)returnFormattedStringWithPrefixFromString:(NSString *)theString toSize:(int)size {
+
+    NSString *x = theString;
+    
+    while ([x length] < size) {
+        
+        
+        x = [x stringByAppendingString:@" "];
+    }
+    
+    return x;
 }
 
 

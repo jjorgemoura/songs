@@ -85,8 +85,9 @@
     CGContextScaleCTM(currentContext, 1.0, -1.0);
     CGContextTranslateCTM(currentContext, 0, (-1)*frameRect.origin.y*2);
     
-    
+
     CFRelease(frameRef);
+    CFRelease(currentText);
     CFRelease(stringRef);
     CFRelease(framesetter);
 }
@@ -130,6 +131,7 @@
     
     
     CFRelease(frameRef);
+    CFRelease(currentText);
     CFRelease(stringRef);
     CFRelease(framesetter);
 }

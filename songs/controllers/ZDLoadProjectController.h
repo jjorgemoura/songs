@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "ZDCoreDataTableVC.h"
+#import "SWTableViewCell.h"
+
 
 @class ZDLoadProjectController;
 
@@ -17,12 +19,13 @@
 @optional
 - (void)viewController:(ZDLoadProjectController *)viewController willLoadZDProject:(NSString *)projectName andProjectID:(NSString *)projectID;
 - (void)viewController:(ZDLoadProjectController *)viewController didLoadZDProjectWithID:(NSString *)projectID;
+- (void)viewController:(ZDLoadProjectController *)viewController didDeleteZDProjectWithID:(NSString *)projectID;
 
 @end
 
 
 
-@interface ZDLoadProjectController : ZDCoreDataTableVC <UITableViewDataSource, UITableViewDelegate>
+@interface ZDLoadProjectController : ZDCoreDataTableVC <UITableViewDataSource, UITableViewDelegate, SWTableViewCellDelegate>
 
 @property (nonatomic, weak) id <ZDLoadProjectControllerDelegate> delegate;
 

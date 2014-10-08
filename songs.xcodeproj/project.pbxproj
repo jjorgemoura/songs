@@ -27,6 +27,7 @@
 		CF20EF50194DEA02008E47A4 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF20EF34194DEA02008E47A4 /* CoreData.framework */; };
 		CF20EF58194DEA02008E47A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CF20EF56194DEA02008E47A4 /* InfoPlist.strings */; };
 		CF20EF5A194DEA02008E47A4 /* songsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CF20EF59194DEA02008E47A4 /* songsTests.m */; };
+		CF32060819E2F8B90088B9E9 /* ZDLoadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF32060719E2F8B90088B9E9 /* ZDLoadTableViewCell.m */; };
 		CF3398871980116E007A701C /* ZDPDFEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = CF3398861980116E007A701C /* ZDPDFEngine.m */; };
 		CF33988A198011B4007A701C /* ZDSongsPDFManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CF339889198011B4007A701C /* ZDSongsPDFManager.m */; };
 		CF341BC619D5748700BD9CFA /* ZDProjectDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF341BC519D5748700BD9CFA /* ZDProjectDetailController.m */; };
@@ -35,6 +36,7 @@
 		CF3F7932194DF1AF00D9615A /* Storyboard_iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF3F7931194DF1AF00D9615A /* Storyboard_iphone.storyboard */; };
 		CF3F7934194DF1DC00D9615A /* Storyboard_ipad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF3F7933194DF1DC00D9615A /* Storyboard_ipad.storyboard */; };
 		CF4E7121197E785F00A23592 /* UINavigationItem+MultipleButtonsAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4E7120197E785F00A23592 /* UINavigationItem+MultipleButtonsAddition.m */; };
+		CF66B75A19E43D80004C0BFB /* ZDMultipleSelectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF66B75919E43D80004C0BFB /* ZDMultipleSelectionController.m */; };
 		CF7F5D0019B4D37400070FDE /* ZDBar.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7F5CFF19B4D37400070FDE /* ZDBar.m */; };
 		CF7F5D0319B4D37500070FDE /* ZDProject.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7F5D0219B4D37500070FDE /* ZDProject.m */; };
 		CF7F5D0619B4D37500070FDE /* ZDSongBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7F5D0519B4D37500070FDE /* ZDSongBlock.m */; };
@@ -55,6 +57,12 @@
 		CFF01A541969661B00A6E2F6 /* ZDLoadProjectController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF01A531969661B00A6E2F6 /* ZDLoadProjectController.m */; };
 		CFF01A5A1969669500A6E2F6 /* ZDSongCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF01A591969669500A6E2F6 /* ZDSongCollectionViewCell.m */; };
 		CFF4B546196AFB8000FF78F4 /* ZDCoreDataTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF4B545196AFB8000FF78F4 /* ZDCoreDataTableVC.m */; };
+		CFF6DBD419DB6DB5003EA04F /* NSMutableArray+SWUtilityButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF6DBC919DB6DB5003EA04F /* NSMutableArray+SWUtilityButtons.m */; };
+		CFF6DBD519DB6DB5003EA04F /* SWCellScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF6DBCB19DB6DB5003EA04F /* SWCellScrollView.m */; };
+		CFF6DBD619DB6DB5003EA04F /* SWLongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF6DBCD19DB6DB5003EA04F /* SWLongPressGestureRecognizer.m */; };
+		CFF6DBD719DB6DB5003EA04F /* SWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF6DBCF19DB6DB5003EA04F /* SWTableViewCell.m */; };
+		CFF6DBD819DB6DB5003EA04F /* SWUtilityButtonTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF6DBD119DB6DB5003EA04F /* SWUtilityButtonTapGestureRecognizer.m */; };
+		CFF6DBD919DB6DB5003EA04F /* SWUtilityButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = CFF6DBD319DB6DB5003EA04F /* SWUtilityButtonView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +105,8 @@
 		CF20EF55194DEA02008E47A4 /* songsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "songsTests-Info.plist"; sourceTree = "<group>"; };
 		CF20EF57194DEA02008E47A4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CF20EF59194DEA02008E47A4 /* songsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = songsTests.m; sourceTree = "<group>"; };
+		CF32060619E2F8B90088B9E9 /* ZDLoadTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDLoadTableViewCell.h; sourceTree = "<group>"; };
+		CF32060719E2F8B90088B9E9 /* ZDLoadTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDLoadTableViewCell.m; sourceTree = "<group>"; };
 		CF3398851980116E007A701C /* ZDPDFEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDPDFEngine.h; sourceTree = "<group>"; };
 		CF3398861980116E007A701C /* ZDPDFEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDPDFEngine.m; sourceTree = "<group>"; };
 		CF339888198011B4007A701C /* ZDSongsPDFManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDSongsPDFManager.h; sourceTree = "<group>"; };
@@ -111,6 +121,8 @@
 		CF3F7933194DF1DC00D9615A /* Storyboard_ipad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard_ipad.storyboard; sourceTree = "<group>"; };
 		CF4E711F197E785F00A23592 /* UINavigationItem+MultipleButtonsAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationItem+MultipleButtonsAddition.h"; sourceTree = "<group>"; };
 		CF4E7120197E785F00A23592 /* UINavigationItem+MultipleButtonsAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationItem+MultipleButtonsAddition.m"; sourceTree = "<group>"; };
+		CF66B75819E43D80004C0BFB /* ZDMultipleSelectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDMultipleSelectionController.h; sourceTree = "<group>"; };
+		CF66B75919E43D80004C0BFB /* ZDMultipleSelectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDMultipleSelectionController.m; sourceTree = "<group>"; };
 		CF7F5CFE19B4D37400070FDE /* ZDBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDBar.h; sourceTree = "<group>"; };
 		CF7F5CFF19B4D37400070FDE /* ZDBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDBar.m; sourceTree = "<group>"; };
 		CF7F5D0119B4D37500070FDE /* ZDProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDProject.h; sourceTree = "<group>"; };
@@ -150,6 +162,18 @@
 		CFF01A591969669500A6E2F6 /* ZDSongCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDSongCollectionViewCell.m; sourceTree = "<group>"; };
 		CFF4B544196AFB8000FF78F4 /* ZDCoreDataTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDCoreDataTableVC.h; sourceTree = "<group>"; };
 		CFF4B545196AFB8000FF78F4 /* ZDCoreDataTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDCoreDataTableVC.m; sourceTree = "<group>"; };
+		CFF6DBC819DB6DB5003EA04F /* NSMutableArray+SWUtilityButtons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+SWUtilityButtons.h"; sourceTree = "<group>"; };
+		CFF6DBC919DB6DB5003EA04F /* NSMutableArray+SWUtilityButtons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+SWUtilityButtons.m"; sourceTree = "<group>"; };
+		CFF6DBCA19DB6DB5003EA04F /* SWCellScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWCellScrollView.h; sourceTree = "<group>"; };
+		CFF6DBCB19DB6DB5003EA04F /* SWCellScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWCellScrollView.m; sourceTree = "<group>"; };
+		CFF6DBCC19DB6DB5003EA04F /* SWLongPressGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWLongPressGestureRecognizer.h; sourceTree = "<group>"; };
+		CFF6DBCD19DB6DB5003EA04F /* SWLongPressGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWLongPressGestureRecognizer.m; sourceTree = "<group>"; };
+		CFF6DBCE19DB6DB5003EA04F /* SWTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWTableViewCell.h; sourceTree = "<group>"; };
+		CFF6DBCF19DB6DB5003EA04F /* SWTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWTableViewCell.m; sourceTree = "<group>"; };
+		CFF6DBD019DB6DB5003EA04F /* SWUtilityButtonTapGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWUtilityButtonTapGestureRecognizer.h; sourceTree = "<group>"; };
+		CFF6DBD119DB6DB5003EA04F /* SWUtilityButtonTapGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonTapGestureRecognizer.m; sourceTree = "<group>"; };
+		CFF6DBD219DB6DB5003EA04F /* SWUtilityButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWUtilityButtonView.h; sourceTree = "<group>"; };
+		CFF6DBD319DB6DB5003EA04F /* SWUtilityButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -301,6 +325,8 @@
 				CF3F7933194DF1DC00D9615A /* Storyboard_ipad.storyboard */,
 				CFF01A581969669500A6E2F6 /* ZDSongCollectionViewCell.h */,
 				CFF01A591969669500A6E2F6 /* ZDSongCollectionViewCell.m */,
+				CF32060619E2F8B90088B9E9 /* ZDLoadTableViewCell.h */,
+				CF32060719E2F8B90088B9E9 /* ZDLoadTableViewCell.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -332,6 +358,8 @@
 				CF341BC519D5748700BD9CFA /* ZDProjectDetailController.m */,
 				CF341BC719D58A7900BD9CFA /* ZDProjectExportController.h */,
 				CF341BC819D58A7900BD9CFA /* ZDProjectExportController.m */,
+				CF66B75819E43D80004C0BFB /* ZDMultipleSelectionController.h */,
+				CF66B75919E43D80004C0BFB /* ZDMultipleSelectionController.m */,
 			);
 			name = controller;
 			path = controllers;
@@ -356,8 +384,8 @@
 		CF3F792D194DEDE900D9615A /* frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CF3F792E194DEDFC00D9615A /* SWRevealViewController.h */,
-				CF3F792F194DEDFC00D9615A /* SWRevealViewController.m */,
+				CFF6DBDA19DB6DCA003EA04F /* SWReveal */,
+				CFF6DBDB19DB6DDA003EA04F /* SWTableView */,
 				CFF4B544196AFB8000FF78F4 /* ZDCoreDataTableVC.h */,
 				CFF4B545196AFB8000FF78F4 /* ZDCoreDataTableVC.m */,
 				CF0756751976E22C007C420C /* ZDCoreCollectionVC.h */,
@@ -370,6 +398,34 @@
 				CF339889198011B4007A701C /* ZDSongsPDFManager.m */,
 			);
 			path = frameworks;
+			sourceTree = "<group>";
+		};
+		CFF6DBDA19DB6DCA003EA04F /* SWReveal */ = {
+			isa = PBXGroup;
+			children = (
+				CF3F792E194DEDFC00D9615A /* SWRevealViewController.h */,
+				CF3F792F194DEDFC00D9615A /* SWRevealViewController.m */,
+			);
+			name = SWReveal;
+			sourceTree = "<group>";
+		};
+		CFF6DBDB19DB6DDA003EA04F /* SWTableView */ = {
+			isa = PBXGroup;
+			children = (
+				CFF6DBC819DB6DB5003EA04F /* NSMutableArray+SWUtilityButtons.h */,
+				CFF6DBC919DB6DB5003EA04F /* NSMutableArray+SWUtilityButtons.m */,
+				CFF6DBCA19DB6DB5003EA04F /* SWCellScrollView.h */,
+				CFF6DBCB19DB6DB5003EA04F /* SWCellScrollView.m */,
+				CFF6DBCC19DB6DB5003EA04F /* SWLongPressGestureRecognizer.h */,
+				CFF6DBCD19DB6DB5003EA04F /* SWLongPressGestureRecognizer.m */,
+				CFF6DBCE19DB6DB5003EA04F /* SWTableViewCell.h */,
+				CFF6DBCF19DB6DB5003EA04F /* SWTableViewCell.m */,
+				CFF6DBD019DB6DB5003EA04F /* SWUtilityButtonTapGestureRecognizer.h */,
+				CFF6DBD119DB6DB5003EA04F /* SWUtilityButtonTapGestureRecognizer.m */,
+				CFF6DBD219DB6DB5003EA04F /* SWUtilityButtonView.h */,
+				CFF6DBD319DB6DB5003EA04F /* SWUtilityButtonView.m */,
+			);
+			name = SWTableView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -492,20 +548,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF66B75A19E43D80004C0BFB /* ZDMultipleSelectionController.m in Sources */,
 				CF8D099F1981169F002C73D3 /* ZDDetailsBarController.m in Sources */,
 				CF20EF41194DEA02008E47A4 /* ZDAppDelegate.m in Sources */,
 				CF341BC619D5748700BD9CFA /* ZDProjectDetailController.m in Sources */,
 				CFB44394196DD8FB00EDB6E2 /* ZDBar+Factory.m in Sources */,
 				CF341BC919D58A7900BD9CFA /* ZDProjectExportController.m in Sources */,
 				CF7F5D0919B4D3BB00070FDE /* ZDNote.m in Sources */,
+				CFF6DBD819DB6DB5003EA04F /* SWUtilityButtonTapGestureRecognizer.m in Sources */,
 				CF119D231970294D00E512F8 /* ZDCoreDataStack.m in Sources */,
 				CF4E7121197E785F00A23592 /* UINavigationItem+MultipleButtonsAddition.m in Sources */,
 				CF7F5D0019B4D37400070FDE /* ZDBar.m in Sources */,
 				CFF01A4B196965E900A6E2F6 /* ZDAuxViewController.m in Sources */,
+				CFF6DBD419DB6DB5003EA04F /* NSMutableArray+SWUtilityButtons.m in Sources */,
 				CFF01A511969660E00A6E2F6 /* ZDNewProjectController.m in Sources */,
+				CFF6DBD519DB6DB5003EA04F /* SWCellScrollView.m in Sources */,
 				CFF01A48196965C800A6E2F6 /* ZDMenuController.m in Sources */,
 				CF20EF44194DEA02008E47A4 /* songs.xcdatamodeld in Sources */,
 				CFF01A5A1969669500A6E2F6 /* ZDSongCollectionViewCell.m in Sources */,
+				CF32060819E2F8B90088B9E9 /* ZDLoadTableViewCell.m in Sources */,
 				CF7F5D0319B4D37500070FDE /* ZDProject.m in Sources */,
 				CF20EF3D194DEA02008E47A4 /* main.m in Sources */,
 				CF0756771976E22C007C420C /* ZDCoreCollectionVC.m in Sources */,
@@ -513,14 +574,17 @@
 				CF3398871980116E007A701C /* ZDPDFEngine.m in Sources */,
 				CF33988A198011B4007A701C /* ZDSongsPDFManager.m in Sources */,
 				CFB44391196DD8EC00EDB6E2 /* ZDSongBlock+Factory.m in Sources */,
+				CFF6DBD619DB6DB5003EA04F /* SWLongPressGestureRecognizer.m in Sources */,
 				CF119D2A19704F9D00E512F8 /* NSManagedObjectID+ZDString.m in Sources */,
 				CFF4B546196AFB8000FF78F4 /* ZDCoreDataTableVC.m in Sources */,
 				CFB4438E196DD8C600EDB6E2 /* ZDProject+Factory.m in Sources */,
 				CF7F5D0C19B4D8F000070FDE /* ZDChordType.m in Sources */,
 				CFF01A4E196965F900A6E2F6 /* ZDSettingsController.m in Sources */,
+				CFF6DBD719DB6DB5003EA04F /* SWTableViewCell.m in Sources */,
 				CFD6A0F1197D20360006A0AC /* UIColor+HexString.m in Sources */,
 				CFF01A45196965BA00A6E2F6 /* ZDMainController.m in Sources */,
 				CF7F5D0619B4D37500070FDE /* ZDSongBlock.m in Sources */,
+				CFF6DBD919DB6DB5003EA04F /* SWUtilityButtonView.m in Sources */,
 				CF18307E19CC89C40008A777 /* ZDEditBarController.m in Sources */,
 				CF119D2D19704FCF00E512F8 /* NSManagedObjectContext+ZDAdditions.m in Sources */,
 				CFF01A541969661B00A6E2F6 /* ZDLoadProjectController.m in Sources */,
@@ -584,7 +648,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 506;
+				CURRENT_PROJECT_VERSION = 672;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -624,7 +688,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
-				CURRENT_PROJECT_VERSION = 506;
+				CURRENT_PROJECT_VERSION = 672;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -649,8 +713,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "songs/songs-Prefix.pch";
 				INFOPLIST_FILE = "songs/songs-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -664,8 +729,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "songs/songs-Prefix.pch";
 				INFOPLIST_FILE = "songs/songs-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

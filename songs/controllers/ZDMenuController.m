@@ -218,5 +218,32 @@
 }
 
 
+- (void)viewController:(ZDLoadProjectController *)viewController didDeleteZDProjectWithID:(NSString *)projectID {
+
+    
+    if (!projectID) {
+        
+        return;
+    }
+
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *projectIDStored = [userDefaults objectForKey:@"projectID"];
+    
+    if (projectIDStored) {
+     
+        if ([projectID isEqualToString:projectIDStored]) {
+            
+            //delete from NSUserDefaults
+            [userDefaults setObject:nil  forKey:@"projectID"];
+        }
+    }
+}
+
+
 
 @end
+
+
+
+

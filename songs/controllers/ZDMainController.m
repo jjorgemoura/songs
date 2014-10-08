@@ -25,18 +25,19 @@
 @property (nonatomic, strong) NSString *theProjectID;
 @property (nonatomic, strong) NSString *theProjectName;
 @property (nonatomic, strong) ZDBar *selectedBar;
+@property (nonatomic, strong) NSMutableDictionary *selectedMultiBarsList;
 @property (nonatomic, strong) NSIndexPath *selectedIndexPath;
 
 @property (nonatomic, weak) IBOutlet UIBarButtonItem* revealButtonItem;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem* auxRevealButtonItem;
-
+@property (nonatomic, weak) IBOutlet UIBarButtonItem* detailsButtonItem;
+@property (nonatomic, weak) IBOutlet UIBarButtonItem* exportButtonItem;
 
 @property (nonatomic, strong) UIPopoverController *theAddPopoverController;
 
 
-
-@property (nonatomic, weak) IBOutlet UIBarButtonItem* detailsButtonItem;
-@property (nonatomic, weak) IBOutlet UIBarButtonItem* exportButtonItem;
+@property (nonatomic) int multiSelectionBarsFirstBar;
+@property (nonatomic) int multiSelectionBarsLastBar;
 
 @end
 
@@ -86,11 +87,24 @@
         
         if (moID) {
         
-            ZDProject *theProject = (ZDProject *)[[ZDCoreDataStack mainQueueContext] objectWithID:moID];
-            //[self setTheProject:theProject];
+            NSError *error = nil;
+            //ZDProject *theProject2 = (ZDProject *)[[ZDCoreDataStack mainQueueContext] objectWithID:moID];
+            ZDProject *theProject = (ZDProject *)[[ZDCoreDataStack mainQueueContext] existingObjectWithID:moID error:&error];
             
-            [self setTheProjectID:projectIDStored];
-            [self setTheProjectName:[theProject name]];
+            if (error) {
+                NSLog(@"ERROR Checking objectID: %@", [error description]);
+            }
+            
+            
+            if (theProject) {
+                
+                [self setTheProjectID:projectIDStored];
+                [self setTheProjectName:[theProject name]];
+            }
+            else {
+                
+                [[self revealViewController] performSelector:@selector(revealToggle:) withObject:self];
+            }
         }
         else {
         
@@ -159,7 +173,7 @@
     
     [panGesture setMaximumNumberOfTouches:1];
     [panGesture setMinimumNumberOfTouches:1];
-    //[[self collectionView] addGestureRecognizer:panGesture];
+    [[self collectionView] addGestureRecognizer:panGesture];
     
     
     
@@ -168,12 +182,15 @@
     [longPressGesture setMinimumPressDuration:1.5];
     [longPressGesture setNumberOfTapsRequired:0];
     [longPressGesture setNumberOfTouchesRequired:1];
-    [longPressGesture setAllowableMovement:2];
+    [longPressGesture setAllowableMovement:3];
     [[self collectionView] addGestureRecognizer:longPressGesture];
 }
 
 
 - (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
 
     if ([self theProjectName]) {
         
@@ -183,6 +200,8 @@
 
 
 - (void)viewWillDisappear:(BOOL)animated {
+    
+    [super viewWillDisappear:animated];
     
     
     //Save to NSUserDefaults
@@ -380,15 +399,26 @@
     if(projectID) {
     
         NSManagedObjectID *moID = [ZDCoreDataStack managedObjectIDFromString:projectID];
-        ZDProject *theProject = (ZDProject *)[[ZDCoreDataStack mainQueueContext] objectWithID:moID];
-        //[self setTheProject:theProject];
+        //ZDProject *theProject2 = (ZDProject *)[[ZDCoreDataStack mainQueueContext] objectWithID:moID];
+
+        NSError *error = nil;
+        ZDProject *theProject = (ZDProject *)[[ZDCoreDataStack mainQueueContext] existingObjectWithID:moID error:&error];
         
-        //[[self collectionView] reloadData];
+        if (error) {
+            NSLog(@"ERROR Checking objectID: %@", [error description]);
+        }
         
         
-        [self setTheProjectID:projectID];
-        [self setTheProjectName:[theProject name]];
-        [self performFetch];
+        if (theProject) {
+            
+            [self setTheProjectID:projectID];
+            [self setTheProjectName:[theProject name]];
+            [self performFetch];
+        }
+        else {
+            
+            [[self revealViewController] performSelector:@selector(revealToggle:) withObject:self];
+        }
     }
 }
 
@@ -512,7 +542,7 @@
             
             //THIS IS iOS 8 CODE
             nextVC.modalPresentationStyle = UIModalPresentationPopover;
-            [nextVC setPreferredContentSize:CGSizeMake(325.0, 575.0)];
+            [nextVC setPreferredContentSize:CGSizeMake(325.0, 600.0)];
             
             UIPopoverPresentationController *popoverPresentation = nextVC.popoverPresentationController;
             [popoverPresentation setSourceView:[self collectionView]];
@@ -526,14 +556,14 @@
             //existing code...
             
             //fix or turn around to fix a problem with the popover content size
-            [nextVC setPreferredContentSize:CGSizeMake(325.0, 575.0)];
+            [nextVC setPreferredContentSize:CGSizeMake(325.0, 600.0)];
             
             
             
             //instanciate and set Property
             [self setTheAddPopoverController:[[UIPopoverController alloc] initWithContentViewController:nextVC]];
             
-            [[self theAddPopoverController] setPopoverContentSize:CGSizeMake(325.0, 575.0) animated:YES];
+            [[self theAddPopoverController] setPopoverContentSize:CGSizeMake(325.0, 600.0) animated:YES];
             [[self theAddPopoverController] presentPopoverFromRect:[(UICollectionViewCell *)sender frame] inView:[self collectionView] permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
         }
     }
@@ -563,7 +593,7 @@
         [nextVC setYear:[[theProject year] stringValue]];
         [nextVC setBpm:[[theProject bpm] stringValue]];
         [nextVC setSongKey:[theProject key]];
-        [nextVC setNumberBars:[NSString stringWithFormat:@"%u", [[theProject bars] count]]];
+        [nextVC setNumberBars:[NSString stringWithFormat:@"%lu", (unsigned long)[[theProject bars] count]]];
         [nextVC setTimeSignature:nil];
         
         
@@ -594,6 +624,57 @@
             //[[self theAddPopoverController] presentPopoverFromRect:[(UICollectionViewCell *)sender frame] inView:[self collectionView] permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
         }
     }
+    
+
+    if([[segue identifier] isEqualToString:@"edit_multiple_bars"]) {
+        
+//        ZDProject *theProject = nil;
+//        
+//        if ([self selectedBar]) {
+//            
+//            theProject = [[self selectedBar] theProject];
+//        }
+//        else {
+//            
+//            ZDBar *tempBar = [[[self fetchedResultsController] fetchedObjects] objectAtIndex:0];
+//            theProject = [tempBar theProject];
+//        }
+        
+        
+        ZDMultipleSelectionController *nextVC = [segue destinationViewController];
+        [nextVC setTheBarsList:[[self selectedMultiBarsList] allValues]];
+        [nextVC setDelegate:self];
+        
+        
+        
+        //to work as a popover
+        if ([nextVC respondsToSelector:@selector(popoverPresentationController)]) {
+            
+            //THIS IS iOS 8 CODE
+            nextVC.modalPresentationStyle = UIModalPresentationPopover;
+            [nextVC setPreferredContentSize:CGSizeMake(325.0, 325.0)];
+            
+            UIPopoverPresentationController *popoverPresentation = nextVC.popoverPresentationController;
+            [popoverPresentation setSourceView:[self collectionView]];
+            [popoverPresentation setSourceRect:[(UICollectionViewCell *)sender frame]];
+            [popoverPresentation setPermittedArrowDirections:(UIPopoverArrowDirectionLeft | UIPopoverArrowDirectionRight)];
+            
+            [self presentViewController:nextVC animated:YES completion:nil];
+            
+        } else {
+            //THIS IS IOS 7- CODE
+            //fix or turn around to fix a problem with the popover content size
+            [nextVC setPreferredContentSize:CGSizeMake(325.0, 325.0)];
+            
+            //instanciate and set Property
+            [self setTheAddPopoverController:[[UIPopoverController alloc] initWithContentViewController:nextVC]];
+            
+            [[self theAddPopoverController] setPopoverContentSize:CGSizeMake(325.0, 325.0) animated:YES];
+            //[[self theAddPopoverController] presentPopoverFromRect:[(UICollectionViewCell *)sender frame] inView:[self collectionView] permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        }
+    }
+    
+    
     
     if([[segue identifier] isEqualToString:@"projectexport_button"]) {
         
@@ -690,6 +771,123 @@
 - (void)handlePanGesture:(UIPanGestureRecognizer *)sender {
     
     NSLog(@"handlePanGesture");
+    BOOL ended = NO;
+    
+    
+    
+    CGPoint p = [sender locationInView:[self collectionView]];
+    NSIndexPath *indexPath = [[self collectionView] indexPathForItemAtPoint:p];
+    
+    if (indexPath == nil){
+        
+        //NSLog(@"Couldn't find index path");
+    }
+    else {
+        
+        //This is to save the selected bar.
+        ZDBar *theBar = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+        
+        
+        
+        if ([sender state] == UIGestureRecognizerStateBegan) {
+            NSLog(@"handlePanBegin");
+            [self setSelectedMultiBarsList:[[NSMutableDictionary alloc] init]];
+            [self setMultiSelectionBarsFirstBar:[[theBar order] intValue]];
+            [self setMultiSelectionBarsLastBar:0];
+        }
+        
+        if ([sender state] == UIGestureRecognizerStateChanged) {
+            NSLog(@"handlePan Changed");
+        }
+        
+        if ([sender state] == UIGestureRecognizerStateEnded) {
+            NSLog(@"handlePan Ended");
+            ended = YES;
+            [self setMultiSelectionBarsLastBar:[[theBar order] intValue]];
+            
+            
+            if ([self multiSelectionBarsLastBar] < [self multiSelectionBarsFirstBar]) {
+                
+                int tempInt = [self multiSelectionBarsFirstBar];
+                [self setMultiSelectionBarsFirstBar:[self multiSelectionBarsLastBar]];
+                [self setMultiSelectionBarsLastBar:tempInt];
+            }
+        }
+        
+        
+        
+        //check if already exists in Dic
+//        if ([[self selectedMultiBarsList] objectForKey: [theBar order] ] == nil) {
+//            
+//            [[self selectedMultiBarsList] setObject:theBar forKey:[theBar order]];
+//            [self setSelectedIndexPath:indexPath];
+//            [self setSelectedBar:theBar];
+//        }
+        //legacy
+        [self setSelectedIndexPath:indexPath];
+        [self setSelectedBar:theBar];
+        
+        
+        
+        //DECISION
+        //if ended, go forward
+        if (ended) {
+            
+            //If only select 1 (the first and last bar are the same), do nothing
+            if ([self multiSelectionBarsFirstBar]  == [self multiSelectionBarsLastBar]) {
+                return;
+            }
+            
+            
+            
+            //add only now to the selected Dic.
+            ZDProject *theProject = [theBar theProject];
+            
+            for (ZDBar *x in [theProject bars]) {
+                
+                if ([[x order] intValue] >= [self multiSelectionBarsFirstBar] && [[x order] intValue] <= [self multiSelectionBarsLastBar]) {
+                    
+                    [[self selectedMultiBarsList] setObject:x forKey:[x order]];
+                }
+            }
+            
+            
+            
+            //check if exists jumps in the lines. For ex, the selected bars qt is diferent of the number between theFrom order to the toOrder
+//            NSArray *AllTheKeys = [[self selectedMultiBarsList] allKeys];
+//            
+//            int minBarOrder = [(NSNumber *)[AllTheKeys objectAtIndex:0] intValue];
+//            int maxBarOrder = [(NSNumber *)[AllTheKeys objectAtIndex:0] intValue];
+//            
+//            for (NSNumber *x in AllTheKeys) {
+//                
+//                ZDBar *xBar = [[self selectedMultiBarsList] objectForKey:x];
+//                
+//                if ([[xBar order] intValue] <= minBarOrder) {
+//                    minBarOrder = [[xBar order] intValue];
+//                }
+//            
+//                if ([[xBar order] intValue] >= maxBarOrder) {
+//                    maxBarOrder = [[xBar order] intValue];
+//                }
+//            }
+//            
+//            
+//            if (maxBarOrder - minBarOrder + 1 != (int)[[self selectedMultiBarsList] count]) {
+//                
+//                NSLog(@"The multibar Selection contains jumps.");
+//                return;
+//            }
+            
+            
+            
+            // get the cell at indexPath (the one you long pressed)
+            UICollectionViewCell *cell = [[self collectionView] cellForItemAtIndexPath:indexPath];
+            
+            // do stuff with the cell
+            [self performSegueWithIdentifier:@"edit_multiple_bars" sender:cell];
+        }
+    }
 }
 
 - (void)handleLongPressGesture:(UILongPressGestureRecognizer *)sender {
@@ -900,6 +1098,32 @@
         [self setTheAddPopoverController:nil];
     }
 }
+
+
+
+//---------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------
+#pragma mark - ZDMultipleSelectionsController Delegate
+//---------------------------------------------------------------------------------------
+- (void)viewControllerDidDeleteZDBars:(ZDMultipleSelectionController *)viewController {
+
+
+    if ([self respondsToSelector:@selector(popoverPresentationController)]) {
+        
+        //iOS 8
+        [viewController dismissViewControllerAnimated:YES completion:nil];
+    }
+    else {
+        
+        //iOS 7
+        [[self theAddPopoverController] dismissPopoverAnimated:YES];
+        [self setTheAddPopoverController:nil];
+    }
+    
+    [self performFetch];
+}
+
+
 
 
 @end

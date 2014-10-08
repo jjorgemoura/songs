@@ -91,6 +91,8 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
+    
     
     //The gesture about touching outside
     UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapBehind:)];
@@ -170,6 +172,8 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    
+    [super viewWillDisappear:animated];
     
     //REMOVE ALL GESTURES
     NSArray * gesturesList = [[[self view] window] gestureRecognizers];

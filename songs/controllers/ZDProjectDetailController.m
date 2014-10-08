@@ -54,6 +54,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     
+    [super viewWillAppear:animated];
+    
     [[self labelNumber1] setText:nil];
     [[self labelNumber2] setText:nil];
     [[self labelNumber3] setText:nil];
@@ -68,6 +70,9 @@
 
 - (void)viewDidAppear:(BOOL)animated {
 
+    [super viewDidAppear:animated];
+    
+    
     //int lineFilled = 0;
     BOOL line2Fill = NO;
     BOOL line3Fill = NO;
@@ -264,7 +269,7 @@
     
     //2 - Decide the URL
     NSString *theURL = [NSString stringWithFormat:GOOGLE_API_URL, GOOGLE_API_KEY, GOOGLE_CX_KEY, theSearchString];
-    NSLog(@"THE URL TO GOOGLE: %@", theURL);
+    //NSLog(@"THE URL TO GOOGLE: %@", theURL);
     
     
     
@@ -276,8 +281,8 @@
     //4 - THE URLSESSION
     NSURLSession *session = [NSURLSession sharedSession];
     
-    BOOL yyy = [NSThread isMainThread];
-    NSLog(@"%@", yyy ? @"THIS IS THE MAIN THREAD" : @"THIS IS NOT THE MAIN THREAD");
+    //BOOL yyy = [NSThread isMainThread];
+    //NSLog(@"%@", yyy ? @"THIS IS THE MAIN THREAD" : @"THIS IS NOT THE MAIN THREAD");
     
     
     //5 - The Download Task
@@ -290,11 +295,10 @@
                                           }
                                           else {
                                               
-                                              BOOL yyy = [NSThread isMainThread];
-                                              NSLog(@"%@", yyy ? @"THIS IS THE MAIN THREAD" : @"THIS IS NOT THE MAIN THREAD");
-                                              NSLog(@"DATA: %@", [data description]);
-                                              NSLog(@"RESPONSE: %@", [response description]);
-                                              
+//                                              BOOL yyy = [NSThread isMainThread];
+//                                              NSLog(@"%@", yyy ? @"THIS IS THE MAIN THREAD" : @"THIS IS NOT THE MAIN THREAD");
+//                                              NSLog(@"DATA: %@", [data description]);
+//                                              NSLog(@"RESPONSE: %@", [response description]);
                                               
                                               
                                               
@@ -314,6 +318,7 @@
                                                   
                                                   NSArray *items = [responseDictionary objectForKey:@"items"];
                                                   
+                                                  //NSLog(@"COUNT = %lu", (unsigned long)[items count]);
                                                   if([items count] == 0) {
                                                       
                                                       NSLog(@"This song has no images");
@@ -345,9 +350,9 @@
 
 - (void)downloadImageForBand:(NSString *)theURL {
 
-    NSLog(@"XXXXXXXXXX: downloadImageForBand");
-    BOOL yyy = [NSThread isMainThread];
-    NSLog(@"%@", yyy ? @"THIS IS THE MAIN THREAD" : @"THIS IS NOT THE MAIN THREAD");
+//    NSLog(@"XXXXXXXXXX: downloadImageForBand");
+//    BOOL yyy = [NSThread isMainThread];
+//    NSLog(@"%@", yyy ? @"THIS IS THE MAIN THREAD" : @"THIS IS NOT THE MAIN THREAD");
     
     
     //1 - Decide the URL
@@ -370,16 +375,16 @@
                                                   else {
                                                       
                                                       
-                                                      BOOL yyy = [NSThread isMainThread];
-                                                      NSLog(@"%@", yyy ? @"THIS IS THE MAIN THREAD" : @"THIS IS NOT THE MAIN THREAD");
+//                                                      BOOL yyy = [NSThread isMainThread];
+//                                                      NSLog(@"%@", yyy ? @"THIS IS THE MAIN THREAD" : @"THIS IS NOT THE MAIN THREAD");
                                                       
                                                       //LOCAL DIRECTORY
-                                                      NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+                                                      //NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
                                                       
                                                       //NSLog(@"DOCUMENTS PATH: %@", documentsPath);
-                                                      NSLog(@"TEMP LOCATION PATH: %@", [location path]);
-                                                      NSLog(@"FILENAME: %@", [response suggestedFilename]);
-                                                      NSLog(@"RESPONSE: %@", [response description]);
+                                                      //NSLog(@"TEMP LOCATION PATH: %@", [location path]);
+                                                      //NSLog(@"FILENAME: %@", [response suggestedFilename]);
+                                                      //NSLog(@"RESPONSE: %@", [response description]);
                                                       
                                                       //SAVE LOCALY
                                                       //NSURL *documentsDirectoryURL = [NSURL fileURLWithPath:documentsPath];
