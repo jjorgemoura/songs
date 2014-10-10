@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13E28" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6244" systemVersion="13F34" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="ZDBar" representedClassName="ZDBar" syncable="YES">
         <attribute name="chordNote" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="chordType" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -25,13 +25,15 @@
     <entity name="ZDSongBlock" representedClassName="ZDSongBlock" syncable="YES">
         <attribute name="borderHexColor" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="color" attributeType="String" syncable="YES"/>
+        <attribute name="detailDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="hexColor" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="info" attributeType="String" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="order" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
     </entity>
     <elements>
         <element name="ZDBar" positionX="151" positionY="108" width="128" height="165"/>
         <element name="ZDProject" positionX="-63" positionY="-18" width="128" height="193"/>
-        <element name="ZDSongBlock" positionX="358" positionY="9" width="128" height="120"/>
+        <element name="ZDSongBlock" positionX="358" positionY="9" width="128" height="148"/>
     </elements>
 </model>

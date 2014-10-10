@@ -118,6 +118,8 @@
         [newSongBlock1 setName:@"intro"];
         [newSongBlock1 setHexColor:@"#C7C7CC"];
         [newSongBlock1 setBorderHexColor:@"#898c90"];
+        [newSongBlock1 setOrder:[NSNumber numberWithInt:1]];
+        [newSongBlock1 setDetailDescription:@""];
         
         ZDSongBlock *newSongBlock2 = [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:moc];
         [newSongBlock2 setColor:@"green"];
@@ -125,6 +127,8 @@
         [newSongBlock2 setName:@"verse"];
         [newSongBlock2 setHexColor:@"#0BD318"];
         [newSongBlock2 setBorderHexColor:@"#898c90"];
+        [newSongBlock2 setOrder:[NSNumber numberWithInt:2]];
+        [newSongBlock2 setDetailDescription:@""];
         
         ZDSongBlock *newSongBlock3 = [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:moc];
         [newSongBlock3 setColor:@"blue"];
@@ -132,6 +136,8 @@
         [newSongBlock3 setName:@"chorus"];
         [newSongBlock3 setHexColor:@"#5BCAFF"];
         [newSongBlock3 setBorderHexColor:@"#898c90"];
+        [newSongBlock3 setOrder:[NSNumber numberWithInt:3]];
+        [newSongBlock3 setDetailDescription:@""];
         
         ZDSongBlock *newSongBlock4 = [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:moc];
         [newSongBlock4 setColor:@"yellow"];
@@ -139,6 +145,8 @@
         [newSongBlock4 setName:@"bridge"];
         [newSongBlock4 setHexColor:@"#FFCC00"];
         [newSongBlock4 setBorderHexColor:@"#898c90"];
+        [newSongBlock4 setOrder:[NSNumber numberWithInt:4]];
+        [newSongBlock4 setDetailDescription:@""];
         
         ZDSongBlock *newSongBlock5 = [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:moc];
         [newSongBlock5 setColor:@"sea"];
@@ -146,6 +154,8 @@
         [newSongBlock5 setName:@"hook"];
         [newSongBlock5 setHexColor:@"#55EFCB"];
         [newSongBlock5 setBorderHexColor:@"#898c90"];
+        [newSongBlock5 setOrder:[NSNumber numberWithInt:5]];
+        [newSongBlock5 setDetailDescription:@""];
         
         ZDSongBlock *newSongBlock6 = [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:moc];
         [newSongBlock6 setColor:@"red"];
@@ -153,6 +163,8 @@
         [newSongBlock6 setName:@"solo"];
         [newSongBlock6 setHexColor:@"#FF5E3A"];
         [newSongBlock6 setBorderHexColor:@"#898c90"];
+        [newSongBlock6 setOrder:[NSNumber numberWithInt:6]];
+        [newSongBlock6 setDetailDescription:@""];
         
         ZDSongBlock *newSongBlock7 = [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:moc];
         [newSongBlock7 setColor:@"cyan"];
@@ -160,6 +172,8 @@
         [newSongBlock7 setName:@"jam"];
         [newSongBlock7 setHexColor:@"#55EFCB"];
         [newSongBlock7 setBorderHexColor:@"#898c90"];
+        [newSongBlock7 setOrder:[NSNumber numberWithInt:7]];
+        [newSongBlock7 setDetailDescription:@""];
         
         ZDSongBlock *newSongBlock8 = [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:moc];
         [newSongBlock8 setColor:@"orange"];
@@ -167,6 +181,8 @@
         [newSongBlock8 setName:@"verse_b"];
         [newSongBlock8 setHexColor:@"#FF9500"];
         [newSongBlock8 setBorderHexColor:@"#898c90"];
+        [newSongBlock8 setOrder:[NSNumber numberWithInt:8]];
+        [newSongBlock8 setDetailDescription:@""];
         
         ZDSongBlock *newSongBlock9 = [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:moc];
         [newSongBlock9 setColor:@"pink"];
@@ -174,6 +190,8 @@
         [newSongBlock9 setName:@"chorus_b"];
         [newSongBlock9 setHexColor:@"#FF4981"];
         [newSongBlock9 setBorderHexColor:@"#898c90"];
+        [newSongBlock9 setOrder:[NSNumber numberWithInt:9]];
+        [newSongBlock9 setDetailDescription:@""];
         
         ZDSongBlock *newSongBlock10 = [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:moc];
         [newSongBlock10 setColor:@"smoke"];
@@ -181,6 +199,8 @@
         [newSongBlock10 setName:@"break"];
         [newSongBlock10 setHexColor:@"#E0F8D8"];
         [newSongBlock10 setBorderHexColor:@"#898c90"];
+        [newSongBlock10 setOrder:[NSNumber numberWithInt:10]];
+        [newSongBlock10 setDetailDescription:@""];
         
         ZDSongBlock *newSongBlock11 = [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:moc];
         [newSongBlock11 setColor:@"purple"];
@@ -188,6 +208,8 @@
         [newSongBlock11 setName:@"outro"];
         [newSongBlock11 setHexColor:@"#EF4DB6"];
         [newSongBlock11 setBorderHexColor:@"#898c90"];
+        [newSongBlock11 setOrder:[NSNumber numberWithInt:11]];
+        [newSongBlock11 setDetailDescription:@""];
         
         ZDSongBlock *newSongBlock12 = [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:moc];
         [newSongBlock12 setColor:@"cream"];
@@ -195,6 +217,8 @@
         [newSongBlock12 setName:@"coda"];
         [newSongBlock12 setHexColor:@"#E4DDCA"];
         [newSongBlock12 setBorderHexColor:@"#898c90"];
+        [newSongBlock12 setOrder:[NSNumber numberWithInt:12]];
+        [newSongBlock12 setDetailDescription:@""];
         
         NSError *error = nil;
         [moc save:&error];
@@ -248,8 +272,14 @@
 
 + (NSFetchRequest *)allEntities {
 
-    NSFetchRequest* request = [NSFetchRequest fetchRequestWithEntityName:[self entityName]];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:[self entityName]];
     //request setPredicate:[NSPredicate predicateWithFormat:@"name = "]
+
+    NSSortDescriptor *sortByOrder = [[NSSortDescriptor alloc] initWithKey:@"order" ascending:YES];
+    NSArray *orderDescriptors = @[sortByOrder];
+    [request setSortDescriptors:orderDescriptors];
+    
+    
     
     return request;
 }

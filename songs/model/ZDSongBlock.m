@@ -16,5 +16,7 @@
 @dynamic hexColor;
 @dynamic info;
 @dynamic name;
+@dynamic order;
+@dynamic detailDescription;
 
 @end

@@ -18,7 +18,7 @@
 @class ZDProject;
 
 
-@interface ZDMainController : ZDCoreCollectionVC <UICollectionViewDataSource, UICollectionViewDelegate, ZDDetailsBarControllerDelegate, ZDAddInsertBarsControllerDelegate, ZDEditBarControllerDelegate, ZDProjectExportControllerDelegate, ZDMultipleSelectionControllerDelegate>
+@interface ZDMainController : ZDCoreCollectionVC <UICollectionViewDataSource, UICollectionViewDelegate, ZDDetailsBarControllerDelegate, ZDAddInsertBarsControllerDelegate, ZDEditBarControllerDelegate, ZDProjectExportControllerDelegate, ZDMultipleSelectionControllerDelegate, UIPopoverPresentationControllerDelegate>
 
 - (void)changeProjectToProjectWithID:(NSString *)projectID;
 

@@ -17,5 +17,7 @@
 @property (nonatomic, retain) NSString * hexColor;
 @property (nonatomic, retain) NSString * info;
 @property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSString * detailDescription;
+@property (nonatomic, retain) NSNumber * order;
 
 @end

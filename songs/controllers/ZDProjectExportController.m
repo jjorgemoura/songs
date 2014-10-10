@@ -18,6 +18,7 @@
 
 - (NSString *)bodyTextFromProject;
 - (NSString *)returnFormattedStringWithPrefixFromString:(NSString *)theString toSize:(int)size;
+- (NSDictionary *)barsInDictionary:(NSArray *)barsList;
 @end
 
 
@@ -134,6 +135,10 @@
     NSString *currentBlock = @"none";
     
     
+    //Order the Bars
+    NSDictionary *barsDic = [self barsInDictionary:[[[self theSelectedZDProject] bars] array]];
+    
+    
     
     // add HTML before the link here with line breaks (\n)
     
@@ -160,10 +165,11 @@
     }
     
     if ([[self theSelectedZDProject] year]) {
-
-        [body appendString:@" <br>\n"];
-        [body appendString:@" Year: \n"];
-        [body appendString:[[[self theSelectedZDProject] year] stringValue]];
+        if (![[[self theSelectedZDProject] year] intValue] == 0) {
+            [body appendString:@" <br>\n"];
+            [body appendString:@" Year: \n"];
+            [body appendString:[[[self theSelectedZDProject] year] stringValue]];
+        }
     }
     
     [body appendString:@" </h5>\n"];
@@ -175,9 +181,15 @@
     [body appendString:@" <h5>Song Structure</h5>\n"];
     
     
+    //old
+    //for (ZDBar *theBar in [[self theSelectedZDProject] bars]) {
     
-    for (ZDBar *theBar in [[self theSelectedZDProject] bars]) {
+    
+    for (int i = 1; i <= [barsDic count]; i++) {
+    
+        ZDBar *theBar = [barsDic objectForKey:[NSNumber numberWithInt:i]];
         
+      
         if ([[[theBar theSongBlock] name] isEqualToString:currentBlock]) {
             
             [body appendString:@" "];
@@ -227,6 +239,23 @@
     
     return x;
 }
+
+
+
+- (NSDictionary *)barsInDictionary:(NSArray *)barsList {
+
+    NSMutableDictionary *mDic = [[NSMutableDictionary alloc] initWithCapacity:[barsList count]];
+
+    
+    for (ZDBar *x in barsList) {
+        
+        [mDic setObject:x forKey:[x order]];
+    }
+
+    return mDic;
+}
+
+
 
 
 @end

@@ -91,8 +91,13 @@
     
     //LINE 1
     if ([self year]) {
-        
-        line1Text = [NSString stringWithFormat:@"%@ (%@)", [self songProjectName], [self year]];
+        if (![[self year] isEqualToString:@"0"]) {
+
+            line1Text = [NSString stringWithFormat:@"%@ (%@)", [self songProjectName], [self year]];
+        }
+        else {
+            line1Text = [NSString stringWithFormat:@"%@", [self songProjectName]];
+        }
     }
     else {
     
@@ -135,8 +140,13 @@
         
         line4Fill = YES;
         if ([self bpm]) {
+            if (![[self bpm] isEqualToString:@"0"]) {
             
-            line4Text = [NSString stringWithFormat:@"Key: %@ / Bpm: %@", [self songKey], [self bpm]];
+                line4Text = [NSString stringWithFormat:@"Key: %@ / Bpm: %@", [self songKey], [self bpm]];
+            }
+            else {
+                line4Text = [NSString stringWithFormat:@"Key: %@", [self songKey]];
+            }
         }
         else {
             line4Text = [NSString stringWithFormat:@"Key: %@", [self songKey]];
@@ -145,9 +155,10 @@
     else {
         
         if ([self bpm]) {
-            
-            line4Fill = YES;
-            line4Text = [NSString stringWithFormat:@"Bpm by: %@", [self bpm]];
+            if (![[self bpm] isEqualToString:@"0"]) {
+                line4Fill = YES;
+                line4Text = [NSString stringWithFormat:@"Bpm by: %@", [self bpm]];
+            }
         }
     }
     

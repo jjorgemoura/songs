@@ -164,8 +164,8 @@
     [tapGesture setDelaysTouchesBegan:YES];
     
     [tapGesture setNumberOfTapsRequired:2];
-    //[tapGesture setNumberOfTouchesRequired:1];
-    //[[self collectionView] addGestureRecognizer:tapGesture];
+    [tapGesture setNumberOfTouchesRequired:1];
+    [[self collectionView] addGestureRecognizer:tapGesture];
 
     
     
@@ -296,15 +296,16 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
 
+    //NSLog(@"Step 1");
     UICollectionViewCell *theCell = [collectionView cellForItemAtIndexPath:indexPath];
     
-    //[[theCell contentView] setBackgroundColor:[UIColor whiteColor]];
     [[theCell backgroundView] setBackgroundColor:[UIColor whiteColor]];
 }
 
 
 - (void)collectionView:(UICollectionView *)collectionView didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath {
-
+ 
+    //NSLog(@"Step 2");
     //the Cell
     UICollectionViewCell *theCell = [collectionView cellForItemAtIndexPath:indexPath];
     
@@ -323,11 +324,18 @@
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 
+    //NSLog(@"Step 3");
+    
+    if ([[collectionView cellForItemAtIndexPath:indexPath] isSelected]) {
+        return NO;
+    }
+    
     return YES;
 }
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
 
+    //NSLog(@"Step 4");
     return YES;
 }
 
@@ -338,6 +346,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 
+    //NSLog(@"Step 5");
     //the Cell
     UICollectionViewCell *theCell = [collectionView cellForItemAtIndexPath:indexPath];
     [[theCell layer] setBorderColor:[[UIColor colorWithHexString:@"#f7f7f7"] CGColor]];
@@ -352,17 +361,23 @@
     
     //the first version was a modal, now is a popover
     //[self performSegueWithIdentifier:@"details_bar" sender:self];
+    
+    if (!theCell) {
+        //do nothing. Double clic bug
+        return;
+    }
+    
     [self performSegueWithIdentifier:@"details_bar" sender:theCell];
     
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
 
+    //NSLog(@"Step 6");
     //the Cell
     UICollectionViewCell *theCell = [collectionView cellForItemAtIndexPath:indexPath];
     
     //the Bar corresponding of this cell
-    //ZDBar *theBar = [[[self theProject] bars] objectAtIndex:[indexPath row]];
     ZDBar *theBar = [[self fetchedResultsController] objectAtIndexPath:indexPath];
     
     UIColor *theBlockBorderColor = [UIColor colorWithHexString:[[theBar theSongBlock] borderHexColor]];
@@ -374,17 +389,14 @@
 
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath {
-
     return NO;
 }
 
 - (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-
     return NO;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-    
 }
 
 
@@ -428,8 +440,6 @@
 #pragma mark - Target Action Buttons
 //---------------------------------------------------------------------------------------
 - (IBAction)detailsButtonPressed:(id)sender {
-
-    //NSLog(@"DETAILS .........");
     
     [self performSegueWithIdentifier:@"projectdetail_button" sender:sender];
 }
@@ -476,6 +486,7 @@
             [popoverPresentation setSourceView:[self collectionView]];
             [popoverPresentation setSourceRect:[(UICollectionViewCell *)sender frame]];
             [popoverPresentation setPermittedArrowDirections:(UIPopoverArrowDirectionLeft | UIPopoverArrowDirectionRight)];
+            [popoverPresentation setDelegate:self];
             
             [self presentViewController:nextVC animated:YES completion:nil];
             
@@ -729,43 +740,40 @@
     
     NSLog(@"handleTapGesture");
     
-    if ([sender state] == UIGestureRecognizerStateBegan){
-        NSLog(@"UIGestureRecognizerStateBegan.");
-        //Do Whatever You want on Began of Gesture
-    }
-    
-    if ([sender state] == UIGestureRecognizerStateEnded) {
-        NSLog(@"UIGestureRecognizerStateEnded");
-        //Do Whatever You want on End of Gesture
-    }
-    
-    if ([sender state] == UIGestureRecognizerStateCancelled){
-        NSLog(@"UIGestureRecognizerStateCancelled.");
-        //Do Whatever You want on Began of Gesture
-    }
-    
-    if ([sender state] == UIGestureRecognizerStateChanged) {
-        NSLog(@"UIGestureRecognizerStateChanged");
-        //Do Whatever You want on End of Gesture
-    }
-    
-    if ([sender state] == UIGestureRecognizerStateFailed){
-        NSLog(@"UIGestureRecognizerStateFailed.");
-        //Do Whatever You want on Began of Gesture
-    }
-    
-    if ([sender state] == UIGestureRecognizerStatePossible) {
-        NSLog(@"UIGestureRecognizerStatePossible");
-        //Do Whatever You want on End of Gesture
-    }
-    
-    if ([sender state] == UIGestureRecognizerStateRecognized){
-        NSLog(@"UIGestureRecognizerStateRecognized.");
-        //Do Whatever You want on Began of Gesture
-    }
-    
-    
-    
+//    if ([sender state] == UIGestureRecognizerStateBegan){
+//        NSLog(@"UIGestureRecognizerStateBegan.");
+//        //Do Whatever You want on Began of Gesture
+//    }
+//    
+//    if ([sender state] == UIGestureRecognizerStateEnded) {
+//        NSLog(@"UIGestureRecognizerStateEnded");
+//        //Do Whatever You want on End of Gesture
+//    }
+//    
+//    if ([sender state] == UIGestureRecognizerStateCancelled){
+//        NSLog(@"UIGestureRecognizerStateCancelled.");
+//        //Do Whatever You want on Began of Gesture
+//    }
+//    
+//    if ([sender state] == UIGestureRecognizerStateChanged) {
+//        NSLog(@"UIGestureRecognizerStateChanged");
+//        //Do Whatever You want on End of Gesture
+//    }
+//    
+//    if ([sender state] == UIGestureRecognizerStateFailed){
+//        NSLog(@"UIGestureRecognizerStateFailed.");
+//        //Do Whatever You want on Began of Gesture
+//    }
+//    
+//    if ([sender state] == UIGestureRecognizerStatePossible) {
+//        NSLog(@"UIGestureRecognizerStatePossible");
+//        //Do Whatever You want on End of Gesture
+//    }
+//    
+//    if ([sender state] == UIGestureRecognizerStateRecognized){
+//        NSLog(@"UIGestureRecognizerStateRecognized.");
+//        //Do Whatever You want on Began of Gesture
+//    }
 }
 
 - (void)handlePanGesture:(UIPanGestureRecognizer *)sender {
@@ -929,7 +937,22 @@
 }
 
 
+//---------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------
+#pragma mark - UIPopoverPresentationControllerDelegate
+//---------------------------------------------------------------------------------------
+- (BOOL)popoverPresentationControllerShouldDismissPopover:(UIPopoverPresentationController *)popoverPresentationController {
 
+    
+//    if ([self selectedIndexPath]) {
+//
+//        if ([[[self collectionView] cellForItemAtIndexPath:[self selectedIndexPath]] isSelected]) {
+//            [[[self collectionView] cellForItemAtIndexPath:[self selectedIndexPath]] setSelected:NO];
+//        }
+//    }
+    
+    return YES;
+}
 
 
 //---------------------------------------------------------------------------------------
