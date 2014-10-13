@@ -29,5 +29,6 @@
 
 @property (nonatomic, strong) ZDBar *theBar;
 @property (nonatomic, weak) id <ZDDetailsBarControllerDelegate> delegate;
+@property (nonatomic, weak) UIAlertController *theConfirmationAlertBox;
 
 @end

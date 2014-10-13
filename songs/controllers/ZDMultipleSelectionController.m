@@ -113,36 +113,40 @@
     
     UIAlertController *confirmationAlertBox = [UIAlertController alertControllerWithTitle:@"Delete Bars" message:@"Do you want to delete the selected bars?" preferredStyle:UIAlertControllerStyleActionSheet];
     
+    __weak ZDMultipleSelectionController *weakSelf = self;
     
     UIAlertAction* deleteAction = [UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDestructive
                                                          handler:^(UIAlertAction * action) {
                                                              
+                                                             __strong ZDMultipleSelectionController *strongSelf = weakSelf;
+                                                             
+                                                             
                                                              //DELEGATE
-                                                             if ([[self delegate] respondsToSelector:@selector(viewControllerWillDeleteZDBars:)]) {
+                                                             if ([[strongSelf delegate] respondsToSelector:@selector(viewControllerWillDeleteZDBars:)]) {
                                                                  
-                                                                 [[self delegate] viewControllerWillDeleteZDBars:self];
+                                                                 [[strongSelf delegate] viewControllerWillDeleteZDBars:strongSelf];
                                                              }
                                                              
                                                              
                                                              
                                                              //Orders
                                                              //Check properties
-                                                             int numberBarsToDelete = (int)[[self theBarsList] count];
+                                                             int numberBarsToDelete = (int)[[strongSelf theBarsList] count];
                                                              
                                                              
                                                              //INSERT INTO DB - First change only the order
-                                                             ZDProject *theProject = [(ZDBar *)[[self theBarsList] objectAtIndex:0] theProject];
+                                                             ZDProject *theProject = [(ZDBar *)[[strongSelf theBarsList] objectAtIndex:0] theProject];
                                                              
                                                              for (ZDBar *bIterator in [theProject bars]) {
                                                                  
                                                                  //Before, do nothing
-                                                                 if ([[bIterator order] intValue] <= [self maxOrderToDelete]) {
+                                                                 if ([[bIterator order] intValue] <= [strongSelf maxOrderToDelete]) {
                                                                      
                                                                      continue;
                                                                  }
                                                                  
                                                                  //after
-                                                                 if ([[bIterator order] intValue] > [self maxOrderToDelete]) {
+                                                                 if ([[bIterator order] intValue] > [strongSelf maxOrderToDelete]) {
                                                                      
                                                                      int newOrder = [[bIterator order] intValue] - numberBarsToDelete;
                                                                      [bIterator setOrder:[NSNumber numberWithInt:newOrder]];
@@ -157,7 +161,7 @@
                                                              //DELETE
                                                              NSManagedObjectContext *moc = [ZDCoreDataStack mainQueueContext];
                                                              
-                                                             for (ZDBar *x in [self theBarsList]) {
+                                                             for (ZDBar *x in [strongSelf theBarsList]) {
                                                                  
                                                                  [moc deleteObject:x];
                                                              }
@@ -177,20 +181,29 @@
                                                              
                                                              
                                                              //DELEGATE
-                                                             if ([[self delegate] respondsToSelector:@selector(viewControllerDidDeleteZDBars:)]) {
+                                                             if ([[strongSelf delegate] respondsToSelector:@selector(viewControllerDidDeleteZDBars:)]) {
                                                                  
-                                                                 [[self delegate] viewControllerDidDeleteZDBars:self];
+                                                                 [[strongSelf delegate] viewControllerDidDeleteZDBars:strongSelf];
                                                              }
+                                                             
+                                                             //Dismiss VC
+                                                             [confirmationAlertBox dismissViewControllerAnimated:YES completion:nil];
                                                          }];
+    
     
     UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel
                                                          handler:^(UIAlertAction * action) {
-                                                             
+
+                                                             //Dismiss VC
+                                                             [confirmationAlertBox dismissViewControllerAnimated:YES completion:nil];
                                                          }];
     
+    
+    //Add the Actions
     [confirmationAlertBox addAction:deleteAction];
     [confirmationAlertBox addAction:cancelAction];
     
+    //Present VC
     [self presentViewController:confirmationAlertBox animated:YES completion:nil];
 }
 

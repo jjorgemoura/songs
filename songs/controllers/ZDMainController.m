@@ -944,12 +944,33 @@
 - (BOOL)popoverPresentationControllerShouldDismissPopover:(UIPopoverPresentationController *)popoverPresentationController {
 
     
-//    if ([self selectedIndexPath]) {
+    if ([popoverPresentationController presentedViewController]) {
+        
+        if ([[popoverPresentationController presentedViewController] isKindOfClass:[ZDDetailsBarController class]]) {
+            
+            ZDDetailsBarController *x = (ZDDetailsBarController *)[popoverPresentationController presentedViewController];
+            
+            if ([x theConfirmationAlertBox]) {
+                
+                //The AlertBox is Active.
+                return NO;
+            }
+//            [x dismissViewControllerAnimated:YES completion:nil];
+//            NSLog(@"%@", [popoverPresentationController description]);
+        }
+    }
+    
+    
+//    if ([popoverPresentationController presentingViewController]) {
+//        
+//        if ([[popoverPresentationController presentingViewController] isKindOfClass:[ZDDetailsBarController class]]) {
 //
-//        if ([[[self collectionView] cellForItemAtIndexPath:[self selectedIndexPath]] isSelected]) {
-//            [[[self collectionView] cellForItemAtIndexPath:[self selectedIndexPath]] setSelected:NO];
+//            ZDDetailsBarController *x = (ZDDetailsBarController *)[popoverPresentationController presentingViewController];
+//            NSLog(@"Is here");
 //        }
 //    }
+    
+
     
     return YES;
 }
