@@ -21,7 +21,6 @@
 
 @interface ZDMainController ()
 
-//@property (nonatomic, strong) ZDProject *theProject;
 @property (nonatomic, strong) NSString *theProjectID;
 @property (nonatomic, strong) NSString *theProjectName;
 @property (nonatomic, strong) ZDBar *selectedBar;
@@ -88,7 +87,6 @@
         if (moID) {
         
             NSError *error = nil;
-            //ZDProject *theProject2 = (ZDProject *)[[ZDCoreDataStack mainQueueContext] objectWithID:moID];
             ZDProject *theProject = (ZDProject *)[[ZDCoreDataStack mainQueueContext] existingObjectWithID:moID error:&error];
             
             if (error) {
@@ -137,10 +135,8 @@
     
     //FetchRequest
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"ZDBar"];
-    //NSPredicate *predicate = [NSPredicate predicateWithFormat:@"theProject.name"];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"theProject.name = %@", [self theProjectName]];
     [request setPredicate:predicate];
-    //[request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"order" ascending:YES]]];
     
     
     NSSortDescriptor *orderDescriptor = [[NSSortDescriptor alloc] initWithKey:@"order" ascending:YES];
@@ -248,11 +244,8 @@
     if ([indexPath section] == 0) {
         
         //clear cell
-        //[cell color:[UIColor blackColor]];
-        
         
         //ZDBar *theBar_old = [[[self theProject] bars] objectAtIndex:[indexPath row]];
-        //NSUInteger wwww = [[[self fetchedResultsController] sections] count];
         ZDBar *theBar = [[self fetchedResultsController] objectAtIndexPath:indexPath];
         
         
@@ -296,7 +289,6 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
 
-    //NSLog(@"Step 1");
     UICollectionViewCell *theCell = [collectionView cellForItemAtIndexPath:indexPath];
     
     [[theCell backgroundView] setBackgroundColor:[UIColor whiteColor]];
@@ -305,26 +297,21 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath {
  
-    //NSLog(@"Step 2");
     //the Cell
     UICollectionViewCell *theCell = [collectionView cellForItemAtIndexPath:indexPath];
     
     //the Bar corresponding of this cell
-    //ZDBar *theBar = [[[self theProject] bars] objectAtIndex:[indexPath row]];
     ZDBar *theBar = [[self fetchedResultsController] objectAtIndexPath:indexPath];
 
     
     //set color
     UIColor *theBlockColor = [UIColor colorWithHexString:[[theBar theSongBlock] hexColor]];
-    //[[theCell contentView] setBackgroundColor:theBlockColor];
     [[theCell backgroundView] setBackgroundColor:theBlockColor];
 }
 
 
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-
-    //NSLog(@"Step 3");
     
     if ([[collectionView cellForItemAtIndexPath:indexPath] isSelected]) {
         return NO;
@@ -335,7 +322,6 @@
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
 
-    //NSLog(@"Step 4");
     return YES;
 }
 
@@ -359,8 +345,6 @@
     
     
     
-    //the first version was a modal, now is a popover
-    //[self performSegueWithIdentifier:@"details_bar" sender:self];
     
     if (!theCell) {
         //do nothing. Double clic bug
@@ -411,7 +395,7 @@
     if(projectID) {
     
         NSManagedObjectID *moID = [ZDCoreDataStack managedObjectIDFromString:projectID];
-        //ZDProject *theProject2 = (ZDProject *)[[ZDCoreDataStack mainQueueContext] objectWithID:moID];
+        
 
         NSError *error = nil;
         ZDProject *theProject = (ZDProject *)[[ZDCoreDataStack mainQueueContext] existingObjectWithID:moID error:&error];
@@ -542,7 +526,6 @@
     if([[segue identifier] isEqualToString:@"addinsert_bar"]) {
         
         ZDAddInsertBarsController *nextVC = [segue destinationViewController];
-        //[self setAddInsertPopoverVC:nextVC];
         [nextVC setDelegate:self];
         [nextVC setTheSelectedZDBar:[self selectedBar]];
         
@@ -589,9 +572,7 @@
         }
         else {
         
-            //NSIndexPath *ip = [NSIndexPath indexPathWithIndex:0.0];
             ZDBar *tempBar = [[[self fetchedResultsController] fetchedObjects] objectAtIndex:0];
-            //ZDBar *tempBar = [[self fetchedResultsController] objectAtIndexPath:ip];
             theProject = [tempBar theProject];
         }
         
@@ -617,8 +598,6 @@
             
             UIPopoverPresentationController *popoverPresentation = nextVC.popoverPresentationController;
             [popoverPresentation setBarButtonItem:[self detailsButtonItem]];
-            //[popoverPresentation setSourceView:[self collectionView]];
-            //[popoverPresentation setSourceRect:[(UIBarButtonItem *)sender ]];
             [popoverPresentation setPermittedArrowDirections:(UIPopoverArrowDirectionLeft | UIPopoverArrowDirectionRight | UIPopoverArrowDirectionUp)];
             
             [self presentViewController:nextVC animated:YES completion:nil];
@@ -638,18 +617,6 @@
     
 
     if([[segue identifier] isEqualToString:@"edit_multiple_bars"]) {
-        
-//        ZDProject *theProject = nil;
-//        
-//        if ([self selectedBar]) {
-//            
-//            theProject = [[self selectedBar] theProject];
-//        }
-//        else {
-//            
-//            ZDBar *tempBar = [[[self fetchedResultsController] fetchedObjects] objectAtIndex:0];
-//            theProject = [tempBar theProject];
-//        }
         
         
         ZDMultipleSelectionController *nextVC = [segue destinationViewController];
@@ -710,8 +677,6 @@
             
             UIPopoverPresentationController *popoverPresentation = nextVC.popoverPresentationController;
             [popoverPresentation setBarButtonItem:[self exportButtonItem]];
-            //[popoverPresentation setSourceView:[self collectionView]];
-            //[popoverPresentation setSourceRect:[(UIBarButtonItem *)sender ]];
             [popoverPresentation setPermittedArrowDirections:(UIPopoverArrowDirectionLeft | UIPopoverArrowDirectionRight | UIPopoverArrowDirectionUp)];
             
             [self presentViewController:nextVC animated:YES completion:nil];
@@ -824,13 +789,6 @@
         
         
         
-        //check if already exists in Dic
-//        if ([[self selectedMultiBarsList] objectForKey: [theBar order] ] == nil) {
-//            
-//            [[self selectedMultiBarsList] setObject:theBar forKey:[theBar order]];
-//            [self setSelectedIndexPath:indexPath];
-//            [self setSelectedBar:theBar];
-//        }
         //legacy
         [self setSelectedIndexPath:indexPath];
         [self setSelectedBar:theBar];
@@ -859,33 +817,6 @@
                 }
             }
             
-            
-            
-            //check if exists jumps in the lines. For ex, the selected bars qt is diferent of the number between theFrom order to the toOrder
-//            NSArray *AllTheKeys = [[self selectedMultiBarsList] allKeys];
-//            
-//            int minBarOrder = [(NSNumber *)[AllTheKeys objectAtIndex:0] intValue];
-//            int maxBarOrder = [(NSNumber *)[AllTheKeys objectAtIndex:0] intValue];
-//            
-//            for (NSNumber *x in AllTheKeys) {
-//                
-//                ZDBar *xBar = [[self selectedMultiBarsList] objectForKey:x];
-//                
-//                if ([[xBar order] intValue] <= minBarOrder) {
-//                    minBarOrder = [[xBar order] intValue];
-//                }
-//            
-//                if ([[xBar order] intValue] >= maxBarOrder) {
-//                    maxBarOrder = [[xBar order] intValue];
-//                }
-//            }
-//            
-//            
-//            if (maxBarOrder - minBarOrder + 1 != (int)[[self selectedMultiBarsList] count]) {
-//                
-//                NSLog(@"The multibar Selection contains jumps.");
-//                return;
-//            }
             
             
             
@@ -920,7 +851,6 @@
     else {
      
         //This is to save the selected bar.
-        //ZDBar *theBar = [[[self theProject] bars] objectAtIndex:[indexPath row]];
         ZDBar *theBar = [[self fetchedResultsController] objectAtIndexPath:indexPath];
         [self setSelectedBar:theBar];
         [self setSelectedIndexPath:indexPath];
@@ -955,23 +885,10 @@
                 //The AlertBox is Active.
                 return NO;
             }
-//            [x dismissViewControllerAnimated:YES completion:nil];
-//            NSLog(@"%@", [popoverPresentationController description]);
         }
     }
     
-    
-//    if ([popoverPresentationController presentingViewController]) {
-//        
-//        if ([[popoverPresentationController presentingViewController] isKindOfClass:[ZDDetailsBarController class]]) {
-//
-//            ZDDetailsBarController *x = (ZDDetailsBarController *)[popoverPresentationController presentingViewController];
-//            NSLog(@"Is here");
-//        }
-//    }
-    
 
-    
     return YES;
 }
 
@@ -1037,7 +954,6 @@
     
     // do stuff with the cell
     [self performSegueWithIdentifier:@"edit_bar" sender:cell];
-    
 }
 
 
@@ -1058,9 +974,6 @@
 }
 
 - (void)viewController:(ZDAddInsertBarsController *)viewController didInsertXBars:(NSNumber *)barsQuantity ofType:(ZDSongBlock *)barBlockType beforeTheCurrentBar:(BOOL)before {
-
-    //[[self collectionView] reloadData];
-    
     
     
     if ([self respondsToSelector:@selector(popoverPresentationController)]) {

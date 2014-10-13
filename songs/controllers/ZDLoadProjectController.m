@@ -60,8 +60,6 @@
     
     
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"ZDProject"];
-    //NSPredicate *thePredicate = [NSPredicate predicateWithFormat:@"name = "];
-    //[request setPredicate:thePredicate];
     [request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name"
                                                                 ascending:YES]]];
     
@@ -91,7 +89,6 @@
     static NSString *cellIdentifier = @"MY_PROJECT_LOAD";
     
     
-    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     ZDLoadTableViewCell *cell = (ZDLoadTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
 
@@ -210,9 +207,6 @@
     
     
     
-    
-    
-    //NSLog(@"Project Loaded: %@", [theProject name]);
     
     
     //Call Delegate

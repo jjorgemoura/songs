@@ -181,9 +181,6 @@
     [body appendString:@" <h5>Song Structure</h5>\n"];
     
     
-    //old
-    //for (ZDBar *theBar in [[self theSelectedZDProject] bars]) {
-    
     
     for (int i = 1; i <= [barsDic count]; i++) {
     

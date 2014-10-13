@@ -85,14 +85,12 @@
 //---------------------------------------------------------------------------------------
 - (IBAction)save:(id)sender {
     
-    //NSLog(@"SAVE Button");
     BOOL toSave = YES;
     
     if(![[self projectTextName] text]) {
     
         //projectTextName cannot be null
         toSave = NO;
-        //[[self projectTextName] setBorderStyle:<#(UITextBorderStyle)#>];
     }
     
     

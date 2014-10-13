@@ -274,8 +274,6 @@
         theSearchString = [[NSString stringWithFormat:@"%@", song] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     }
     
-    //theSearchString = [NSString stringWithFormat:@"Beatles"];
-    
     
     
     //2 - Decide the URL
@@ -324,7 +322,6 @@
                                               else {
                                               
                                                   NSString *theImageURLToDownload = nil;
-                                                  //theImageURLToDownload = @"http://coolalbumreview.com/wp-content/uploads/2010/11/The+Cure+cure1.jpg";
                                         
                                                   
                                                   NSArray *items = [responseDictionary objectForKey:@"items"];
@@ -351,7 +348,6 @@
                                       }];
     
     //6 - Start the Download
-    //[downloadTask setde];
     [dataTask resume];
     
     
@@ -420,7 +416,6 @@
     
     
     //4 - Start the Download
-    //[downloadTask setde];
     [downloadTask resume];
 }
 
@@ -433,19 +428,19 @@
 //---------------------------------------------------------------------------------------
 - (void)URLSession:(NSURLSession *)session didBecomeInvalidWithError:(NSError *)error {
 
-    NSLog(@"NSURLSessionDelegate: 1");
+    //NSLog(@"NSURLSessionDelegate: 1");
 }
 
 
 - (void)URLSession:(NSURLSession *)session didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *credential)) completionHandler {
 
 
-    NSLog(@"NSURLSessionDelegate: 2");
+    //NSLog(@"NSURLSessionDelegate: 2");
 }
 
 - (void)URLSessionDidFinishEventsForBackgroundURLSession:(NSURLSession *)session {
 
-    NSLog(@"NSURLSessionDelegate: 3");
+    //NSLog(@"NSURLSessionDelegate: 3");
 }
 
 
@@ -455,7 +450,7 @@
 //---------------------------------------------------------------------------------------
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error {
 
-        NSLog(@"NSURLSessionTaskDelegate: 1");
+        //NSLog(@"NSURLSessionTaskDelegate: 1");
 }
 
 
@@ -465,27 +460,27 @@ didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
  completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition,
                              NSURLCredential *credential))completionHandler {
 
-        NSLog(@"NSURLSessionTaskDelegate: 2");
+        //NSLog(@"NSURLSessionTaskDelegate: 2");
 }
 
 
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didSendBodyData:(int64_t)bytesSent totalBytesSent:(int64_t)totalBytesSent totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend {
 
-        NSLog(@"NSURLSessionTaskDelegate: 3");
+        //NSLog(@"NSURLSessionTaskDelegate: 3");
 }
 
 
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task needNewBodyStream:(void (^)(NSInputStream *bodyStream))completionHandler {
 
 
-        NSLog(@"NSURLSessionTaskDelegate: 4");
+        //NSLog(@"NSURLSessionTaskDelegate: 4");
 }
 
 
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task willPerformHTTPRedirection:(NSHTTPURLResponse *)response newRequest:(NSURLRequest *)request completionHandler:(void (^)(NSURLRequest *))completionHandler {
 
 
-        NSLog(@"NSURLSessionTaskDelegate: 5");
+    //NSLog(@"NSURLSessionTaskDelegate: 5");
 }
 
 
@@ -497,19 +492,19 @@ didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
 //---------------------------------------------------------------------------------------
 - (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didResumeAtOffset:(int64_t)fileOffset expectedTotalBytes:(int64_t)expectedTotalBytes {
 
-    NSLog(@"NSURLSessionDownloadDelegate: 1");
+    //NSLog(@"NSURLSessionDownloadDelegate: 1");
 
 }
 
 
 - (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didWriteData:(int64_t)bytesWritten totalBytesWritten:(int64_t)totalBytesWritten totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite {
 
-    NSLog(@"NSURLSessionDownloadDelegate: 2");
+    //NSLog(@"NSURLSessionDownloadDelegate: 2");
 }
 
 - (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didFinishDownloadingToURL:(NSURL *)location {
 
-    NSLog(@"NSURLSessionDownloadDelegate: 3");
+    //NSLog(@"NSURLSessionDownloadDelegate: 3");
 }
 
 
