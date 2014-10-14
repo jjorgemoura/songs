@@ -51,6 +51,11 @@
     // Do any additional setup after loading the view.
     
     if([self theBar]) {
+        
+        //NSLog(@"DETAILSVC: ADDRESS: %@", [self description]);
+        //NSLog(@"DETAILSVC: BARBUTTON: %@", [[self popoverPresentationController] barButtonItem] ? @"YES" : @"NO");
+        //NSLog(@"DETAILSVC: SOURCEVIEW: %@", [[self popoverPresentationController] sourceView] ? @"YES" : @"NO");
+        
     
         NSString *timeSig = [NSString stringWithFormat:@"%@/%@", [[self theBar] timeSignatureBeatCount], [[self theBar] timeSignatureNoteValue]];
         NSString *barNumber = [NSString stringWithFormat:@"Bar #%@", [[[self theBar] order] stringValue]];
@@ -61,6 +66,11 @@
         [[self theSongBlock] setText:[[[self theBar] theSongBlock] name]];
         
         [[self theChord] setBackgroundColor:[UIColor colorWithHexString:[[[self theBar] theSongBlock] hexColor]]];
+        
+    }
+    else {
+    
+        NSLog(@"The Bar is nil");
     }
 }
 
@@ -69,30 +79,19 @@
     [super viewDidAppear:animated];
     
     
-//    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapBehind:)];
-//    [recognizer setNumberOfTapsRequired:1];
-//    [recognizer setCancelsTouchesInView:NO]; //So the user can still interact with controls in the modal view
-    //[[[self view] window] addGestureRecognizer:recognizer];
+    //[self setLoaded:@"yes"];
     
+    //set the finish of being loaded
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    
+        [self setLoaded:@"yes"];
+    });
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
 
     [super viewWillDisappear:animated];
     
-    
-//    //REMOVE ALL GESTURES
-//    NSArray * gesturesList = [[[self view] window] gestureRecognizers];
-//    //NSLog(@"SIZE OF GESTURES LIST: %lu", (unsigned long)[gesturesList count]);
-//    
-//    for (UIGestureRecognizer *x in gesturesList) {
-//        
-//        //NSLog(@"The Gesture: %@", [x description]);
-//        if ([x isKindOfClass:[UITapGestureRecognizer class]]) {
-//            
-//            [[[self view] window] removeGestureRecognizer:x];
-//        }
-//    }
 }
 
 
@@ -147,8 +146,8 @@
         
         [[self delegate] viewController:self didEditZDBar:[self theBar]];
     }
-    
 }
+
 
 - (IBAction)deleteButtonPressed:(id)sender {
     

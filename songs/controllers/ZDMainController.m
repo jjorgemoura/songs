@@ -73,8 +73,6 @@
     
     
     
-    
-    
     //Prepare Default Scale
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *projectIDStored = [userDefaults objectForKey:@"projectID"];
@@ -289,39 +287,55 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
 
-    UICollectionViewCell *theCell = [collectionView cellForItemAtIndexPath:indexPath];
-    
-    [[theCell backgroundView] setBackgroundColor:[UIColor whiteColor]];
+//    UICollectionViewCell *theCell = [collectionView cellForItemAtIndexPath:indexPath];
+//    
+//    [[theCell backgroundView] setBackgroundColor:[UIColor whiteColor]];
 }
 
 
 - (void)collectionView:(UICollectionView *)collectionView didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath {
  
-    //the Cell
-    UICollectionViewCell *theCell = [collectionView cellForItemAtIndexPath:indexPath];
-    
-    //the Bar corresponding of this cell
-    ZDBar *theBar = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-
-    
-    //set color
-    UIColor *theBlockColor = [UIColor colorWithHexString:[[theBar theSongBlock] hexColor]];
-    [[theCell backgroundView] setBackgroundColor:theBlockColor];
+//    //the Cell
+//    UICollectionViewCell *theCell = [collectionView cellForItemAtIndexPath:indexPath];
+//    
+//    //the Bar corresponding of this cell
+//    ZDBar *theBar = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+//
+//    
+//    //set color
+//    UIColor *theBlockColor = [UIColor colorWithHexString:[[theBar theSongBlock] hexColor]];
+//    [[theCell backgroundView] setBackgroundColor:theBlockColor];
 }
 
 
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    if ([[collectionView cellForItemAtIndexPath:indexPath] isSelected]) {
-        return NO;
-    }
     
+    if ([self presentedViewController]) {
+        
+        if ([[self presentedViewController] isKindOfClass:[ZDDetailsBarController class]]) {
+            //NSLog(@"Should Select return NO because the Details is already opened.");
+            return NO;
+        }
+    }
+
+    //NSLog(@"Should Select return YES.");
     return YES;
 }
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
 
+    
+    if ([self presentedViewController]) {
+        
+        if ([[self presentedViewController] isKindOfClass:[ZDDetailsBarController class]]) {
+            //NSLog(@"Should DeSelect return NO because the Details is already opened.");
+            return NO;
+        }
+    }
+
+    //NSLog(@"Should Deselect return YES.");
     return YES;
 }
 
@@ -332,10 +346,14 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 
-    //NSLog(@"Step 5");
+
+    //NSLog(@"DID SELECT ITEM????");
+    
+    
     //the Cell
     UICollectionViewCell *theCell = [collectionView cellForItemAtIndexPath:indexPath];
     [[theCell layer] setBorderColor:[[UIColor colorWithHexString:@"#f7f7f7"] CGColor]];
+
     
     
     //ZDBar *theBar = [[[self theProject] bars] objectAtIndex:[indexPath row]];
@@ -344,20 +362,45 @@
     [self setSelectedIndexPath:indexPath];
     
     
-    
-    
-    if (!theCell) {
-        //do nothing. Double clic bug
+
+    if(!theCell) {
+        
+        //NSLog(@"Sender (the Cell) is nil");
         return;
     }
     
-    [self performSegueWithIdentifier:@"details_bar" sender:theCell];
+    if ([self presentedViewController]) {
+        
+        if ([[self presentedViewController] isKindOfClass:[ZDDetailsBarController class]]) {
+            //NSLog(@"SELECT ITEM: NO - The Details is already opened. %@", [[self presentedViewController] description]);
+            return;
+        }
+    }
     
+    
+    
+//    if ([self detailsVCActive]) {
+//    
+//        //it is already active. do nothing
+//        NSLog(@"DID SELECT ITEM: Return");
+//        return;
+//    }
+//    else {
+//
+//        NSLog(@"DID SELECT ITEM: Perform Segue");
+//        [self setDetailsVCActive:YES];
+//        NSLog(@"Did Select : Perform Segue.");
+//        [self performSegueWithIdentifier:@"details_bar" sender:theCell];
+//
+//    }
+    
+    
+    //NSLog(@"SELECT ITEM: YES - Perform Segue.");
+    [self performSegueWithIdentifier:@"details_bar" sender:theCell];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
 
-    //NSLog(@"Step 6");
     //the Cell
     UICollectionViewCell *theCell = [collectionView cellForItemAtIndexPath:indexPath];
     
@@ -443,6 +486,26 @@
 //---------------------------------------------------------------------------------------
 #pragma mark - Segue Navigation
 //---------------------------------------------------------------------------------------
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier
+                                  sender:(id)sender {
+
+    NSLog(@"SEGUE IDENTIFIER IS: %@", identifier);
+
+    if([identifier isEqualToString:@"details_bar"]) {
+    
+        if ([self presentedViewController]) {
+            
+            if ([[self presentedViewController] isKindOfClass:[ZDDetailsBarController class]]) {
+                NSLog(@"The Details is already opened. %@", [[self presentedViewController] description]);
+                return NO;
+            }
+        }
+    }
+
+    return YES;
+}
+
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     // Get the new view controller using [segue destinationViewController].
@@ -454,10 +517,16 @@
     
     if([[segue identifier] isEqualToString:@"details_bar"]) {
        
+        
+        //dispatch_barrier_sync(<#dispatch_queue_t queue#>, <#^(void)block#>)
+        
+        
         ZDDetailsBarController *nextVC = [segue destinationViewController];
         [nextVC setTheBar:[self selectedBar]];
         [nextVC setDelegate:self];
         
+        
+        //NSLog(@"PREPARE FOR SEGUE: DETAILS_BAR: %@", [nextVC description]);
         
         //to work as a popover
         if ([nextVC respondsToSelector:@selector(popoverPresentationController)]) {
@@ -472,8 +541,10 @@
             [popoverPresentation setPermittedArrowDirections:(UIPopoverArrowDirectionLeft | UIPopoverArrowDirectionRight)];
             [popoverPresentation setDelegate:self];
             
-            [self presentViewController:nextVC animated:YES completion:nil];
+            //NSLog(@"PREPARE FOR SEGUE: DETAILS_BAR: POPOVER ADD: %@", [popoverPresentation description]);
             
+            [self presentViewController:nextVC animated:YES completion:nil];
+    
         } else {
             //THIS IS IOS 7- CODE
             //fix or turn around to fix a problem with the popover content size
@@ -493,6 +564,12 @@
         ZDEditBarController *nextVC = [segue destinationViewController];
         [nextVC setTheSelectedZDBar:[self selectedBar]];
         [nextVC setDelegate:self];
+        
+        if(!sender) {
+        
+            NSLog(@"Sender is nil");
+            return;
+        }
         
         
         //to work as a popover
@@ -874,21 +951,32 @@
 - (BOOL)popoverPresentationControllerShouldDismissPopover:(UIPopoverPresentationController *)popoverPresentationController {
 
     
+    //NSLog(@"POPOVER DELEGATE");
+
     if ([popoverPresentationController presentedViewController]) {
         
         if ([[popoverPresentationController presentedViewController] isKindOfClass:[ZDDetailsBarController class]]) {
             
             ZDDetailsBarController *x = (ZDDetailsBarController *)[popoverPresentationController presentedViewController];
+        
+
+            //NSLog(@"POPOVER DELEGATE isViewLoaded %@", [x isViewLoaded] ? @"YES" : @"NO");
+            //NSLog(@"POPOVER DELEGATE isWindowLoaded %@", [[x view] window] ? @"YES" : @"NO");
+            //NSLog(@"POPOVER DELEGATE isPopoverWindowLoaded %@", [[[x popoverPresentationController] presentedView] window] ? @"YES" : @"NO");
             
-            if ([x theConfirmationAlertBox]) {
-                
-                //The AlertBox is Active.
+            
+            if ([x loaded]) {
+
+                //NSLog(@"POPOVER DELEGATE myLoaded %@", [x loaded]);
+                return YES;
+            }
+            else {
+                //NSLog(@"POPOVER DELEGATE: Returns NO");
                 return NO;
             }
         }
     }
     
-
     return YES;
 }
 
