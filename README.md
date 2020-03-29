@@ -1,6 +1,8 @@
 Songz
 ======
 
+**2020 Note: This code end up being a app available in the app store around 2014/2015. The app is not available anymore in the store. This repo in now archived**
+
 Songz is a tool for musicians, to help them to structure the song. This way, it's possible to create or visualize a new song, understanding their structure into bars, chords progression and beat. It's usefull also to music students.
 
 ## Quick start
